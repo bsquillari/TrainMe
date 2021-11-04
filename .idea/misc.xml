@@ -18,6 +18,11 @@
         <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23092369477911648" />
         <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout-w936dp/activity_login.xml" value="0.26953125" />
         <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout/activity_main.xml" value="0.359375" />
+        <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout/fragment_dashboard.xml" value="0.359375" />
+        <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout/fragment_favs.xml" value="0.359375" />
+        <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout/fragment_routines.xml" value="0.359375" />
+        <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout/fragment_routines_list.xml" value="0.359375" />
       </map>
     </option>
   </component>
