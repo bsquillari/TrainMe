@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TrainMe</string>
+    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Crear una cuenta</string>
@@ -11,4 +12,12 @@
     <string name="invalid_username">Nombre de usuario invalido</string>
     <string name="invalid_password">La contraseña debe tener al menos 5 caracteres.</string>
     <string name="login_failed">Ingreso fallido</string>
+
+    <!-- Strings related to Bottom Navigation -->
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Incio</string>
+    <string name="title_dashboard">Explorar</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_favs">Favs</string>
+
 </resources>

@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.3828125" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout-land/activity_login.xml" value="0.34010416666666665" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.255078125" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout-w936dp/activity_login.xml" value="0.275" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_favs.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout-land/activity_login.xml" value="0.30423280423280424" />
         <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23092369477911648" />
         <entry key="..\:/Users/PHS-home/AndroidStudioProjects/TrainMe/app/src/main/res/layout-w936dp/activity_login.xml" value="0.26953125" />
