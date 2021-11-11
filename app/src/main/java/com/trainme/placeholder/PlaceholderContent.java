@@ -1,5 +1,9 @@
 package com.trainme.placeholder;
 
+import android.content.res.Resources;
+
+import com.trainme.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +20,12 @@ public class PlaceholderContent {
     /**
      * An array of sample (placeholder) items.
      */
-    public static final List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
+    public static final List<PlaceholderItem> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<String, PlaceholderItem>();
+    public static final Map<Integer, PlaceholderItem> ITEM_MAP = new HashMap<>();
 
     private static final int COUNT = 25;
 
@@ -38,35 +42,30 @@ public class PlaceholderContent {
     }
 
     private static PlaceholderItem createPlaceholderItem(int position) {
-        return new PlaceholderItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
+        return new PlaceholderItem(position, "Routine Name", "Routine Description", R.drawable.ic_baseline_account_circle_24, 1000000);
     }
 
     /**
      * A placeholder item representing a piece of content.
      */
     public static class PlaceholderItem {
-        public final String id;
-        public final String content;
-        public final String details;
+        public final String name;
+        public final Integer id;
+        public final String description;
+        public final int imageSrc;
+        public final int color;
 
-        public PlaceholderItem(String id, String content, String details) {
+        public PlaceholderItem(Integer id, String name, String description, int ImageSrc, int color) {
             this.id = id;
-            this.content = content;
-            this.details = details;
+            this.name = name;
+            this.description = description;
+            this.imageSrc = ImageSrc;
+            this.color = color;
         }
 
         @Override
         public String toString() {
-            return content;
+            return name;
         }
     }
 }

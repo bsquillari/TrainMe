@@ -1,10 +1,13 @@
 package com.trainme;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.trainme.placeholder.PlaceholderContent.PlaceholderItem;
@@ -34,8 +37,10 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.routineName.setText(mValues.get(position).name);
+        holder.routineDescription.setText(mValues.get(position).description);
+        holder.iconImage.setImageResource(mValues.get(position).imageSrc);
+        holder.colorPill.setCardBackgroundColor(mValues.get(position).color);
     }
 
     @Override
@@ -44,19 +49,22 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public ImageView iconImage;
+        public TextView routineName, routineDescription;
         public PlaceholderItem mItem;
+        public CardView colorPill;
 
         public ViewHolder(FragmentRoutinesBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            iconImage = binding.iconImageView;
+            routineName = binding.nameTextView;
+            routineDescription = binding.descriptionTextView;
+            colorPill = binding.colorPill;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + routineName.getText() + "'";
         }
     }
 }

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.trainme.ui.home.HomeFragment"
+        android:name="com.trainme.RoutinesFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_routines_list" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.trainme.ui.dashboard.DashboardFragment"
+        android:name="com.trainme.RoutinesFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_routines_list" />
 
     <fragment
         android:id="@+id/navigation_favs"
-        android:name="com.trainme.ui.favs.FavsFragment"
+        android:name="com.trainme.RoutinesFragment"
         android:label="@string/title_favs"
         tools:layout="@layout/fragment_routines_list" />
 
