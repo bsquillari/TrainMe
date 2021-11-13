@@ -50,12 +50,13 @@
             app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:onClick="playRoutine"
             app:layout_constraintVertical_bias="0.975" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/favBtn"
+        android:id="@+id/playRoutineBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"

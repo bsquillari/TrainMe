@@ -1,5 +1,6 @@
 package com.trainme;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -29,13 +30,17 @@ public class DetailRoutine extends AppCompatActivity {
         CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
         toolBarLayout.setTitle(getTitle());
 
-//        FloatingActionButton fab = binding.fab;
+//        FloatingActionButton fab = binding.playRoutineBtn;
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Snackbar.make(view, "Routine Added to Favorites", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+//                Intent intent = new Intent(this, PlayRoutine.class);
+//                startActivity(intent);
 //            }
 //        });
+    }
+    public void playRoutine(View view){
+        Intent intent = new Intent(this, PlayRoutine.class);
+        startActivity(intent);
     }
 }
