@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,9 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.trainme.R;
-import com.trainme.ui.login.LoginViewModel;
-import com.trainme.ui.login.LoginViewModelFactory;
+import com.trainme.MainActivity;
 import com.trainme.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -125,9 +124,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+//        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = "Welcome!";
         // TODO : initiate successful logged in experience
+
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

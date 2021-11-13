@@ -3,6 +3,8 @@ package com.trainme;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +24,11 @@ import java.util.List;
 public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutineRecyclerViewAdapter.ViewHolder> {
 
     private final List<PlaceholderItem> mValues;
+    private Context myContext;
 
-    public MyRoutineRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyRoutineRecyclerViewAdapter(List<PlaceholderItem> items, Context context) {
         mValues = items;
+        myContext = context;
     }
 
     @Override
@@ -60,6 +64,15 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
             routineName = binding.nameTextView;
             routineDescription = binding.descriptionTextView;
             colorPill = binding.colorPill;
+            binding.routineCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
+                    Intent myIntent = new Intent(myContext,Detail.class);
+                    myIntent.putExtra("ID", 123); //Optional parameters
+                    myContext.startActivity(myIntent);
+                }
+            });
         }
 
         @Override

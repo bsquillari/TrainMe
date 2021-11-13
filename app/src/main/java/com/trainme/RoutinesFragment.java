@@ -64,7 +64,7 @@ public class RoutinesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyRoutineRecyclerViewAdapter(PlaceholderContent.ITEMS));
+            recyclerView.setAdapter(new MyRoutineRecyclerViewAdapter(PlaceholderContent.ITEMS, this.getContext()));
         }
         return view;
     }
