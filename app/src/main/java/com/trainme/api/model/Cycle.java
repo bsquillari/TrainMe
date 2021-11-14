@@ -24,6 +24,26 @@ public class Cycle {
     @Expose
     private Object metadata;
 
+    private boolean expanded;
+
+    public Cycle(String name, String type, Integer order, Integer repetitions) {
+        this.name = name;
+        this.detail = null;
+        this.type = type;
+        this.order = order;
+        this.repetitions = repetitions;
+        this.metadata = null;
+        this.expanded = false;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
     public String getName() {
         return name;
     }

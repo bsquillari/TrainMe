@@ -1,5 +1,7 @@
 package com.trainme;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.trainme.databinding.ActivityDetailRoutineBinding;
 
@@ -30,6 +33,13 @@ public class DetailRoutine extends AppCompatActivity {
         CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
         toolBarLayout.setTitle(getTitle());
 
+        FrameLayout frame = binding.contentScrollingFragment.cyclesFrameLayout;
+
+        if (savedInstanceState == null) {
+            Fragment newFragment = new CycleFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.add(frame.getId(), newFragment).commit();
+        }
 //        FloatingActionButton fab = binding.playRoutineBtn;
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -39,6 +49,7 @@ public class DetailRoutine extends AppCompatActivity {
 //            }
 //        });
     }
+
     public void playRoutine(View view){
         Intent intent = new Intent(this, PlayRoutine.class);
         startActivity(intent);

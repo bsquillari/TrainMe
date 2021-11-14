@@ -117,17 +117,18 @@
             android:layout_gravity="center"
             android:textSize="@dimen/text_title"
             />
-        <ExpandableListView
-            xmlns:tools="http://schemas.android.com/tools"
+
+<!--        <FrameLayout android:id="@+id/child_cycles" android:visibility="visible" android:layout_height="match_parent" android:layout_width="match_parent"/>-->
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
-            android:name="com.trainme.RoutinesFragment"
+            android:name="com.trainme.CycleFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:layoutManager="LinearLayoutManager"
-            tools:context=".cyclesFragment"
-            tools:listitem="@layout/fragment_cycles"/>
+            tools:context=".CycleFragment"
+            tools:listitem="@layout/fragment_item_cycle" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
