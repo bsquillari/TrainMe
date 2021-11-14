@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Error {
+public class Error extends java.lang.Error {
 
     public static final int LOCAL_UNEXPECTED_ERROR = 10;
 

@@ -15,6 +15,24 @@ public class Exercise {
     @SerializedName("repetitions")
     @Expose
     private Integer repetitions;
+    @SerializedName("exercise")
+    @Expose
+    private Object exercise;
+
+    public Exercise(Integer order, Integer duration, Integer repetitions, Object exercise) {
+        this.order = order;
+        this.duration = duration;
+        this.repetitions = repetitions;
+        this.exercise = exercise;
+    }
+
+    public Object getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Object exercise) {
+        this.exercise = exercise;
+    }
 
     public Integer getOrder() {
         return order;
