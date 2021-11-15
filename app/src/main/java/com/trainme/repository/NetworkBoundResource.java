@@ -23,7 +23,7 @@ public abstract class NetworkBoundResource<Model, Domain> {
 
             if (response.getError() != null) {
                 onFetchFailed();
-                setValue(Resource.error(response.getError(), null));
+                setValue(Resource.error((Error) response.getError(), null));
             } else {
                 Domain data = processResponse(response.getData());
                 setValue(Resource.success(data));

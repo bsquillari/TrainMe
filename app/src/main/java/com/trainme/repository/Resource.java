@@ -8,6 +8,8 @@ import static com.trainme.repository.Status.SUCCESS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.trainme.api.model.Error;
+
 import org.jetbrains.annotations.NotNull;
 
 public class Resource<T> {

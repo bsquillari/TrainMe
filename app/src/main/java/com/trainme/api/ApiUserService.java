@@ -10,12 +10,12 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiUserService {
-    @POST("user/login")
+    @POST("users/login")
     LiveData<ApiResponse<Token>> login(@Body Credentials credentials);
 
-    @POST("user/logout")
+    @POST("users/logout")
     LiveData<ApiResponse<Void>> logout();
 
-    @GET("user/current")
+    @GET("users/current")
     LiveData<ApiResponse<User>> getCurrentUser();
 }

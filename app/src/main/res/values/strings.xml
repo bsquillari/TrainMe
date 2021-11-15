@@ -128,4 +128,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="loading">"Loading..."</string>
+    <string name="error">"Error"</string>
+    <string name="success">\"Success\"</string>
 </resources>

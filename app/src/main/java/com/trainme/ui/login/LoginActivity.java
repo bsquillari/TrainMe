@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,8 +24,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.trainme.App;
 import com.trainme.MainActivity;
+import com.trainme.R;
+import com.trainme.api.model.Credentials;
+import com.trainme.api.model.Error;
 import com.trainme.databinding.ActivityLoginBinding;
+import com.trainme.repository.Resource;
+import com.trainme.repository.Status;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -113,14 +120,38 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
+        binding.login.setOnClickListener(v -> {
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+//                loginViewModel.login(usernameEditText.getText().toString(),
+//                        passwordEditText.getText().toString());
+                Credentials credentials = new Credentials(binding.username.getText().toString(), binding.password.getText().toString());
+                App app = ((App)getApplication());
+                app.getUserRepository().login(credentials).observe(this, r -> {
+                    Log.d("Login", r.getStatus().toString());
+                    if (r.getStatus() == Status.SUCCESS) {
+                        Log.d(TAG, getString(R.string.success));
+                        app.getPreferences().setAuthToken(r.getData().getToken());
+                        updateUiWithUser(new LoggedInUserView(binding.username.getText().toString()));
+                    } else {
+                        defaultResourceHandler(r);
+                    }
+                });
         });
+    }
+    public static final String TAG = "UI";
+    private void defaultResourceHandler(Resource<?> resource) {
+        switch (resource.getStatus()) {
+            case LOADING:
+                Log.d(TAG, getString(R.string.loading));
+                binding.result.setText(R.string.loading);
+                break;
+            case ERROR:
+                Error error = resource.getError();
+                String message = getString(R.string.error, error.getDescription(), error.getCode());
+                Log.d(TAG, message);
+                binding.result.setText(message);
+                break;
+        }
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
