@@ -27,6 +27,8 @@ public class DetailRoutine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         binding = ActivityDetailRoutineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -69,6 +71,9 @@ public class DetailRoutine extends AppCompatActivity {
 
     public void playRoutine(View view){
         Intent intent = new Intent(this, PlayRoutine.class);
+        Bundle b=getIntent().getExtras();
+
+        intent.putExtra("ID",b.getInt("ID") );
         startActivity(intent);
     }
 }

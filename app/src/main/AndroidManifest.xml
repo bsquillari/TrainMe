@@ -17,15 +17,18 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_play_routine"
-            android:theme="@style/Theme.TrainMeLogin.Fullscreen" />
+            android:theme="@style/Theme.TrainMeLogin.Fullscreen"
+            android:parentActivityName=".DetailRoutine"/>
         <activity
             android:name=".DetailRoutine"
             android:exported="false"
             android:label="@string/title_activity_detail_routine"
-            android:theme="@style/Theme.TrainMeLogin.NoActionBar" />
+            android:theme="@style/Theme.TrainMeLogin.NoActionBar"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".EditProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
