@@ -2,6 +2,7 @@ package com.trainme;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class AppPreferences {
     private final String AUTH_TOKEN = "auth_token";
@@ -14,6 +15,7 @@ public class AppPreferences {
 
     public void setAuthToken(String token) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Log.d("token", "setAuthToken: " + token);
         editor.putString(AUTH_TOKEN, token);
         editor.apply();
     }

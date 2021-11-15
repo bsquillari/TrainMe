@@ -1,10 +1,13 @@
 package com.trainme.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.trainme.App;
+import com.trainme.R;
 import com.trainme.databinding.FragmentProfileBinding;
+import com.trainme.repository.Status;
+import com.trainme.ui.login.LoginActivity;
+
+import java.util.Date;
 
 public class ProfileFragment extends Fragment {
 
@@ -26,6 +39,40 @@ public class ProfileFragment extends Fragment {
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        App app = (App) getActivity().getApplication();
+
+        app.getUserRepository().getCurrentUser().observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                ImageLoader imageLoader = new ImageLoader(getContext());
+                Log.d("getCurret", r.getStatus().toString());
+                assert r.getData() != null;
+                binding.emailProfile.setText(r.getData().getEmail());
+                binding.fullNameProfile.setText(r.getData().getFirstName() + " " + r.getData().getLastName());
+                binding.usernameProfile.setText(r.getData().getUsername());
+                binding.phoneProfile.setText(r.getData().getPhone());
+                binding.genderProfile.setText(r.getData().getGender());
+                if (r.getData().getBirthdate() != null) {
+                    Date birth = new Date(r.getData().getBirthdate());
+                    binding.birthProfile.setText(birth.toString());
+                }
+                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
+            }else if(r.getStatus() == Status.ERROR){
+                Log.d("debugeado", "onCreateView: " + r.getError().toString());
+
+            }
+        });
+
+        binding.LogOutBtn.setOnClickListener(v -> {
+
+            app.getUserRepository().logout().observe(getViewLifecycleOwner(), r -> {
+                Log.d("Logout", r.getStatus().toString());
+                if (r.getStatus() == Status.SUCCESS) {
+                    Log.d("profile", getString(R.string.success));
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        });
 
 //        final TextView textView = binding.textProfile;
 //        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

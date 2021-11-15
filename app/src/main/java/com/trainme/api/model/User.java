@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
-
 public class User {
 
     @SerializedName("id")
@@ -24,7 +23,7 @@ public class User {
     private String gender;
     @SerializedName("birthdate")
     @Expose
-    private Date birthdate;
+    private Long birthdate;
     @SerializedName("email")
     @Expose
     private String email;
@@ -34,33 +33,18 @@ public class User {
     @SerializedName("avatarUrl")
     @Expose
     private String avatarUrl;
+    @SerializedName("metadata")
+    @Expose
+    private Object metadata;
     @SerializedName("date")
     @Expose
-    private Date date;
+    private Long date;
     @SerializedName("lastActivity")
     @Expose
-    private Date lastActivity;
+    private Long lastActivity;
     @SerializedName("verified")
     @Expose
     private Boolean verified;
-
-    public User() {
-    }
-
-    public User(Integer id, String username, String firstName, String lastName, String gender, Date birthdate, String email, String phone, String avatarUrl, Date date, Date lastActivity, Boolean verified) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.firstName = firstName;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.email = email;
-        this.phone = phone;
-        this.avatarUrl = avatarUrl;
-        this.date = date;
-        this.lastActivity = lastActivity;
-        this.verified = verified;
-    }
 
     public Integer getId() {
         return id;
@@ -86,7 +70,7 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getFLastName() {
+    public String getLastName() {
         return lastName;
     }
 
@@ -102,11 +86,11 @@ public class User {
         this.gender = gender;
     }
 
-    public Date getBirthdate() {
+    public Long getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(Long birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -134,19 +118,27 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
-    public Date getDate() {
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
-    public Date getLastActivity() {
+    public Long getLastActivity() {
         return lastActivity;
     }
 
-    public void setLastActivity(Date lastActivity) {
+    public void setLastActivity(Long lastActivity) {
         this.lastActivity = lastActivity;
     }
 
@@ -157,4 +149,5 @@ public class User {
     public void setVerified(Boolean verified) {
         this.verified = verified;
     }
+
 }
