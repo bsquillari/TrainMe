@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trainme.placeholder.CycleHolders;
-import com.trainme.placeholder.PlaceholderContent;
 
 /**
  * A fragment representing a list of Items.

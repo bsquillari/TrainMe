@@ -1,7 +1,6 @@
 package com.trainme;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -12,11 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.trainme.databinding.FragmentItemCycleBinding;
 import com.trainme.placeholder.ExerciseHolder;
-import com.trainme.placeholder.PlaceholderContent;
 
 /**
  * A fragment representing a list of Items.
