@@ -9,19 +9,34 @@
         android:id="@+id/navigation_home"
         android:name="com.trainme.RoutinesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_routines_list" />
+        tools:layout="@layout/fragment_routines_list" >
+        <argument
+            android:name="section"
+            app:argType="string"
+            android:defaultValue="home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.trainme.RoutinesFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_routines_list" />
+        tools:layout="@layout/fragment_routines_list" >
+        <argument
+            android:name="section"
+            app:argType="string"
+            android:defaultValue="dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favs"
         android:name="com.trainme.RoutinesFragment"
         android:label="@string/title_favs"
-        tools:layout="@layout/fragment_routines_list" />
+        tools:layout="@layout/fragment_routines_list" >
+        <argument
+            android:name="section"
+            app:argType="string"
+            android:defaultValue="favs" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"

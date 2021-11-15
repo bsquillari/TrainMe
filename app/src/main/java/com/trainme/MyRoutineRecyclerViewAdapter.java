@@ -36,11 +36,29 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     private final static int PageSize = 10;
     private int page;
     private boolean isLastPage;
+    private String section;
 
-    public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context) {
+    public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context, String section) {
         this.repository = repository;
         this.lifecycleOwner = lifecycleOwner;
+        this.section = section;
         page = 0;
+
+        if(section.equals("home")) {
+            repository.getMyRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+
+                if (r.getStatus() == Status.SUCCESS) {
+                    Log.d("Routines", r.getData().getContent().toString());
+                    data = r.getData();
+                    mValues = r.getData().getContent();
+                    isLastPage = r.getData().getIsLastPage();
+                    notifyDataSetChanged();
+                } else {
+
+                }
+            });
+        }
+        if(section.equals("dashboard")) {
             repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
 
                 if (r.getStatus() == Status.SUCCESS) {
@@ -52,7 +70,22 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                 } else {
 
                 }
-        });
+            });
+        }
+        if(section.equals("favs")) {
+            repository.getFavourites(page++, PageSize).observe(lifecycleOwner, r -> {
+
+                if (r.getStatus() == Status.SUCCESS) {
+                    Log.d("Routines", r.getData().getContent().toString());
+                    data = r.getData();
+                    mValues = r.getData().getContent();
+                    isLastPage = r.getData().getIsLastPage();
+                    notifyDataSetChanged();
+                } else {
+
+                }
+            });
+        }
         myContext = context;
     }
 
@@ -66,19 +99,47 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if(mValues!=null) {
-            if(((position+1)%mValues.size())==0 && position!=0 && !isLastPage){
+            if(position!=mValues.size()-1 && !isLastPage){
                 Log.d("Routines", "NextPage");
-                repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+                if(section.equals("dashboard")) {
+                    repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
 
-                    if (r.getStatus() == Status.SUCCESS) {
-                        Log.d("Routines", r.getData().getContent().toString());
-                        mValues.addAll(r.getData().getContent());
-                        isLastPage = r.getData().getIsLastPage();
+                        if (r.getStatus() == Status.SUCCESS) {
+                            Log.d("Routines", r.getData().getContent().toString());
+                            mValues.addAll(r.getData().getContent());
+                            isLastPage = r.getData().getIsLastPage();
 //                        notifyDataSetChanged();
-                    } else {
+                        } else {
 
-                    }
-                });
+                        }
+                    });
+                }
+                if(section.equals("home")) {
+                    repository.getMyRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+
+                        if (r.getStatus() == Status.SUCCESS) {
+                            Log.d("Routines", r.getData().getContent().toString());
+                            mValues.addAll(r.getData().getContent());
+                            isLastPage = r.getData().getIsLastPage();
+//                        notifyDataSetChanged();
+                        } else {
+
+                        }
+                    });
+                }
+                if(section.equals("favs")) {
+                    repository.getFavourites(page++, PageSize).observe(lifecycleOwner, r -> {
+
+                        if (r.getStatus() == Status.SUCCESS) {
+                            Log.d("Routines", r.getData().getContent().toString());
+                            mValues.addAll(r.getData().getContent());
+                            isLastPage = r.getData().getIsLastPage();
+//                        notifyDataSetChanged();
+                        } else {
+
+                        }
+                    });
+                }
             }
                 if(position<mValues.size()) {
                     holder.mItem = mValues.get(position);
