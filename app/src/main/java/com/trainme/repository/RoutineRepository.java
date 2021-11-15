@@ -30,6 +30,28 @@ public class RoutineRepository {
         }.asLiveData();
     }
 
+    public LiveData<Resource<PagedList<Routine>>> getMyRoutines(int page, int size, String orderBy) {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                return apiService.getMyRoutines(page, size, orderBy);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<PagedList<Routine>>> getFavourites(int page, int size) {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                return apiService.getFavourites(page, size);
+            }
+        }.asLiveData();
+    }
+
     public LiveData<Resource<Routine>> getRoutine(int routineId) {
         return new NetworkBoundResource<Routine, Routine>()
         {
