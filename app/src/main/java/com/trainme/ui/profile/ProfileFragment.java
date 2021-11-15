@@ -54,6 +54,8 @@ public class ProfileFragment extends Fragment {
                 if (r.getData().getBirthdate() != null) {
                     Date birth = new Date(r.getData().getBirthdate());
                     binding.birthProfile.setText(birth.toString());
+                }else{
+                    binding.birthProfile.setText(R.string.NoBdate);
                 }
                 imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
             }else if(r.getStatus() == Status.ERROR){
