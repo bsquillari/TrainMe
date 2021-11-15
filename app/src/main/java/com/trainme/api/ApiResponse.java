@@ -33,6 +33,7 @@ public class ApiResponse<T> {
     }
 
     private void parseResponse(Response<T> response) {
+        Log.d("apiresp", "parseResponse: " + String.valueOf(response.code()));
         if (response.isSuccessful()) {
             this.data = response.body();
             return;
