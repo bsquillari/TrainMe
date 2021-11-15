@@ -3,13 +3,10 @@ package com.trainme;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.trainme.api.model.Exercise;
-import com.trainme.placeholder.ExerciseHolder;
-import com.trainme.placeholder.PlaceholderContent.PlaceholderItem;
 import com.trainme.databinding.FragmentExerciseItemBinding;
 
 import java.util.List;

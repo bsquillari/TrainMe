@@ -2,6 +2,7 @@ package com.trainme;
 
 import android.app.Application;
 
+import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.SportRepository;
 import com.trainme.repository.UserRepository;
 
@@ -13,6 +14,7 @@ public class App extends Application {
     private AppPreferences preferences;
     private UserRepository userRepository;
     private SportRepository sportRepository;
+    private RoutineRepository routineRepository;
 
     public AppPreferences getPreferences() { return preferences; }
 
@@ -33,5 +35,11 @@ public class App extends Application {
         userRepository = new UserRepository(this);
 
         sportRepository = new SportRepository(this);
+
+        routineRepository = new RoutineRepository(this);
+    }
+
+    public RoutineRepository getRoutineRepository() {
+        return routineRepository;
     }
 }

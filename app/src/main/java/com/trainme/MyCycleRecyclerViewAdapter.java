@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trainme.api.model.Cycle;
-import com.trainme.placeholder.PlaceholderContent.PlaceholderItem;
 import com.trainme.databinding.FragmentItemCycleBinding;
 
 import java.util.List;
