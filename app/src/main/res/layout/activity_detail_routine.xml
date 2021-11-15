@@ -34,7 +34,10 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_scrolling" android:id="@+id/contentScrollingFragment"/>
+    <include
+        android:id="@+id/contentScrollingFragment"
+        layout="@layout/content_scrolling" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -44,13 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:onClick="playRoutine"
             android:src="@android:drawable/ic_media_play"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="playRoutine"
             app:layout_constraintVertical_bias="0.975" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,26 +62,26 @@
         android:id="@+id/playRoutineBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
         android:clickable="true"
         android:src="@android:drawable/star_big_off"
-        android:layout_marginRight="16dp"
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="end|bottom" />
 
     <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.95"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.975" />-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.95"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.975" />-->
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="@dimen/fab_margin"-->
-<!--        app:layout_anchor="@id/app_bar"-->
-<!--        app:layout_anchorGravity="bottom|end"-->
-<!--        app:srcCompat="@android:drawable/btn_star_big_on" />-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fab"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="@dimen/fab_margin"-->
+    <!--        app:layout_anchor="@id/app_bar"-->
+    <!--        app:layout_anchorGravity="bottom|end"-->
+    <!--        app:srcCompat="@android:drawable/btn_star_big_on" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
