@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.trainme.placeholder.PlaceholderContent;
 
 /**
  * A fragment representing a list of Items.
@@ -64,7 +63,7 @@ public class RoutinesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyRoutineRecyclerViewAdapter(PlaceholderContent.ITEMS, this.getContext()));
+            recyclerView.setAdapter(new MyRoutineRecyclerViewAdapter(((App)getActivity().getApplication()).getRoutineRepository(), getViewLifecycleOwner(), this.getContext()));
         }
         return view;
     }

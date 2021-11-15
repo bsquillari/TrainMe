@@ -1,33 +1,58 @@
 package com.trainme;
 
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.trainme.placeholder.PlaceholderContent.PlaceholderItem;
+
+import com.trainme.api.ApiRoutineService;
+import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Routine;
 import com.trainme.databinding.FragmentRoutinesBinding;
+import com.trainme.placeholder.RoutineHolder;
+import com.trainme.repository.RoutineRepository;
+import com.trainme.repository.Status;
+
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutineRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
-    private Context myContext;
+    private List<Routine> mValues;
+    private PagedList<Routine> data;
+    private final RoutineRepository repository;
+    private final LifecycleOwner lifecycleOwner;
+    private final Context myContext;
+    private final static int PageSize = 10;
+    private int page;
+    private boolean isLastPage;
 
-    public MyRoutineRecyclerViewAdapter(List<PlaceholderItem> items, Context context) {
-        mValues = items;
+    public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context) {
+        this.repository = repository;
+        this.lifecycleOwner = lifecycleOwner;
+        page = 0;
+            repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+
+                if (r.getStatus() == Status.SUCCESS) {
+                    Log.d("Routines", r.getData().getContent().toString());
+                    data = r.getData();
+                    mValues = r.getData().getContent();
+                    isLastPage = r.getData().getIsLastPage();
+                    notifyDataSetChanged();
+                } else {
+
+                }
+        });
         myContext = context;
     }
 
@@ -40,22 +65,44 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.routineName.setText(mValues.get(position).name);
-        holder.routineDescription.setText(mValues.get(position).description);
-        holder.iconImage.setImageResource(mValues.get(position).imageSrc);
-        holder.colorPill.setCardBackgroundColor(mValues.get(position).color);
+        if(mValues!=null) {
+            if(((position+1)%mValues.size())==0 && position!=0 && !isLastPage){
+                Log.d("Routines", "NextPage");
+                repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+
+                    if (r.getStatus() == Status.SUCCESS) {
+                        Log.d("Routines", r.getData().getContent().toString());
+                        mValues.addAll(r.getData().getContent());
+                        isLastPage = r.getData().getIsLastPage();
+//                        notifyDataSetChanged();
+                    } else {
+
+                    }
+                });
+            }
+                if(position<mValues.size()) {
+                    holder.mItem = mValues.get(position);
+                    holder.routineName.setText(holder.mItem.getName());
+                    holder.routineDescription.setText(holder.mItem.getDetail());
+                    holder.iconImage.setImageResource(R.mipmap.ic_launcher);
+                }
+
+        }
+//        holder.colorPill.setCardBackgroundColor( mValues.ITEMS.get(position).color);
+
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        if(mValues==null)
+            return 0;
+        else return data.getTotalCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView iconImage;
         public TextView routineName, routineDescription;
-        public PlaceholderItem mItem;
+        public Routine mItem;
         public CardView colorPill;
 
         public ViewHolder(FragmentRoutinesBinding binding) {
