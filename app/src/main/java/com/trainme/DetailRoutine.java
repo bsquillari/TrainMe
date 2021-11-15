@@ -12,10 +12,12 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.trainme.databinding.ActivityDetailRoutineBinding;
+import com.trainme.repository.Status;
 
 public class DetailRoutine extends AppCompatActivity {
 
@@ -40,6 +42,21 @@ public class DetailRoutine extends AppCompatActivity {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.add(frame.getId(), newFragment).commit();
         }
+
+        binding.FavBtn.setOnClickListener(v -> {
+            App app = (App) getApplication();
+            app.getRoutineRepository().addToFavs(getIntent().getExtras().getInt("ID")).observe(this, r ->{
+                if (r.getStatus() == Status.SUCCESS){
+                    Log.d("FAVS", "onCreate: added to Favs");
+
+//                    binding.FavBtn.setBackgroundColor(R.color.teal_200);
+                } else if (r.getStatus() == Status.ERROR) {
+                    Log.d("FAVS", "Favs Error");
+                }
+            });
+        });
+
+
 //        FloatingActionButton fab = binding.playRoutineBtn;
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
