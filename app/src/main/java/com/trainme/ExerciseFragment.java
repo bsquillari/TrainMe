@@ -1,6 +1,7 @@
 package com.trainme;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ public class ExerciseFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 2;
+    public int cycleId;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,7 +46,8 @@ public class ExerciseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Bundle bundle = getArguments();
+        cycleId = bundle.getInt("CycleId");
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -54,7 +57,7 @@ public class ExerciseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_item_list, container, false);
-
+//        int id = getActivity().getIntent().getExtras().getInt("ID");
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -64,7 +67,7 @@ public class ExerciseFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyExerciseRecyclerViewAdapter(ExerciseHolder.ITEMS));
+            recyclerView.setAdapter(new MyExerciseRecyclerViewAdapter(((App)getActivity().getApplication()).getRoutineRepository(), getViewLifecycleOwner(), this.getContext(), cycleId));
         }
         return view;
     }

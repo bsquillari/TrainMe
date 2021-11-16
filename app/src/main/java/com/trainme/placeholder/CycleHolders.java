@@ -21,31 +21,31 @@ public class CycleHolders {
     /**
      * An array of sample (placeholder) items.
      */
-    public static final List<Cycle> ITEMS = new ArrayList<>();
-
-    /**
-     * A map of sample (placeholder) items, by ID.
-     */
-    public static final Map<Integer, Cycle> ITEM_MAP = new HashMap<>();
-
-    private static final int COUNT = 25;
-
-    public static int routineId = 0;
-
-//    static {
-//        // Add some sample items.
-//        for (int i = 1; i <= COUNT; i++) {
-//            addItem(createPlaceholderItem(i));
-//        }
+//    public static final List<Cycle> ITEMS = new ArrayList<>();
+//
+//    /**
+//     * A map of sample (placeholder) items, by ID.
+//     */
+//    public static final Map<Integer, Cycle> ITEM_MAP = new HashMap<>();
+//
+//    private static final int COUNT = 25;
+//
+//    public static int routineId = 0;
+//
+////    static {
+////        // Add some sample items.
+////        for (int i = 1; i <= COUNT; i++) {
+////            addItem(createPlaceholderItem(i));
+////        }
+////    }
+//
+//    public static void addItem(Cycle item) {
+//        ITEMS.add(item);
+//        ITEM_MAP.put(item.getOrder(), item);
 //    }
-
-    public static void addItem(Cycle item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.getOrder(), item);
-    }
-
-    public static Cycle createPlaceholderItem(int position, String name, String type, int reps) {
-        return new Cycle(name, type, position, reps);
-    }
+//
+//    public static Cycle createPlaceholderItem(int position, String name, String type, int reps) {
+//        return new Cycle(name, type, position, reps);
+//    }
 
 }

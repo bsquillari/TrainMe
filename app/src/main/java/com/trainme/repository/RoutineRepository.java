@@ -8,7 +8,9 @@ import com.trainme.CycleFragment;
 import com.trainme.api.ApiClient;
 import com.trainme.api.ApiResponse;
 import com.trainme.api.ApiRoutineService;
+import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
+import com.trainme.api.model.Exercise;
 import com.trainme.api.model.PagedList;
 import com.trainme.api.model.Routine;
 
@@ -97,4 +99,16 @@ public class RoutineRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<PagedList<ContentEx>>> getExercises(int page, int size, String orderBy, int id) {
+        return new NetworkBoundResource<PagedList<ContentEx>, PagedList<ContentEx>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<ContentEx>>> createCall() {
+                return apiService.getExercises(id, page, size, orderBy);
+            }
+        }.asLiveData();
+    }
+
 }

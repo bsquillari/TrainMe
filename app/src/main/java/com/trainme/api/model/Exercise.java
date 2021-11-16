@@ -6,32 +6,63 @@ import com.google.gson.annotations.SerializedName;
 
 public class Exercise {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("detail")
+    @Expose
+    private String detail;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("date")
+    @Expose
+    private Long date;
     @SerializedName("order")
     @Expose
     private Integer order;
-    @SerializedName("duration")
-    @Expose
-    private Integer duration;
-    @SerializedName("repetitions")
-    @Expose
-    private Integer repetitions;
-    @SerializedName("exercise")
-    @Expose
-    private Object exercise;
 
-    public Exercise(Integer order, Integer duration, Integer repetitions, Object exercise) {
-        this.order = order;
-        this.duration = duration;
-        this.repetitions = repetitions;
-        this.exercise = exercise;
+    public Integer getId() {
+        return id;
     }
 
-    public Object getExercise() {
-        return exercise;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setExercise(Object exercise) {
-        this.exercise = exercise;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
     }
 
     public Integer getOrder() {
@@ -41,21 +72,4 @@ public class Exercise {
     public void setOrder(Integer order) {
         this.order = order;
     }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public Integer getRepetitions() {
-        return repetitions;
-    }
-
-    public void setRepetitions(Integer repetitions) {
-        this.repetitions = repetitions;
-    }
-
 }

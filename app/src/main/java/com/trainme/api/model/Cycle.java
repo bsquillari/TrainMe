@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Cycle {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -23,8 +26,7 @@ public class Cycle {
     @SerializedName("metadata")
     @Expose
     private Object metadata;
-
-    private boolean expanded;
+    private boolean expanded = false;
 
     public Cycle(String name, String type, Integer order, Integer repetitions) {
         this.name = name;
@@ -42,6 +44,14 @@ public class Cycle {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -91,5 +101,4 @@ public class Cycle {
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
     }
-
 }

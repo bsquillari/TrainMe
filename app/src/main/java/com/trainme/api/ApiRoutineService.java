@@ -3,7 +3,9 @@ package com.trainme.api;
 import androidx.lifecycle.LiveData;
 
 
+import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
+import com.trainme.api.model.Exercise;
 import com.trainme.api.model.PagedList;
 import com.trainme.api.model.Routine;
 
@@ -35,4 +37,9 @@ public interface ApiRoutineService {
 
     @GET("routines/{routineId}/cycles")
     LiveData<ApiResponse<PagedList<Cycle>>> getCycles(@Path("routineId") int routine, @Query("page") int page, @Query("size") int size, @Query("orderBy") String orderBy);
+
+    @GET("cycles/{cycleId}/exercises")
+    LiveData<ApiResponse<PagedList<ContentEx>>> getExercises(@Path("cycleId") int routine, @Query("page") int page, @Query("size") int size, @Query("orderBy") String orderBy);
+
+
 }
