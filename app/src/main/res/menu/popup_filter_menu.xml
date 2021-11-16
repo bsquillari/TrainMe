@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_item_category" android:title="@string/menu_item_category"/>
+    <item android:id="@+id/menu_item_score" android:title="@string/menu_item_score"/>
+    <item android:id="@+id/menu_item_date" android:title="@string/menu_item_date"/>
+    <item android:id="@+id/menu_item_difficulty" android:title="@string/menu_item_difficulty"/>
+    <item android:id="@+id/menu_item_name" android:title="@string/menu_item_name"/>
+</menu>

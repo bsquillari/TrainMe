@@ -37,15 +37,23 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     private int page;
     private boolean isLastPage;
     private String section;
+    private String orderBy;
 
-    public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context, String section) {
+
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context, String section, String orderBy) {
         this.repository = repository;
         this.lifecycleOwner = lifecycleOwner;
         this.section = section;
         page = 0;
+        this.orderBy = orderBy;
 
         if(section.equals("home")) {
-            repository.getMyRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+            repository.getMyRoutines(page++, PageSize, this.orderBy).observe(lifecycleOwner, r -> {
 
                 if (r.getStatus() == Status.SUCCESS) {
                     Log.d("Routines", r.getData().getContent().toString());
@@ -59,7 +67,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
             });
         }
         if(section.equals("dashboard")) {
-            repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+            repository.getRoutines(page++, PageSize, this.orderBy).observe(lifecycleOwner, r -> {
 
                 if (r.getStatus() == Status.SUCCESS) {
                     Log.d("Routines", r.getData().getContent().toString());
@@ -86,6 +94,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                 }
             });
         }
+
         myContext = context;
     }
 
@@ -102,26 +111,24 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
             if(position!=mValues.size()-1 && !isLastPage){
                 Log.d("Routines", "NextPage");
                 if(section.equals("dashboard")) {
-                    repository.getRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+                    repository.getRoutines(page++, PageSize, this.orderBy).observe(lifecycleOwner, r -> {
 
                         if (r.getStatus() == Status.SUCCESS) {
                             Log.d("Routines", r.getData().getContent().toString());
                             mValues.addAll(r.getData().getContent());
                             isLastPage = r.getData().getIsLastPage();
-//                        notifyDataSetChanged();
                         } else {
 
                         }
                     });
                 }
                 if(section.equals("home")) {
-                    repository.getMyRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+                    repository.getMyRoutines(page++, PageSize, this.orderBy).observe(lifecycleOwner, r -> {
 
                         if (r.getStatus() == Status.SUCCESS) {
                             Log.d("Routines", r.getData().getContent().toString());
                             mValues.addAll(r.getData().getContent());
                             isLastPage = r.getData().getIsLastPage();
-//                        notifyDataSetChanged();
                         } else {
 
                         }
@@ -134,7 +141,6 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                             Log.d("Routines", r.getData().getContent().toString());
                             mValues.addAll(r.getData().getContent());
                             isLastPage = r.getData().getIsLastPage();
-//                        notifyDataSetChanged();
                         } else {
 
                         }

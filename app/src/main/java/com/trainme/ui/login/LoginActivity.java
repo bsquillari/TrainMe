@@ -15,15 +15,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.trainme.App;
 import com.trainme.MainActivity;
 import com.trainme.R;
@@ -130,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("Login", r.getStatus().toString());
                     if (r.getStatus() == Status.SUCCESS) {
                         Log.d(TAG, getString(R.string.success));
+                        binding.loading.setVisibility(View.GONE);
                         app.getPreferences().setAuthToken(r.getData().getToken());
                         updateUiWithUser(new LoggedInUserView(binding.username.getText().toString()));
                     } else {
@@ -143,13 +147,24 @@ public class LoginActivity extends AppCompatActivity {
         switch (resource.getStatus()) {
             case LOADING:
                 Log.d(TAG, getString(R.string.loading));
-                binding.result.setText(R.string.loading);
+                binding.loading.setVisibility(View.VISIBLE);
                 break;
             case ERROR:
+                binding.loading.setVisibility(View.GONE);
                 Error error = resource.getError();
-                String message = getString(R.string.error, error.getDescription(), error.getCode());
+                String message = getString(R.string.error)+": " + error.getDescription();
+                Snackbar snack = Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.error)).setDuration(20*1000);
+                View view = snack.getView();
+                FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+                params.gravity = Gravity.TOP;
+                view.setLayoutParams(params);
+                snack.setAction("DISMISS", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+                snack.show();
                 Log.d(TAG, message);
-                binding.result.setText(message);
                 break;
         }
     }

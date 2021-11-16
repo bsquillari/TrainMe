@@ -132,4 +132,9 @@
     <string name="error">"Error"</string>
     <string name="success">\"Success\"</string>
     <string name="NoBdate">No birthdate Provided</string>
+    <string name="menu_item_category">Category</string>
+    <string name="menu_item_score">Score</string>
+    <string name="menu_item_date">Date</string>
+    <string name="menu_item_difficulty">Difficulty</string>
+    <string name="menu_item_name">Name</string>
 </resources>
