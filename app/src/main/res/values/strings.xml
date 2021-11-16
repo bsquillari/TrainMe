@@ -20,6 +20,7 @@
     <string name="title_profile">Profile</string>
     <string name="title_favs">Favorites</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="title_training">Training</string>
     <string name="title_activity_detail_routine">DetailRoutine</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
