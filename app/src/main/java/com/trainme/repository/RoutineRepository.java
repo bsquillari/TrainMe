@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.trainme.App;
+import com.trainme.CycleFragment;
 import com.trainme.api.ApiClient;
 import com.trainme.api.ApiResponse;
 import com.trainme.api.ApiRoutineService;
+import com.trainme.api.model.Cycle;
 import com.trainme.api.model.PagedList;
 import com.trainme.api.model.Routine;
 
@@ -37,6 +39,17 @@ public class RoutineRepository {
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
                 return apiService.getMyRoutines(page, size, orderBy);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<PagedList<Cycle>>> getCycles(int page, int size, String orderBy, int id) {
+        return new NetworkBoundResource<PagedList<Cycle>, PagedList<Cycle>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Cycle>>> createCall() {
+                return apiService.getCycles(id, page, size, orderBy);
             }
         }.asLiveData();
     }

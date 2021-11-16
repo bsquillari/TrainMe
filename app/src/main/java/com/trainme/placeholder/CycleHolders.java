@@ -30,20 +30,22 @@ public class CycleHolders {
 
     private static final int COUNT = 25;
 
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createPlaceholderItem(i));
-        }
-    }
+    public static int routineId = 0;
 
-    private static void addItem(Cycle item) {
+//    static {
+//        // Add some sample items.
+//        for (int i = 1; i <= COUNT; i++) {
+//            addItem(createPlaceholderItem(i));
+//        }
+//    }
+
+    public static void addItem(Cycle item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.getOrder(), item);
     }
 
-    private static Cycle createPlaceholderItem(int position) {
-        return new Cycle("Name", "Warmup", position, 3);
+    public static Cycle createPlaceholderItem(int position, String name, String type, int reps) {
+        return new Cycle(name, type, position, reps);
     }
 
 }

@@ -1,7 +1,8 @@
 package com.trainme;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,7 +10,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import  androidx.fragment.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -42,7 +43,7 @@ public class DetailRoutine extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Fragment newFragment = new CycleFragment();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft =  getSupportFragmentManager().beginTransaction();
             ft.add(frame.getId(), newFragment).commit();
         }
         App app = (App) getApplication();

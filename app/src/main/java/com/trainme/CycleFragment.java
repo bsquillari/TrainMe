@@ -1,18 +1,26 @@
 package com.trainme;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+
+import com.trainme.repository.Status;
+
+import android.content.Context;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.trainme.api.model.Cycle;
 import com.trainme.placeholder.CycleHolders;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -22,6 +30,8 @@ public class CycleFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
+    private List<Cycle> cycleList = new ArrayList<>();
+
     private int mColumnCount = 1;
 
     /**
@@ -48,14 +58,15 @@ public class CycleFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_cycles_list, container, false);
-
         // Set the adapter
+        int id = getActivity().getIntent().getExtras().getInt("ID");
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
@@ -64,8 +75,29 @@ public class CycleFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCycleRecyclerViewAdapter(CycleHolders.ITEMS, this.getActivity()));
+            recyclerView.setAdapter(new MyCycleRecyclerViewAdapter(((App)getActivity().getApplication()).getRoutineRepository(), getViewLifecycleOwner(), this.getContext(), id));
         }
+
+//        App app = (App) getActivity().getApplication();
+//        app.getRoutineRepository().getCycles(0, 100, "id", id).observe(getViewLifecycleOwner(), r -> {
+//            if (r.getStatus() == Status.SUCCESS) {
+//                Log.d("cycles", "onCreateView: cycles sucessssss");
+////                if (CycleHolders.routineId != id) {
+////                    CycleHolders.routineId = id;
+////                }
+////                for (Cycle cycle : cycleList) {
+////                    cycleList.remove(cycle);
+////                }
+//
+//                for (Cycle cycle : r.getData().getContent()) {
+//                    cycleList.add(cycle);
+////                    CycleHolders.addItem(cycle);
+//                    Log.d("cycle", "onCreateView: " + cycle);
+//                }
+//            } else if (r.getStatus() == Status.ERROR) {
+//                Log.d("cycles", "onCreateView: Error cargando cycles");
+//            }
+//        });
         return view;
     }
 }

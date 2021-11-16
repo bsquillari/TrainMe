@@ -1,38 +1,73 @@
 package com.trainme;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import com.trainme.api.model.Cycle;
+import com.trainme.api.model.PagedList;
+import com.trainme.databinding.ActivityDetailRoutineBinding;
+import com.trainme.databinding.CycleDetailBinding;
 import com.trainme.databinding.FragmentItemCycleBinding;
+import com.trainme.databinding.FragmentRoutinesBinding;
+import com.trainme.repository.RoutineRepository;
+import com.trainme.repository.Status;
+
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Cycle}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Cycle> mValues;
-    private final Context context;
+    private final static int PageSize = 10;
+    private final RoutineRepository repository;
+    private final int id;
+    private final LifecycleOwner lifecycleOwner;
+    private final Context myContext;
+    private List<Cycle> mValues;
+    private PagedList<Cycle> data;
+    private int page;
+    private boolean isLastPage;
 
-    public MyCycleRecyclerViewAdapter(List<Cycle> items, Context context) {
-        mValues = items;
-        this.context = context;
+    public MyCycleRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context, int id) {
+        this.repository = repository;
+        this.lifecycleOwner = lifecycleOwner;
+        page = 0;
+        this.id = id;
+        repository.getCycles(page++, PageSize, "id", id).observe(lifecycleOwner, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("CyclesAdapter", "MyCycleRecyclerViewAdapter: sucess de cycles");
+                data = r.getData();
+                mValues = data.getContent();
+                isLastPage = data.getIsLastPage();
+                notifyDataSetChanged();
+            } else if (r.getStatus() == Status.ERROR) {
+                Log.d("CyclesAdapter", "MyCycleRecyclerViewAdapter: Error consiguiendo cycles");
+            }
+        });
+//            repository.getMyRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
+//
+//                if (r.getStatus() == Status.SUCCESS) {
+//                    Log.d("Routines", r.getData().getContent().toString());
+//                    data = r.getData();
+//                    mValues = r.getData().getContent();
+//                    isLastPage = r.getData().getIsLastPage();
+//                    notifyDataSetChanged();
+//                } else {
+//
+//                }
+//            });
+//
+        myContext = context;
     }
 
     @Override
@@ -44,58 +79,67 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.cycle = mValues.get(position);
-        holder.name.setText(mValues.get(position).getName());
-        holder.type.setText(mValues.get(position).getType());
-        holder.repetitions.setText(mValues.get(position).getRepetitions().toString());
-        boolean isExpanded = mValues.get(position).isExpanded();
-        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        FrameLayout frame = holder.exercisesFrameLayout;
+        if (mValues != null) {
+            if (position != mValues.size() - 1 && !isLastPage) {
+                Log.d("Routines", "NextPage");
+                repository.getCycles(page++, PageSize, "id", id).observe(lifecycleOwner, r -> {
 
-        Fragment newFragment = new ExerciseFragment();          // TODO: Analizar si esta bien que este en esta funcion.
-        FragmentTransaction ft = ((Activity)context).getFragmentManager().beginTransaction();
-        ft.add(frame.getId(), newFragment).commit();
-        Log.e("onCreateView", "Exercise Fragment");
+                    if (r.getStatus() == Status.SUCCESS) {
+                        Log.d("Cycles", r.getData().getContent().toString());
+                        mValues.addAll(r.getData().getContent());
+                        isLastPage = r.getData().getIsLastPage();
+//                        notifyDataSetChanged();
+                    } else if (r.getStatus() == Status.ERROR) {
+                        Log.d("CyclesAdapter", "MyCycleRecyclerViewAdapter: Error consiguiendo cycles");
+                    }
+                });
+
+            }
+            if (position < mValues.size()) {
+                holder.mItem = mValues.get(position);
+                holder.cycleName.setText(holder.mItem.getName());
+//                holder.cycleDetail.setText(holder.mItem.getDetail());
+                holder.cycleType.setText(holder.mItem.getType());
+//                holder.reps.setText(holder.mItem.getRepetitions());
+            }
+
+        }
+//        holder.colorPill.setCardBackgroundColor( mValues.ITEMS.get(position).color);
+
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        if (mValues == null)
+            return 0;
+        else return data.getTotalCount();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public Cycle cycle;
-        public TextView name, type, repetitions;
-        public ConstraintLayout expandableLayout;
-        public LinearLayout cycleMainLinearLayout;
-        public ImageView expandIcon;
-        public FrameLayout exercisesFrameLayout;
+        public TextView cycleName, cycleDetail, cycleType, reps;
+        public Cycle mItem;
+
         public ViewHolder(FragmentItemCycleBinding binding) {
             super(binding.getRoot());
-            name = binding.cycleNameTextView;
-            type = binding.cycleTypeTextView;
-            repetitions = binding.cyclesRepetitionsTextView;
-            expandableLayout = binding.expandableCycle;
-            cycleMainLinearLayout = binding.cycleLinearLayout;
-            expandIcon = binding.dropDown;
-            exercisesFrameLayout = binding.exercisesFrameLayout;
-            cycleMainLinearLayout.setOnClickListener(new View.OnClickListener(){
+            cycleName = binding.cycleNameTextView;
+            cycleType = binding.cycleTypeTextView;
+            reps = binding.reps;
+            binding.cycleCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cycle.setExpanded(!cycle.isExpanded());
-                    if(cycle.isExpanded())
-                        expandIcon.setImageResource(R.drawable.ic_baseline_arrow_circle_up_24);
-                    else
-                        expandIcon.setImageResource(R.drawable.ic_baseline_arrow_circle_down_24);
-                    notifyItemChanged(getBindingAdapterPosition());
+                    Log.d("cycle viewhodler", "onClick: de cycle view");
 
+//                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
+//                    Intent myIntent = new Intent(myContext, DetailRoutine.class);
+//                    myIntent.putExtra("ID", 18); //Optional parameters
+//                    myContext.startActivity(myIntent);
                 }
             });
         }
 
         @Override
         public String toString() {
-            return super.toString();
+            return super.toString() + " '" + cycleName.getText() + "'";
         }
     }
 }

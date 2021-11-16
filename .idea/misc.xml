@@ -14,15 +14,17 @@
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_edit_profile.xml" value="0.22" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_fullscreen.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/activity_play_routine.xml" value="0.25243055555555555" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/content_detail.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/content_scrolling.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/cycle_detail.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_exercise_item.xml" value="0.23783783783783785" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_exercise_item_list.xml" value="0.23783783783783785" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_favs.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_item_cycle.xml" value="0.24444444444444444" />
+        <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_item_cycle.xml" value="0.1" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_item_cycles_list.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gaspar/Desktop/ITBA/2021-2Q/HCI/TrainMe/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
