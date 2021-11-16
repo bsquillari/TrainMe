@@ -1,5 +1,6 @@
 package com.trainme.ui.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,9 @@ import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.trainme.App;
+import com.trainme.MainActivity;
 import com.trainme.R;
+import com.trainme.RoutinesFragmentArgs;
 import com.trainme.databinding.FragmentProfileBinding;
 import com.trainme.repository.Status;
 import com.trainme.ui.login.LoginActivity;
@@ -31,9 +34,10 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private FragmentProfileBinding binding;
-
+    private Activity mActivity;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        String section = ProfileFragmentArgs.fromBundle(getArguments()).getSection();
         profileViewModel =
                 new ViewModelProvider(this).get(ProfileViewModel.class);
 
@@ -83,7 +87,16 @@ public class ProfileFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+        ((MainActivity)mActivity).filterBtn(!(section.equals("favs") || section.equals("profile")));
         return root;
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity){
+            mActivity =(Activity) context;
+        }
     }
 
     @Override

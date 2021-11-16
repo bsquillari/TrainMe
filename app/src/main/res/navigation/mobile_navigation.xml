@@ -43,6 +43,10 @@
         android:name="com.trainme.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="section"
+            app:argType="string"
+            android:defaultValue="profile" />
         <action
             android:id="@+id/action_navigation_profile_to_editProfileActivity2"
             app:destination="@id/editProfileActivity" />
