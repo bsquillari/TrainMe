@@ -44,9 +44,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     private int getColor(int id){
         return colors[id % 4];
     }
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-    }
+
 
     public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context, String section, String orderBy) {
         this.repository = repository;
@@ -156,6 +154,19 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     holder.routineDescription.setText(holder.mItem.getDetail());
                     holder.iconImage.setImageResource(R.mipmap.ic_launcher);
                     holder.colorPill.setCardBackgroundColor(getColor(holder.mItem.getId()));
+                    holder.routineCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
+                            Intent myIntent = new Intent(myContext,DetailRoutine.class);
+                            myIntent.putExtra("ID", holder.mItem.getId()); //Optional parameters
+                            myIntent.putExtra("Name", holder.mItem.getName()); //Optional parameters
+                            myIntent.putExtra("Detail", holder.mItem.getDetail()); //Optional parameters
+                            myIntent.putExtra("Difficulty", holder.mItem.getDifficulty()); //Optional parameters
+                            myIntent.putExtra("Score", holder.mItem.getScore()); //Optional parameters
+                            myContext.startActivity(myIntent);
+                        }
+                    });
                 }
 
         }
@@ -175,6 +186,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
         public TextView routineName, routineDescription;
         public Routine mItem;
         public CardView colorPill;
+        public CardView routineCard;
 
         public ViewHolder(FragmentRoutinesBinding binding) {
             super(binding.getRoot());
@@ -182,15 +194,16 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
             routineName = binding.nameTextView;
             routineDescription = binding.descriptionTextView;
             colorPill = binding.colorPill;
-            binding.routineCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
-                    Intent myIntent = new Intent(myContext,DetailRoutine.class);
-                    myIntent.putExtra("ID", 23); //Optional parameters
-                    myContext.startActivity(myIntent);
-                }
-            });
+            routineCard = binding.routineCard;
+//            binding.routineCard.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+////                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
+//                    Intent myIntent = new Intent(myContext,DetailRoutine.class);
+//                    myIntent.putExtra("ID", data.); //Optional parameters
+//                    myContext.startActivity(myIntent);
+//                }
+//            });
         }
 
         @Override
