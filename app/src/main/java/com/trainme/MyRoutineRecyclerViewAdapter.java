@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,9 +39,11 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     private boolean isLastPage;
     private String section;
     private String orderBy;
+    private final int colors[]={Color.RED, Color.GREEN, Color.MAGENTA, Color.GRAY};
 
-
-
+    private int getColor(int id){
+        return colors[id % 4];
+    }
     public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
     }
@@ -152,6 +155,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     holder.routineName.setText(holder.mItem.getName());
                     holder.routineDescription.setText(holder.mItem.getDetail());
                     holder.iconImage.setImageResource(R.mipmap.ic_launcher);
+                    holder.colorPill.setCardBackgroundColor(getColor(holder.mItem.getId()));
                 }
 
         }
