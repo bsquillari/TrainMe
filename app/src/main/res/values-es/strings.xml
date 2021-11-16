@@ -15,10 +15,11 @@
 
     <!-- Strings related to Bottom Navigation -->
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Incio</string>
-    <string name="title_dashboard">Explorar</string>
+    <string name="title_myroutines">Incio</string>
+    <string name="title_explore">Explorar</string>
     <string name="title_profile">Perfil</string>
     <string name="title_favs">Favs</string>
     <string name="edit_profile">Editar Perfil</string>
+    <string name="menu_item_category">Categoría</string>
 
 </resources>
