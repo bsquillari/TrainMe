@@ -1,30 +1,49 @@
 package com.trainme.api.model;
 
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Routine {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("detail")
     @Expose
     private String detail;
+    @SerializedName("date")
+    @Expose
+    private Long date;
+    @SerializedName("score")
+    @Expose
+    private Integer score;
     @SerializedName("isPublic")
     @Expose
     private Boolean isPublic;
     @SerializedName("difficulty")
     @Expose
     private String difficulty;
+    @SerializedName("user")
+    @Expose
+    private User user;
     @SerializedName("category")
     @Expose
     private Category category;
     @SerializedName("metadata")
     @Expose
     private Object metadata;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -40,6 +59,22 @@ public class Routine {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public Boolean getIsPublic() {
@@ -58,6 +93,14 @@ public class Routine {
         this.difficulty = difficulty;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -73,6 +116,5 @@ public class Routine {
     public void setMetadata(Object metadata) {
         this.metadata = metadata;
     }
-
 }
 

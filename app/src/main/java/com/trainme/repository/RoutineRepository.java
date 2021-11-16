@@ -62,4 +62,26 @@ public class RoutineRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<Void>> addToFavs(int routineId){
+        return new NetworkBoundResource<Void, Void>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Void>> createCall() {
+                return apiService.addToFavs(routineId);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<Void>> removeFav(int routineId){
+        return new NetworkBoundResource<Void, Void>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Void>> createCall() {
+                return apiService.removeFav(routineId);
+            }
+        }.asLiveData();
+    }
 }

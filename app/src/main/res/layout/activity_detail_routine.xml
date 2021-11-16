@@ -59,12 +59,24 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/playRoutineBtn"
+        android:id="@+id/FavBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:src="@android:drawable/star_big_off"
+        app:layout_anchor="@+id/app_bar"
+        app:layout_anchorGravity="end|bottom" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/UnFavBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:clickable="true"
         android:src="@android:drawable/star_big_off"
+        android:backgroundTint="@android:color/darker_gray"
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="end|bottom" />
 
