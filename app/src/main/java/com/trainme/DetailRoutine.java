@@ -32,11 +32,16 @@ public class DetailRoutine extends AppCompatActivity {
 
         binding = ActivityDetailRoutineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        int routineId = getIntent().getExtras().getInt("ID");
+        String routineName = getIntent().getExtras().getString("Name");
+        String routineDetail = getIntent().getExtras().getString("Detail");
+        String routineDifficulty = getIntent().getExtras().getString("Difficulty");
+        String routineScore = getIntent().getExtras().getString("Score");
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
-        toolBarLayout.setTitle(getTitle());
+        toolBarLayout.setTitle(routineName);
 
         FrameLayout frame = binding.contentScrollingFragment.cyclesFrameLayout;
 
@@ -52,23 +57,23 @@ public class DetailRoutine extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS){
                 for (Routine routine : r.getData().getContent()) {
                     int id = routine.getId();
-                    if (id == getIntent().getExtras().getInt("ID")) {
-                        binding.FavBtn.setVisibility(View.INVISIBLE);
-                        binding.UnFavBtn.setVisibility(View.VISIBLE);
+                    if (id == routineId) {
+                        binding.FavBtn.setVisibility(View.VISIBLE);
+                        binding.UnFavBtn.setVisibility(View.INVISIBLE);
                         isFav.set(1);
                         Log.d("fac", "no encontro en favs ");
                     }
                 }
                 if (isFav.get() == 0) {
                     Log.d("fac", "no encontro en favs ");
-                    binding.FavBtn.setVisibility(View.VISIBLE);
-                    binding.UnFavBtn.setVisibility(View.INVISIBLE);
+                    binding.FavBtn.setVisibility(View.INVISIBLE);
+                    binding.UnFavBtn.setVisibility(View.VISIBLE);
                 }
             }
         });
 
         binding.FavBtn.setOnClickListener(v -> {
-            app.getRoutineRepository().addToFavs(getIntent().getExtras().getInt("ID")).observe(this, r -> {
+            app.getRoutineRepository().removeFav(routineId).observe(this, r -> {
                 if (r.getStatus() == Status.SUCCESS) {
                     Log.d("FAVS", "onCreate: added to Favs");
 
@@ -81,7 +86,7 @@ public class DetailRoutine extends AppCompatActivity {
         });
 
         binding.UnFavBtn.setOnClickListener(v -> {
-            app.getRoutineRepository().removeFav(getIntent().getExtras().getInt("ID")).observe(this, r -> {
+            app.getRoutineRepository().addToFavs(routineId).observe(this, r -> {
                 if (r.getStatus() == Status.SUCCESS) {
                     Log.d("FAVS", "onCreate: removed from Favs");
 
@@ -105,9 +110,9 @@ public class DetailRoutine extends AppCompatActivity {
 
     public void playRoutine(View view) {
         Intent intent = new Intent(this, PlayRoutine.class);
-        Bundle b = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
 
-        intent.putExtra("ID", b.getInt("ID"));
+        intent.putExtra("ID", bundle.getInt("ID"));
         startActivity(intent);
     }
 }
