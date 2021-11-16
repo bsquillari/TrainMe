@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_myroutines">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_myroutines"
         android:name="com.trainme.RoutinesFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_myroutines"
         tools:layout="@layout/fragment_routines_list" >
         <argument
             android:name="section"
@@ -17,9 +17,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_explore"
         android:name="com.trainme.RoutinesFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_explore"
         tools:layout="@layout/fragment_routines_list" >
         <argument
             android:name="section"
