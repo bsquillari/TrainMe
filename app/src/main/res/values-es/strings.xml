@@ -20,5 +20,6 @@
     <string name="title_profile">Perfil</string>
     <string name="title_favs">Favs</string>
     <string name="edit_profile">Editar Perfil</string>
+    <string name="menu_item_category">Categoría</string>
 
 </resources>
