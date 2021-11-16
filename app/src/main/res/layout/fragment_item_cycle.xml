@@ -46,16 +46,20 @@
                     android:id="@+id/cycleTypeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
                     android:textSize="18sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    android:textColor="@android:color/black"
+
                     android:text=" Repetitions: "/>
                 <TextView
                     android:id="@+id/repsTextView"
                     android:layout_width="wrap_content"
                     android:textSize="18sp"
+                    android:textColor="@android:color/black"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 

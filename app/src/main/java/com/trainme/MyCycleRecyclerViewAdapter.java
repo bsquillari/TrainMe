@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.trainme.api.model.Cycle;
 import com.trainme.api.model.PagedList;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
-import com.trainme.databinding.CycleDetailBinding;
 import com.trainme.databinding.FragmentItemCycleBinding;
 import com.trainme.databinding.FragmentRoutinesBinding;
 import com.trainme.repository.RoutineRepository;
