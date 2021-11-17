@@ -138,4 +138,7 @@
     <string name="menu_item_date">Date</string>
     <string name="menu_item_difficulty">Difficulty</string>
     <string name="menu_item_name">Name</string>
+    <string name="logoutQuestion">Leaving so soon? Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

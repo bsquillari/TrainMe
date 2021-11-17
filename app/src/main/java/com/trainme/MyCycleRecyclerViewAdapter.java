@@ -4,6 +4,7 @@ package com.trainme;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -110,6 +111,7 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
                 holder.reps.setText(holder.mItem.getRepetitions().toString());
                 boolean isExpanded = mValues.get(position).isExpanded();
                 holder.expandableLayout.setVisibility(isExpanded? View.VISIBLE : View.GONE);
+                holder.exerciseList.setLayoutManager(new GridLayoutManager(context, 2));        // TODO: Cambiar el numero de columnas segun el tamaño?
                 holder.exerciseList.setAdapter(new MyExerciseRecyclerViewAdapter(repository, lifecycleOwner, context, holder.id));
 
             }
