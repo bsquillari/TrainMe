@@ -1,7 +1,5 @@
 package com.trainme;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 

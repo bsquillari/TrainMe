@@ -135,4 +135,6 @@
     <string name="no">No</string>
     <string name="word_username">Username</string>
     <string name="duration">Duration: </string>
+    <string name="action_share">Share</string>
+    <string name="action_favorite">Favorite</string>
 </resources>
