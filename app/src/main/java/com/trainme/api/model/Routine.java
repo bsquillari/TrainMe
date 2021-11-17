@@ -29,7 +29,7 @@ public class Routine {
     private String difficulty;
     @SerializedName("user")
     @Expose
-    private User user;
+    private RoutineOwner user;
     @SerializedName("category")
     @Expose
     private Category category;
@@ -93,11 +93,11 @@ public class Routine {
         this.difficulty = difficulty;
     }
 
-    public User getUser() {
+    public RoutineOwner getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(RoutineOwner user) {
         this.user = user;
     }
 

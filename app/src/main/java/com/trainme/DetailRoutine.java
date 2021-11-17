@@ -14,6 +14,7 @@ import  androidx.fragment.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RatingBar;
 
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
@@ -33,16 +34,27 @@ public class DetailRoutine extends AppCompatActivity {
 
         binding = ActivityDetailRoutineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        int routineId = getIntent().getExtras().getInt("ID");
-        String routineName = getIntent().getExtras().getString("Name");
-        String routineDetail = getIntent().getExtras().getString("Detail");
-        String routineDifficulty = getIntent().getExtras().getString("Difficulty");
-        String routineScore = getIntent().getExtras().getString("Score");
+
+        Intent myIntent=getIntent();
+        int routineId = myIntent.getExtras().getInt("ID");
+        String routineName = myIntent.getExtras().getString("Name");
+
+        String routineDetail = myIntent.getExtras().getString("Detail");
+        String routineDifficulty = myIntent.getExtras().getString("Difficulty");
+        int routineRating = myIntent.getExtras().getInt("Score");
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
         toolBarLayout.setTitle(routineName);
+
+
+
+        binding.contentScrollingFragment.detailTextView.setText(routineDetail);
+
+        binding.contentScrollingFragment.titleTextView.setText(routineName);
+        binding.contentScrollingFragment.rating.setRating(routineRating);
+
 
         FrameLayout frame = binding.contentScrollingFragment.cyclesFrameLayout;
 
@@ -107,6 +119,31 @@ public class DetailRoutine extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+    }
+
+    public void rateRoutine(View view){
+        Intent intent=new Intent(this, RateActiviy.class);
+
+        intent.putExtra("ID", getIntent().getExtras().getInt("ID"));
+
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int routineId=getIntent().getExtras().getInt("ID");
+        App api= (App)getApplication();
+        api.getRoutineRepository().getRoutine(routineId).observe(this,r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("onRes", "refresh");
+                int routineRating=r.getData().getScore();
+                binding.contentScrollingFragment.rating.setRating(routineRating);
+
+            } else if (r.getStatus() == Status.ERROR) {
+                Log.d("onRes", " Error");
+            }
+        });
     }
 
     public void playRoutine(View view) {
