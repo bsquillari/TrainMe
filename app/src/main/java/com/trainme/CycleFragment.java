@@ -65,8 +65,12 @@ public class CycleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_cycles_list, container, false);
-        // Set the adapter
-        int id = getActivity().getIntent().getExtras().getInt("ID");
+        int id;
+        if(getActivity().getIntent().getAction() != null) {
+            id = Integer.parseInt(getActivity().getIntent().getData().getQueryParameter("id"));
+        } else {
+            id = getActivity().getIntent().getExtras().getInt("ID");
+        }
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
