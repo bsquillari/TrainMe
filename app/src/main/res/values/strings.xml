@@ -141,4 +141,5 @@
     <string name="logoutQuestion">Leaving so soon? Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="word_username">Username</string>
 </resources>
