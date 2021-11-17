@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     public void openDetailRoutine(View view) {
-        Intent intent = new Intent(this, DetailRoutine.class);
+        Intent intent = new Intent(this, DetailRoutineActivity.class);
         startActivity(intent);
     }
 

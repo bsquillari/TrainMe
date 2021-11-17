@@ -18,7 +18,7 @@ import com.trainme.databinding.ActivityDetailRoutineBinding;
 import com.trainme.repository.Status;
 import java.util.Objects;
 
-public class DetailRoutine extends AppCompatActivity {
+public class DetailRoutineActivity extends AppCompatActivity {
 
     private ActivityDetailRoutineBinding binding;
     private int routineId;
@@ -122,7 +122,7 @@ public class DetailRoutine extends AppCompatActivity {
     }
 
     public void playRoutine(View view) {
-        Intent intent = new Intent(this, PlayRoutine.class);
+        Intent intent = new Intent(this, PlayRoutineActivity.class);
         Bundle bundle = getIntent().getExtras();
 
         intent.putExtra("ID", bundle.getInt("ID"));

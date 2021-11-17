@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.trainme.databinding.ActivityPlayRoutineBinding;
 
-public class PlayRoutine extends AppCompatActivity {
+public class PlayRoutineActivity extends AppCompatActivity {
 
     private ActivityPlayRoutineBinding binding;
 

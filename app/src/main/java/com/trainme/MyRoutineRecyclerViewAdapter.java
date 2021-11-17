@@ -156,7 +156,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                         @Override
                         public void onClick(View view) {
 //                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
-                            Intent myIntent = new Intent(myContext, DetailRoutine.class);
+                            Intent myIntent = new Intent(myContext, DetailRoutineActivity.class);
                             myIntent.putExtra("ID", holder.mItem.getId()); //Optional parameters
                             myIntent.putExtra("Name", holder.mItem.getName()); //Optional parameters
                             myIntent.putExtra("Detail", holder.mItem.getDetail()); //Optional parameters

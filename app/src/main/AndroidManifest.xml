@@ -16,14 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainMeLogin">
         <activity
-            android:name=".PlayRoutine"
+            android:name=".PlayRoutineActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_play_routine"
-            android:parentActivityName=".DetailRoutine"
+            android:parentActivityName=".DetailRoutineActivity"
             android:theme="@style/Theme.TrainMeLogin.NoActionBar" />
         <activity
-            android:name=".DetailRoutine"
+            android:name=".DetailRoutineActivity"
             android:exported="true"
             android:label="@string/title_activity_detail_routine"
             android:parentActivityName=".MainActivity"
