@@ -38,11 +38,10 @@ public class DetailRoutineActivity extends AppCompatActivity {
         } else {
             routineId = getIntent().getExtras().getInt("ID");
             routineName = getIntent().getExtras().getString("Name");
+            String routineDetail = getIntent().getExtras().getString("Detail");
+            String routineDifficulty = getIntent().getExtras().getString("Difficulty");
+            String routineScore = getIntent().getExtras().getString("Score");
         }
-
-        String routineDetail = getIntent().getExtras().getString("Detail");
-        String routineDifficulty = getIntent().getExtras().getString("Difficulty");
-        String routineScore = getIntent().getExtras().getString("Score");
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);

@@ -76,5 +76,4 @@
         app:layout_constraintStart_toEndOf="@+id/floatingActionButton5"
         app:srcCompat="@drawable/ic_baseline_fast_forward_24" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
