@@ -6,20 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PlayRoutine">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:title="@string/title_training"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/Theme.TrainMeLogin.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    tools:context=".PlayRoutineActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -88,6 +75,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/floatingActionButton5"
         app:srcCompat="@drawable/ic_baseline_fast_forward_24" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

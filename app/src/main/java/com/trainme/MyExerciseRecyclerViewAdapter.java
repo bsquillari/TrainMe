@@ -102,6 +102,8 @@ public class MyExerciseRecyclerViewAdapter extends RecyclerView.Adapter<MyExerci
                 holder.mItem = mValues.get(position);
                 holder.exerciseName.setText(holder.mItem.getExercise().getName());
                 holder.reps.setText(holder.mItem.getRepetitions().toString());
+                holder.type.setText(holder.mItem.getExercise().getType());
+                holder.duration.setText(holder.mItem.getDuration().toString());
 //                holder.cycleDetail.setText(holder.mItem.getDetail());
 //                holder.reps.setText(holder.mItem.getRepetitions());
             }
@@ -119,14 +121,15 @@ public class MyExerciseRecyclerViewAdapter extends RecyclerView.Adapter<MyExerci
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView exerciseName, reps;
+        public TextView exerciseName, reps, type, duration;
         public ContentEx mItem;
 
         public ViewHolder(FragmentExerciseItemBinding binding) {
             super(binding.getRoot());
             exerciseName = binding.exerciseName;
             reps = binding.exerciseRepetitions;
-
+            type = binding.exerciseType;
+            duration = binding.exerciseDuration;
         }
 
         @Override

@@ -1,14 +1,13 @@
 package com.trainme;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.trainme.databinding.ActivityPlayRoutineBinding;
 
-public class PlayRoutine extends AppCompatActivity {
+public class PlayRoutineActivity extends AppCompatActivity {
 
     private ActivityPlayRoutineBinding binding;
 
@@ -16,15 +15,13 @@ public class PlayRoutine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding=ActivityPlayRoutineBinding.inflate(getLayoutInflater());
+        binding = ActivityPlayRoutineBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        binding.getRoot().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
     }
 

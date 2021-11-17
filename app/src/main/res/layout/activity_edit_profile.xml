@@ -12,7 +12,7 @@
         android:layout_height="61dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"

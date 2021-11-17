@@ -1,17 +1,14 @@
 package com.trainme;
 
-import androidx.cardview.widget.CardView;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +21,7 @@ import android.widget.TextView;
 
 import com.trainme.api.model.Cycle;
 import com.trainme.api.model.PagedList;
-import com.trainme.databinding.ActivityDetailRoutineBinding;
-import com.trainme.databinding.CycleDetailBinding;
 import com.trainme.databinding.FragmentItemCycleBinding;
-import com.trainme.databinding.FragmentRoutinesBinding;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
 
@@ -84,7 +78,6 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentItemCycleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }
@@ -117,20 +110,14 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
                 holder.id = holder.mItem.getId();
                 holder.reps.setText(holder.mItem.getRepetitions().toString());
                 boolean isExpanded = mValues.get(position).isExpanded();
-                holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-                FrameLayout frame = holder.exercisesFrameLayout;
+                holder.expandableLayout.setVisibility(isExpanded? View.VISIBLE : View.GONE);
+                holder.exerciseList.setLayoutManager(new GridLayoutManager(context, 2));        // TODO: Cambiar el numero de columnas segun el tamaño?
+                holder.exerciseList.setAdapter(new MyExerciseRecyclerViewAdapter(repository, lifecycleOwner, context, holder.id));
 
-                Fragment newFragment = new ExerciseFragment();          // TODO: Analizar si esta bien que este en esta funcion.
-                Bundle bundle = new Bundle();
-                bundle.putInt("CycleId", holder.id);
-                newFragment.setArguments(bundle);
-                FragmentTransaction ft = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
-                ft.add(frame.getId(), newFragment).commit();
-                Log.e("onCreateView", "Exercise Fragment");
             }
 
         }
-//        holder.colorPill.setCardBackgroundColor( mValues.ITEMS.get(position).color);
+
 
     }
 
@@ -147,7 +134,7 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
         public LinearLayout cycleMainLinearLayout;
         public ImageView expandIcon;
         public FrameLayout exercisesFrameLayout;
-
+        public RecyclerView exerciseList;
         public Cycle mItem;
         public int id;
 
@@ -157,21 +144,18 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
             cycleType = binding.cycleTypeTextView;
             reps = binding.repsTextView;
             expandIcon = binding.dropDown;
-            exercisesFrameLayout = binding.exercisesFrameLayout;
+
             cycleMainLinearLayout = binding.cycleLinearLayout;
             expandableLayout = binding.expandableCycle;
-
+            exerciseList = binding.list;
 
             binding.cycleCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.d("cycle viewhodler", "onClick: de cycle view");
                     mItem.setExpanded(!mItem.isExpanded());
-                    notifyItemChanged(getBindingAdapterPosition());
-//                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
-//                    Intent myIntent = new Intent(myContext, DetailRoutine.class);
-//                    myIntent.putExtra("ID", 18); //Optional parameters
-//                    myContext.startActivity(myIntent);
+                    expandableLayout.setVisibility(mItem.isExpanded()? View.VISIBLE : View.GONE);
+
                 }
             });
         }
