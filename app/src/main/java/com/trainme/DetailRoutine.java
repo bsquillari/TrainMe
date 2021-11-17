@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import  androidx.fragment.app.FragmentActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -20,6 +21,7 @@ import com.trainme.databinding.ActivityDetailRoutineBinding;
 import com.trainme.repository.Status;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DetailRoutine extends AppCompatActivity {
@@ -43,6 +45,8 @@ public class DetailRoutine extends AppCompatActivity {
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
         toolBarLayout.setTitle(routineName);
+        Objects.requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FrameLayout frame = binding.contentScrollingFragment.cyclesFrameLayout;
 
@@ -107,6 +111,19 @@ public class DetailRoutine extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void playRoutine(View view) {
