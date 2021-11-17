@@ -5,10 +5,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.trainme.api.model.Review;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
 import com.trainme.databinding.ActivityRateActiviyBinding;
@@ -27,10 +31,16 @@ public class RateActiviy extends AppCompatActivity {
         binding = ActivityRateActiviyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.title.setText(getIntent().getExtras().getString("Name"));
 
 
 
 
+
+       }
+
+       public void clickCancel(View v){
+        onBackPressed();
        }
 
        public void ClickSubmit(View view){
@@ -41,7 +51,8 @@ public class RateActiviy extends AppCompatActivity {
            int routineId=getIntent().getExtras().getInt("ID");
 
            //llamado a la Api
-           binding.textView.setText("You rated "+ String.valueOf(score));
+           //binding.textView.setText("You rated "+ String.valueOf(score));
+           String message="Rated: "+ String.valueOf(score);
            Review review=new Review(score,editText.getText().toString() );
            api.getRoutineRepository().addReview(routineId,review).observe(this,
                    r -> {
@@ -51,6 +62,8 @@ public class RateActiviy extends AppCompatActivity {
                            Log.d("RATE", "rate Error");
 
                    });
+
+           Toast.makeText(RateActiviy.this,message, Toast.LENGTH_LONG).show();
            onBackPressed();
        }
 }

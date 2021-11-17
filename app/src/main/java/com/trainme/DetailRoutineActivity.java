@@ -29,6 +29,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
     private String routineDetail;
     private String routineDifficulty;
     private int routineScore;
+    private int colorPill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +47,14 @@ public class DetailRoutineActivity extends AppCompatActivity {
             routineDetail = getIntent().getExtras().getString("Detail");
             routineDifficulty = getIntent().getExtras().getString("Difficulty");
             routineScore = getIntent().getExtras().getInt("Score");
+            colorPill=getIntent().getExtras().getInt("ColorPill");
         }
 
         binding.contentScrollingFragment.detailTextView.setText(routineDetail);
         binding.contentScrollingFragment.titleTextView.setText(routineName);
         binding.contentScrollingFragment.rating.setRating(routineScore);
+        binding.contentScrollingFragment.difficultyTextView.setText(routineDifficulty);
+        binding.contentScrollingFragment.colorPill.setCardBackgroundColor(colorPill);
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -140,7 +144,8 @@ public class DetailRoutineActivity extends AppCompatActivity {
     public void rateRoutine(View view){
         Intent intent=new Intent(this, RateActiviy.class);
 
-        intent.putExtra("ID", getIntent().getExtras().getInt("ID"));
+        intent.putExtra("ID", routineId);
+        intent.putExtra("Name", routineName);
 
         startActivity(intent);
     }

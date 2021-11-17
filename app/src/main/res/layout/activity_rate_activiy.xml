@@ -3,38 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/container"
     android:layout_height="match_parent"
     tools:context=".RateActiviy">
 
 
     <RatingBar
         android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
+        android:layout_width="238dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="84dp"
         android:numStars="5"
         android:stepSize="0.5"
+        android:theme="@style/RatingBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="169dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="120dp"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_submit" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="100dp"
         android:onClick="ClickSubmit"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +37,33 @@
         android:layout_height="129dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="68dp"
-        android:ems="10"
-        android:hint="Review"
+        style="@style/MyEditTextStyle"
         android:inputType="text|textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rating" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="36dp"
+        android:onClick="clickCancel"
+        android:text="Cancel"
+        app:layout_constraintEnd_toStartOf="@+id/button_submit"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextReview" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="412dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="68dp"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
