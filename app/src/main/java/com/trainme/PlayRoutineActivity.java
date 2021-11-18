@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -65,7 +66,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                         model.exercisesIterator = model.Exercises.listIterator();
                                         model.currentExercise = model.exercisesIterator.next();
                                         // NO DETAIL VIEW
-                                        binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+                                        binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
                                         binding.exerciseCard1.setVisibility(View.INVISIBLE);
                                         if (model.totalExercises > 0) {
                                             int idxAux = model.exercisesIterator.nextIndex();
@@ -121,16 +122,23 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                                                 if(model.timer!=null)
                                                                     model.timer.cancel();
                                                                 model.timerRunning = false;
+                                                                binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
                                                                 binding.fabPlay.callOnClick();
+                                                            }else {
+                                                                model.timerRunning = false;
+                                                                binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
                                                             }
-                                                            // Hacer ruidito
+                                                            playSound();
+
                                                         }
                                                     };
                                                     model.timer.start();
                                                     model.timerRunning = true;
+                                                    binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
                                                 } else {
                                                     model.timer.cancel();
                                                     model.timerRunning = false;
+                                                    binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
                                                 }
                                             }
                                         });
@@ -141,6 +149,8 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                                 if (model.timer != null)
                                                     model.timer.cancel();
                                                 model.timerRunning = false;
+                                                binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+
 
                                             }
                                         });
@@ -152,6 +162,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                                 if (model.timer != null)
                                                     model.timer.cancel();
                                                 model.timerRunning = false;
+                                                binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
                                             }
                                         });
                                         updateTimer();
@@ -175,6 +186,11 @@ public class PlayRoutineActivity extends AppCompatActivity {
     }
     }
 
+    private void playSound() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.sound);
+        mp.start();
+    }
+
     private void prevExercise() {
         if(!(!model.exercisesIterator.hasNext() && model.currentExerciseReps>0))
         binding.exerciseCard3.setVisibility(View.VISIBLE);
@@ -195,7 +211,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
                 model.currentExerciseReps = model.currentExercise.getRepetitions()-1;
                 binding.exerciseReps2.setText(getResources().getString(R.string.barra, model.currentExerciseReps, model.currentExercise.getRepetitions()));
                 binding.exerciseTitleDetailLayout.setText(model.currentExercise.getExercise().getName() + " " + model.currentExerciseReps + "/" + model.currentExercise.getRepetitions());
-                binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+                binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
                 if(auxBool) {
                     binding.exerciseCard1.setVisibility(View.INVISIBLE);
                 }else {
@@ -330,7 +346,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
                     model.currentExercise = model.exercisesIterator.next();
                     // NO DETAIL VIEW
                     model.exercisesDone = 0;
-                    binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+                    binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
                     binding.exerciseCard1.setVisibility(View.INVISIBLE);
                     binding.exerciseCard3.setVisibility(View.VISIBLE);
                     model.currentExerciseReps = 0;
@@ -404,7 +420,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
                         model.exercisesIterator = model.Exercises.listIterator();
                         model.currentExercise = model.exercisesIterator.next();
                         // NO DETAIL VIEW
-                        binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+                        binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
                         binding.exerciseCard1.setVisibility(View.INVISIBLE);
                         binding.exerciseCard3.setVisibility(View.VISIBLE);
                         if (model.totalExercises > 0) {
@@ -444,7 +460,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
     public void NextExerciseNoCycleJump(){
         model.exercisesDone++;
         binding.exerciseCard1.setVisibility(View.VISIBLE);
-        binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+        binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
         binding.exerciseName1.setText(model.currentExercise.getExercise().getName());
         binding.exerciseReps1.setText(getResources().getString(R.string.barra, model.currentExerciseReps, model.currentExercise.getRepetitions()));
         binding.exerciseCard1.setCardBackgroundColor(getResources().getColor(R.color.purple_500));

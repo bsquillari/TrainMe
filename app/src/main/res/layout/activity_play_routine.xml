@@ -97,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/exercisesLeft"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,6 +106,7 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/toggleExerciseView"/>
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:id="@+id/noDetailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -194,6 +196,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="30dp"
         android:id="@+id/detailLayout"
         android:visibility="invisible"
         android:layout_width="match_parent"
