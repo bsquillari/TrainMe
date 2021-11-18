@@ -54,5 +54,12 @@
     <string name="cyclesLeft">Terminaste %1$d de %2$d ciclos</string>
     <string name="quitRoutineQuestion">Estas seguro de querer terminar la rutina?</string>
     <string name="progressLost">Todo el progreso se va a perder!</string>
+    <string name="confirmChanges">Confirmar cambios?</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="phone_number">Telefono</string>
+    <string name="link_to_profile_pic">Link a foto de perfil</string>
+    <string name="gender">Genero</string>
+    <string name="last_name">Nombre</string>
+    <string name="first_name">Apellido</string>
 
 </resources>
