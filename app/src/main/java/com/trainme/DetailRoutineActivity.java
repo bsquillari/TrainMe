@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,13 +41,17 @@ public class DetailRoutineActivity extends AppCompatActivity {
         if(getIntent().getAction() != null) {
             routineId = Integer.parseInt(getIntent().getData().getQueryParameter("id"));
             routineName = getIntent().getData().getQueryParameter("name");
+            routineDetail = getIntent().getData().getQueryParameter("detail");
+            routineDifficulty = getIntent().getData().getQueryParameter("difficulty");
+            routineScore = Integer.parseInt(getIntent().getData().getQueryParameter("score"));
+            colorPill = Integer.parseInt(getIntent().getData().getQueryParameter("color_pill"));
         } else {
             routineId = getIntent().getExtras().getInt("ID");
             routineName = getIntent().getExtras().getString("Name");
             routineDetail = getIntent().getExtras().getString("Detail");
             routineDifficulty = getIntent().getExtras().getString("Difficulty");
             routineScore = getIntent().getExtras().getInt("Score");
-            colorPill=getIntent().getExtras().getInt("ColorPill");
+            colorPill = getIntent().getExtras().getInt("ColorPill");
             //username=getIntent().getExtras().getString("Username");
         }
 
@@ -121,7 +124,14 @@ public class DetailRoutineActivity extends AppCompatActivity {
         } else if(id == R.id.action_share) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://trainme.com/?id=" + routineId + "&?name=" + routineName);
+            String URI = "https://trainme.com/"
+                    + "?id=" + routineId
+                    + "&?name=" + routineName
+                    + "&?detail=" + routineDetail
+                    + "&?difficulty=" + routineDifficulty
+                    + "&?score=" + routineScore
+                    + "&?pill=" + colorPill;
+            shareIntent.putExtra(Intent.EXTRA_TEXT, URI);
             startActivity(Intent.createChooser(shareIntent, "Choose one"));
         } else if(id == R.id.action_fav) {
             App app = (App) getApplication();
