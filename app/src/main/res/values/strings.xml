@@ -137,4 +137,13 @@
     <string name="duration">Duration: </string>
     <string name="action_share">Share</string>
     <string name="action_favorite">Favorite</string>
+    <string name="ejercicios">Exercises of cycle</string>
+    <string name="toggleExerciseView">Toggle exercise view</string>
+    <string name="goNextCycle">Let\'s go!</string>
+    <string name="finishCyclePopUp">"Congratulations! You finished"</string>
+    <string name="keepGoing">Keep going!</string>
+    <string name="finishRoutine">Amazing! You finished!</string>
+    <string name="rememberToReview">Don\'t forget to review the routine.</string>
+    <string name="goBackToDetail">Go back to routine detail</string>
+    <string name="cyclesLeft">%1$d cycle finished out of %2$d</string>
 </resources>
