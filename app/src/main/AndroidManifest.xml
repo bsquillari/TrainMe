@@ -16,18 +16,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainMeLogin">
         <activity
-            android:name=".PlayRoutine"
+            android:name=".RateActiviy"
+            android:exported="false" />
+        <activity
+            android:name=".PlayRoutineActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_play_routine"
-            android:parentActivityName=".DetailRoutine"
+            android:parentActivityName=".DetailRoutineActivity"
             android:theme="@style/Theme.TrainMeLogin.NoActionBar" />
         <activity
-            android:name=".DetailRoutine"
-            android:exported="false"
+            android:name=".DetailRoutineActivity"
+            android:exported="true"
             android:label="@string/title_activity_detail_routine"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.TrainMeLogin.NoActionBar" />
+            android:theme="@style/Theme.TrainMeLogin.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="trainme.com"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".EditProfileActivity"
             android:exported="true"

@@ -15,11 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.trainme.api.ApiRoutineService;
 import com.trainme.api.model.PagedList;
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.FragmentRoutinesBinding;
-import com.trainme.placeholder.RoutineHolder;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
 
@@ -39,11 +37,11 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
     private boolean isLastPage;
     private String section;
     private String orderBy;
-    private final int colors[]={Color.RED, Color.GREEN, Color.MAGENTA, Color.GRAY};
+    //private final int colors[]={Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.LTGRAY};
 
-    private int getColor(int id){
+    /*private int getColor(int id){
         return colors[id % 4];
-    }
+    }*/
 
 
     public MyRoutineRecyclerViewAdapter(RoutineRepository repository, LifecycleOwner lifecycleOwner, Context context, String section, String orderBy) {
@@ -153,17 +151,33 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     holder.routineName.setText(holder.mItem.getName());
                     holder.routineDescription.setText(holder.mItem.getDetail());
                     holder.iconImage.setImageResource(R.mipmap.ic_launcher);
-                    holder.colorPill.setCardBackgroundColor(getColor(holder.mItem.getId()));
+                    int color=Color.BLACK;
+                    switch (holder.mItem.getDifficulty()){
+                        case "rookie": color=Color.GREEN;
+                        break;
+                        case "beginner": color=Color.YELLOW;
+                        break;
+                        case "intermediate": color=Color.LTGRAY;
+                        break;
+                        case "advanced": color=Color.BLUE;
+                            break;
+                        case "expert": color=Color.RED;
+                            break;
+                    }
+                    holder.colorPill.setCardBackgroundColor(color);
+                    int finalColor = color;
                     holder.routineCard.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 //                    Intent myIntent = new Intent(MainActivity.this, Detail.class);
-                            Intent myIntent = new Intent(myContext,DetailRoutine.class);
+                            Intent myIntent = new Intent(myContext, DetailRoutineActivity.class);
                             myIntent.putExtra("ID", holder.mItem.getId()); //Optional parameters
                             myIntent.putExtra("Name", holder.mItem.getName()); //Optional parameters
                             myIntent.putExtra("Detail", holder.mItem.getDetail()); //Optional parameters
                             myIntent.putExtra("Difficulty", holder.mItem.getDifficulty()); //Optional parameters
                             myIntent.putExtra("Score", holder.mItem.getScore()); //Optional parameters
+                            myIntent.putExtra("ColorPill", finalColor);
+                            //myIntent.putExtra("Username", holder.mItem.getUser().getUsername());
                             myContext.startActivity(myIntent);
                         }
                     });

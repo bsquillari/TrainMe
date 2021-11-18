@@ -17,11 +17,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="@dimen/text_subtitle"
-        android:layout_gravity="start"/>
+        android:textSize="@dimen/text_title"
+        android:layout_gravity="start"
+        android:paddingTop="10dp"
+        android:paddingHorizontal="10dp"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Type"
+    android:textSize="@dimen/text_subtitle"
+    android:id="@+id/exercise_type"
+        android:paddingHorizontal="10dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,5 +43,22 @@
             android:text="2"
             android:textSize="@dimen/text_subtitle" />
     </LinearLayout>
+    <LinearLayout
+        android:paddingBottom="10dp"
+        android:paddingHorizontal="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration" android:textSize="@dimen/text_subtitle"/>
+        <TextView
+            android:id="@+id/exerciseDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textSize="@dimen/text_subtitle" />
+    </LinearLayout>
+
 </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,8 @@
 package com.trainme.ui.profile;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.app.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.trainme.App;
 import com.trainme.MainActivity;
 import com.trainme.R;
@@ -69,15 +72,26 @@ public class ProfileFragment extends Fragment {
         });
 
         binding.LogOutBtn.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.logoutQuestion)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            app.getUserRepository().logout().observe(getViewLifecycleOwner(), r -> {
+                                Log.d("Logout", r.getStatus().toString());
+                                if (r.getStatus() == Status.SUCCESS) {
+                                    Log.d("profile", getString(R.string.success));
+                                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
 
-            app.getUserRepository().logout().observe(getViewLifecycleOwner(), r -> {
-                Log.d("Logout", r.getStatus().toString());
-                if (r.getStatus() == Status.SUCCESS) {
-                    Log.d("profile", getString(R.string.success));
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                }
-            });
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+
         });
 
 //        final TextView textView = binding.textProfile;

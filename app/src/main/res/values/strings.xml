@@ -113,29 +113,40 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">Detail</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="start_training">START TRAINING!</string>
+    <string name="start_training">Start training!</string>
     <string name="cycles">Cycles</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_play_routine">PlayRoutine</string>
     <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="loading">"Loading..."</string>
     <string name="error">"Error"</string>
-    <string name="success">\"Success\"</string>
+    <string name="success">Success</string>
     <string name="NoBdate">No birthdate Provided</string>
     <string name="menu_item_category">Category</string>
     <string name="menu_item_score">Score</string>
     <string name="menu_item_date">Date</string>
     <string name="menu_item_difficulty">Difficulty</string>
     <string name="menu_item_name">Name</string>
+    <string name="logoutQuestion">Leaving so soon? Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="word_username">Username</string>
+    <string name="duration">Duration: </string>
+    <string name="action_share">Share</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="ejercicios">Exercises of cycle</string>
+    <string name="toggleExerciseView">Toggle exercise view</string>
+    <string name="goNextCycle">Let\'s go!</string>
+    <string name="finishCyclePopUp">"Congratulations! You finished"</string>
+    <string name="keepGoing">Keep going!</string>
+    <string name="finishRoutine">Amazing! You finished the routine!</string>
+    <string name="rememberToReview">Don\'t forget to review the routine.</string>
+    <string name="goBackToDetail">Go back to routine detail</string>
+    <string name="cyclesLeft">%1$d cycle finished out of %2$d</string>
+    <string name="barra" translatable="false">%1$d/%2$d</string>
+    <string name="quitRoutineQuestion">Are you sure you want to stop the routine?</string>
+    <string name="progressLost">All progress will be lost!</string>
 </resources>

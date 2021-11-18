@@ -12,6 +12,7 @@ import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
 import com.trainme.api.model.Exercise;
 import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Review;
 import com.trainme.api.model.Routine;
 
 
@@ -107,6 +108,17 @@ public class RoutineRepository {
             @Override
             protected LiveData<ApiResponse<PagedList<ContentEx>>> createCall() {
                 return apiService.getExercises(id, page, size, orderBy);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<Void>> addReview(int routineId, Review review){
+        return new NetworkBoundResource<Void, Void>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Void>> createCall() {
+                return apiService.addReview(routineId, review );
             }
         }.asLiveData();
     }

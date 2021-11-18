@@ -1,7 +1,5 @@
 package com.trainme;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     public void openDetailRoutine(View view) {
-        Intent intent = new Intent(this, DetailRoutine.class);
+        Intent intent = new Intent(this, DetailRoutineActivity.class);
         startActivity(intent);
     }
 

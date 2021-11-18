@@ -4,9 +4,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
-    <string name="action_sign_in">Crear una cuenta</string>
-    <string name="action_sign_in_short">Registrarse</string>
-    <string name="welcome">Bienvenido</string>
+    <string name="welcome">Bienvenido !</string>
     <string name="action_log_in">Ingresar con tu cuenta</string>
     <string name="action_log_in_short">Ingresar</string>
     <string name="invalid_username">Nombre de usuario invalido</string>
@@ -15,11 +13,46 @@
 
     <!-- Strings related to Bottom Navigation -->
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_myroutines">Incio</string>
+    <string name="title_myroutines">MisRutinas</string>
     <string name="title_explore">Explorar</string>
     <string name="title_profile">Perfil</string>
-    <string name="title_favs">Favs</string>
+    <string name="title_favs">Favoritos</string>
     <string name="edit_profile">Editar Perfil</string>
     <string name="menu_item_category">Categoría</string>
+    <string name="login_welcome">Sigue entrenando! TrainMe</string>
+    <string name="title_training">Entrenando</string>
+    <string name="title_activity_detail_routine">Detalle de Rutina</string>
+    <string name="action_settings">Configuración</string>
+    <string name="title_activity_detail">Detalle</string>
+    <string name="next">Proximo</string>
+    <string name="previous">Previous</string>
+    <string name="start_training">Comienza a entrenar!</string>
+    <string name="cycles">Ciclos</string>
+    <string name="loading">Cargando...</string>
+    <string name="error">Error</string>
+    <string name="success">Exito</string>
+    <string name="NoBdate">Falta la fecha de nacimiento</string>
+    <string name="menu_item_score">Puntuación</string>
+    <string name="menu_item_date">Fecha</string>
+    <string name="menu_item_difficulty">Dificultad</string>
+    <string name="menu_item_name">Nombre</string>
+    <string name="logoutQuestion">Ya te vas? Estas seguro?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="word_username">Usuario</string>
+    <string name="duration">Duración:</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_favorite">Favear</string>
+    <string name="ejercicios">Ejercicios del ciclo</string>
+    <string name="toggleExerciseView">Cambiar vista de ejercicios</string>
+    <string name="goNextCycle">Vamos!</string>
+    <string name="finishCyclePopUp">Felicitaciones! Terminaste</string>
+    <string name="keepGoing">Sigue así!</string>
+    <string name="finishRoutine">Espectacular! Terminaste la rutina!</string>
+    <string name="rememberToReview">No te olvides de puntuar la rutina.</string>
+    <string name="goBackToDetail">Volver al detalle de la rutina</string>
+    <string name="cyclesLeft">Terminaste %1$d de %2$d ciclos</string>
+    <string name="quitRoutineQuestion">Estas seguro de querer terminar la rutina?</string>
+    <string name="progressLost">Todo el progreso se va a perder!</string>
 
 </resources>
