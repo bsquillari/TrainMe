@@ -1,132 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditProfileActivity">
 
-    <Spinner
-        android:id="@+id/editTextGender"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Gender"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        app:layout_constraintEnd_toEndOf="@+id/editTextLastName"
-        app:layout_constraintStart_toStartOf="@+id/editTextLastName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/editTextGender"
-        app:layout_constraintStart_toStartOf="@+id/editTextGender"
-        app:layout_constraintTop_toBottomOf="@+id/editTextGender" />
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/editTextFirstName"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="First Name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextLastName"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextFirstName"
-        app:layout_constraintStart_toStartOf="@+id/editTextFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
+        <Spinner
+            android:id="@+id/editTextGender"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:hint="@string/gender" />
 
 
-    <!--        <DatePicker-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:datePickerMode="spinner"-->
-    <!--            android:background="@color/white"-->
-    <!--            android:backgroundTint="@color/white"-->
-
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/birthEditProfile"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="61dp"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:autofillHints="dd/mm/yyyy"-->
-<!--        android:ems="1"-->
-<!--        android:focusable="false"-->
-<!--        android:hint="dd/mm/yyyy"-->
-<!--        android:inputType="date"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/editTextLinkToPicture"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/editTextLinkToPicture"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/editTextLinkToPicture" />-->
+        <EditText
+            android:id="@+id/editTextLinkToPicture"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_baseline_add_a_photo_24"
+            android:hint="@string/link_to_profile_pic"
+            android:inputType="textPersonName" />
 
 
-    <Button
-        android:id="@+id/datePickerButton"
-        style="?android:spinnerStyle"
-        android:layout_width="375dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/editTextLinkToPicture"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLinkToPicture"
-        android:onClick="openDatePicker"/>
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+            android:hint="@string/phone_number"
+            android:inputType="phone" />
 
-    <EditText
-        android:id="@+id/editTextLinkToPicture"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Link to Profile Pic"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
-        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+        <Button
+            android:id="@+id/datePickerButton"
+            android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+            style="?android:spinnerStyle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="openDatePicker" />
 
-    <Button
-        android:id="@+id/editProfileButton"
-        android:layout_width="164dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="32dp"
-        android:drawableLeft="@android:drawable/ic_menu_save"
-        android:text="Save Changes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/editProfileButton"
+            android:layout_width="164dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="32dp"
+            android:drawableLeft="@drawable/ic_baseline_save_24"
+            android:text="@string/save_changes" />
 
-    <!--    <AutoCompleteTextView-->
-    <!--        android:id="@+id/multiAutoCompleteTextView"-->
-    <!--        android:layout_width="377dp"-->
-    <!--        android:layout_height="51dp"-->
-    <!--        android:layout_marginTop="28dp"-->
-    <!--        android:text="Gender"-->
-    <!--        app:layout_constraintEnd_toEndOf="@+id/editTextLinkToPicture"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/editTextLinkToPicture"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/editTextLinkToPicture" />-->
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>

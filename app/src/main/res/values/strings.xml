@@ -154,4 +154,10 @@
     <string name="quitRoutineQuestion">Are you sure you want to stop the routine?</string>
     <string name="progressLost">All progress will be lost!</string>
     <string name="confirmChanges">Confirm Changes?</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="link_to_profile_pic">Link to Profile Pic</string>
+    <string name="gender">Gender</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
 </resources>
