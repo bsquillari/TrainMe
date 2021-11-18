@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".EditProfileActivity">
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
+    <Spinner
+        android:id="@+id/editTextGender"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        android:hint="Gender"
+
+        app:layout_constraintEnd_toEndOf="@+id/editTextLastName"
+        app:layout_constraintStart_toStartOf="@+id/editTextLastName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
 
     <EditText
         android:id="@+id/editTextPhone"
@@ -26,39 +26,77 @@
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextGender"
+        app:layout_constraintStart_toStartOf="@+id/editTextGender"
+        app:layout_constraintTop_toBottomOf="@+id/editTextGender" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextFirstName"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="First Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextLastName"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Full Name"
+        android:hint="Last Name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextFirstName"
+        app:layout_constraintStart_toStartOf="@+id/editTextFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
+
+    <!--        <DatePicker-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:datePickerMode="spinner"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:backgroundTint="@color/white"-->
+
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/birthEditProfile"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:autofillHints="dd/mm/yyyy"-->
+<!--        android:ems="1"-->
+<!--        android:focusable="false"-->
+<!--        android:hint="dd/mm/yyyy"-->
+<!--        android:inputType="date"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/editTextLinkToPicture"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/editTextLinkToPicture"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editTextLinkToPicture" />-->
+
+
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="375dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/editTextLinkToPicture"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLinkToPicture"
+        android:onClick="openDatePicker"/>
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/editTextLinkToPicture"
         android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginTop="32dp"
@@ -70,15 +108,25 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/editProfileButton"
         android:layout_width="164dp"
         android:layout_height="58dp"
         android:layout_marginBottom="32dp"
-        android:text="Save Changes"
         android:drawableLeft="@android:drawable/ic_menu_save"
+        android:text="Save Changes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <AutoCompleteTextView-->
+    <!--        android:id="@+id/multiAutoCompleteTextView"-->
+    <!--        android:layout_width="377dp"-->
+    <!--        android:layout_height="51dp"-->
+    <!--        android:layout_marginTop="28dp"-->
+    <!--        android:text="Gender"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/editTextLinkToPicture"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/editTextLinkToPicture"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/editTextLinkToPicture" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

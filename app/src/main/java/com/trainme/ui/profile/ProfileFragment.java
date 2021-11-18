@@ -23,6 +23,7 @@ import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.squareup.picasso.Picasso;
 import com.trainme.App;
 import com.trainme.MainActivity;
 import com.trainme.R;
@@ -60,11 +61,12 @@ public class ProfileFragment extends Fragment {
                 binding.genderProfile.setText(r.getData().getGender());
                 if (r.getData().getBirthdate() != null) {
                     Date birth = new Date(r.getData().getBirthdate());
-                    binding.birthProfile.setText(birth.toString());
+                    binding.birthProfile.setText(birth.getDate() + "/" + birth.getMonth() + "/" + birth.getYear() );
                 }else{
                     binding.birthProfile.setText(R.string.NoBdate);
                 }
-                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
+                Picasso.get().load(r.getData().getAvatarUrl()).into(binding.avatarURLProfile);
+//                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
             }else if(r.getStatus() == Status.ERROR){
                 Log.d("debugeado", "onCreateView: " + r.getError().toString());
 

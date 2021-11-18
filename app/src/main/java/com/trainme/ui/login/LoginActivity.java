@@ -38,6 +38,7 @@ import com.trainme.repository.Status;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String TAG = "UI";
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
 
@@ -111,24 +112,10 @@ public class LoginActivity extends AppCompatActivity {
         };
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
-
-        binding.login.setOnClickListener(v -> {
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-//                loginViewModel.login(usernameEditText.getText().toString(),
-//                        passwordEditText.getText().toString());
+        passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 Credentials credentials = new Credentials(binding.username.getText().toString(), binding.password.getText().toString());
-                App app = ((App)getApplication());
+                App app = ((App) getApplication());
                 app.getUserRepository().login(credentials).observe(this, r -> {
                     Log.d("Login", r.getStatus().toString());
                     if (r.getStatus() == Status.SUCCESS) {
@@ -136,13 +123,32 @@ public class LoginActivity extends AppCompatActivity {
                         binding.loading.setVisibility(View.GONE);
                         app.getPreferences().setAuthToken(r.getData().getToken());
                         updateUiWithUser(new LoggedInUserView(binding.username.getText().toString()));
-                    } else {
+                    }else {
                         defaultResourceHandler(r);
                     }
                 });
+            }
+            return false;
+        });
+
+
+        binding.login.setOnClickListener(v -> {
+            Credentials credentials = new Credentials(binding.username.getText().toString(), binding.password.getText().toString());
+            App app = ((App) getApplication());
+            app.getUserRepository().login(credentials).observe(this, r -> {
+                Log.d("Login", r.getStatus().toString());
+                if (r.getStatus() == Status.SUCCESS) {
+                    Log.d(TAG, getString(R.string.success));
+                    binding.loading.setVisibility(View.GONE);
+                    app.getPreferences().setAuthToken(r.getData().getToken());
+                    updateUiWithUser(new LoggedInUserView(binding.username.getText().toString()));
+                } else {
+                    defaultResourceHandler(r);
+                }
+            });
         });
     }
-    public static final String TAG = "UI";
+
     private void defaultResourceHandler(Resource<?> resource) {
         switch (resource.getStatus()) {
             case LOADING:
@@ -152,10 +158,10 @@ public class LoginActivity extends AppCompatActivity {
             case ERROR:
                 binding.loading.setVisibility(View.GONE);
                 Error error = resource.getError();
-                String message = getString(R.string.error)+": " + error.getDescription();
-                Snackbar snack = Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.error)).setDuration(20*1000);
+                String message = getString(R.string.error) + ": " + error.getDescription();
+                Snackbar snack = Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.error)).setDuration(20 * 1000);
                 View view = snack.getView();
-                FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
                 params.gravity = Gravity.TOP;
                 view.setLayoutParams(params);
                 snack.setAction("DISMISS", new View.OnClickListener() {

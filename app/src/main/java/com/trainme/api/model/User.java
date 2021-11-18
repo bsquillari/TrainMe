@@ -36,6 +36,17 @@ public class User {
     @SerializedName("metadata")
     @Expose
     private Object metadata;
+
+    public User(String firstName, String lastName, String gender, Long birthdate, String phone, String avatarUrl, Object metadata) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        this.phone = phone;
+        this.avatarUrl = avatarUrl;
+        this.metadata = metadata;
+    }
+
     @SerializedName("date")
     @Expose
     private Long date;

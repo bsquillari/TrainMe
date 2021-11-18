@@ -61,6 +61,17 @@ public class UserRepository {
         }.asLiveData();
     }
 
+    public LiveData<Resource<User>> editProfile(User user) {
+        return new NetworkBoundResource<User, User>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<User>> createCall() {
+                return apiService.editProfile(user);
+            }
+        }.asLiveData();
+    }
+
     public LiveData<Resource<User>> getUser(int userID){
         return new NetworkBoundResource<User, User>()
         {
