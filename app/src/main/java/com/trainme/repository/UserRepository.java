@@ -60,4 +60,15 @@ public class UserRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<User>> getUser(int userID){
+        return new NetworkBoundResource<User, User>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<User>> createCall() {
+                return apiService.getUser(userID);
+            }
+        }.asLiveData();
+    }
 }

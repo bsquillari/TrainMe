@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainMeLogin">
         <activity
+            android:name=".RateActiviy"
+            android:exported="false" />
+        <activity
             android:name=".PlayRoutineActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"

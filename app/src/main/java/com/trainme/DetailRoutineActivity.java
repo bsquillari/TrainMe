@@ -8,6 +8,8 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +26,11 @@ public class DetailRoutineActivity extends AppCompatActivity {
     private int routineId;
     private String routineName;
     private boolean routineFavorite;
+    private String routineDetail;
+    private String routineDifficulty;
+    private String username;
+    private int routineScore;
+    private int colorPill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +45,32 @@ public class DetailRoutineActivity extends AppCompatActivity {
         } else {
             routineId = getIntent().getExtras().getInt("ID");
             routineName = getIntent().getExtras().getString("Name");
-            String routineDetail = getIntent().getExtras().getString("Detail");
-            String routineDifficulty = getIntent().getExtras().getString("Difficulty");
-            String routineScore = getIntent().getExtras().getString("Score");
+            routineDetail = getIntent().getExtras().getString("Detail");
+            routineDifficulty = getIntent().getExtras().getString("Difficulty");
+            routineScore = getIntent().getExtras().getInt("Score");
+            colorPill=getIntent().getExtras().getInt("ColorPill");
+            //username=getIntent().getExtras().getString("Username");
         }
+
+        binding.contentScrollingFragment.detailTextView.setText(routineDetail);
+        binding.contentScrollingFragment.titleTextView.setText(routineName);
+        binding.contentScrollingFragment.rating.setRating(routineScore);
+        binding.contentScrollingFragment.difficultyTextView.setText(routineDifficulty);
+        binding.contentScrollingFragment.colorPill.setCardBackgroundColor(colorPill);
+        //binding.contentScrollingFragment.username.setText(username);
+
+        int routineId=getIntent().getExtras().getInt("ID");
+        App api= (App)getApplication();
+        api.getRoutineRepository().getRoutine(routineId).observe(this,r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("user", "user");
+                String username=r.getData().getUser().getUsername();
+                binding.contentScrollingFragment.username.setText(username);
+
+            } else if (r.getStatus() == Status.ERROR) {
+                Log.d("user", " Error");
+            }
+        });
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -126,6 +155,32 @@ public class DetailRoutineActivity extends AppCompatActivity {
 
         intent.putExtra("ID", bundle.getInt("ID"));
         startActivity(intent);
+    }
+
+    public void rateRoutine(View view){
+        Intent intent=new Intent(this, RateActiviy.class);
+
+        intent.putExtra("ID", routineId);
+        intent.putExtra("Name", routineName);
+
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int routineId=getIntent().getExtras().getInt("ID");
+        App api= (App)getApplication();
+        api.getRoutineRepository().getRoutine(routineId).observe(this,r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("onRes", "refresh");
+                int routineRating=r.getData().getScore();
+                binding.contentScrollingFragment.rating.setRating(routineRating);
+
+            } else if (r.getStatus() == Status.ERROR) {
+                Log.d("onRes", " Error");
+            }
+        });
     }
 
 }

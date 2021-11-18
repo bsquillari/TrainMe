@@ -7,8 +7,10 @@ import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
 import com.trainme.api.model.Exercise;
 import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Review;
 import com.trainme.api.model.Routine;
 
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -40,6 +42,10 @@ public interface ApiRoutineService {
 
     @GET("cycles/{cycleId}/exercises")
     LiveData<ApiResponse<PagedList<ContentEx>>> getExercises(@Path("cycleId") int routine, @Query("page") int page, @Query("size") int size, @Query("orderBy") String orderBy);
+
+
+    @POST("reviews/{routineId}")
+    LiveData<ApiResponse<Void>> addReview(@Path("routineId")int routineId, @Body Review review);
 
 
 }
