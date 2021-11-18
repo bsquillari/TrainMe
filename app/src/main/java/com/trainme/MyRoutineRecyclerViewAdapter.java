@@ -177,6 +177,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                             myIntent.putExtra("Difficulty", holder.mItem.getDifficulty()); //Optional parameters
                             myIntent.putExtra("Score", holder.mItem.getScore()); //Optional parameters
                             myIntent.putExtra("ColorPill", finalColor);
+                            //myIntent.putExtra("Username", holder.mItem.getUser().getUsername());
                             myContext.startActivity(myIntent);
                         }
                     });
