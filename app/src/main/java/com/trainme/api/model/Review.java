@@ -8,7 +8,7 @@ public class Review {
 
     @SerializedName("score")
     @Expose
-    private Double score;
+    private Integer score;
     @SerializedName("review")
     @Expose
     private String review;
@@ -23,17 +23,17 @@ public class Review {
      * @param score
      * @param review
      */
-    public Review(Double score, String review) {
+    public Review(Integer score, String review) {
         super();
         this.score = score;
         this.review = review;
     }
 
-    public Double getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(Double score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
