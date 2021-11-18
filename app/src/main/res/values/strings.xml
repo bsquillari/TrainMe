@@ -146,5 +146,7 @@
     <string name="rememberToReview">Don\'t forget to review the routine.</string>
     <string name="goBackToDetail">Go back to routine detail</string>
     <string name="cyclesLeft">%1$d cycle finished out of %2$d</string>
-    <string name="barra">%1$d/%2$d</string>
+    <string name="barra" translatable="false">%1$d/%2$d</string>
+    <string name="quitRoutineQuestion">Are you sure you want to stop the routine?</string>
+    <string name="progressLost">All progress will be lost!</string>
 </resources>

@@ -40,5 +40,19 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="word_username">Usuario</string>
+    <string name="duration">Duración:</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_favorite">Favear</string>
+    <string name="ejercicios">Ejercicios del ciclo</string>
+    <string name="toggleExerciseView">Cambiar vista de ejercicios</string>
+    <string name="goNextCycle">Vamos!</string>
+    <string name="finishCyclePopUp">Felicitaciones! Terminaste</string>
+    <string name="keepGoing">Sigue así!</string>
+    <string name="finishRoutine">Espectacular! Terminaste la rutina!</string>
+    <string name="rememberToReview">No te olvides de puntuar la rutina.</string>
+    <string name="goBackToDetail">Volver al detalle de la rutina</string>
+    <string name="cyclesLeft">Terminaste %1$d de %2$d ciclos</string>
+    <string name="quitRoutineQuestion">Estas seguro de querer terminar la rutina?</string>
+    <string name="progressLost">Todo el progreso se va a perder!</string>
 
 </resources>

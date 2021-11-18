@@ -154,6 +154,12 @@ public class PlayRoutineActivity extends AppCompatActivity {
 
                                             }
                                         });
+                                        binding.fabStop.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                confirmStop();
+                                            }
+                                        });
                                         binding.fabPrev.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
@@ -184,6 +190,19 @@ public class PlayRoutineActivity extends AppCompatActivity {
         });
 
     }
+    }
+
+    private void confirmStop() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.quitRoutineQuestion)).setMessage(getResources().getString(R.string.progressLost))
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                }).setNegativeButton(R.string.no, null);
+        dialog.show();
     }
 
     private void playSound() {
