@@ -19,7 +19,7 @@
 
         <activity
             android:name=".PlayRoutineActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="keyboardHidden|screenSize"
             android:exported="false"
             android:label="@string/title_activity_play_routine"
             android:parentActivityName=".DetailRoutineActivity"
@@ -27,6 +27,7 @@
         <activity
             android:name=".DetailRoutineActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_detail_routine"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TrainMeLogin.NoActionBar">

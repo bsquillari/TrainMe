@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
 import com.trainme.databinding.ActivityPlayRoutineBinding;
@@ -139,7 +140,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
 
                                                         @Override
                                                         public void onFinish() {
-                                                            boolean startTimer = model.exercisesIterator.hasNext() || (model.currentExerciseReps+1)!=model.currentExercise.getRepetitions();
+                                                            boolean startTimer = !(!model.exercisesIterator.hasNext() && !model.cycleIterator.hasNext() && (model.currentExerciseReps+1)==model.currentExercise.getRepetitions() && (model.currentCycleReps+1)==model.currentCycle.getRepetitions());
                                                             nextExercise();
                                                             if (startTimer) {
                                                                 if(model.timer!=null)
@@ -180,7 +181,11 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                         binding.fabStop.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                binding.fabPlay.callOnClick();
+                                                if(model.timerRunning) {
+                                                    if(model.timer!=null)
+                                                        model.timer.cancel();
+                                                    model.timerRunning = false;
+                                                }
                                                 confirmStop();
                                             }
                                         });
@@ -213,7 +218,160 @@ public class PlayRoutineActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }else{
+            if(!model.cycleIterator.hasNext() && model.currentCycleReps==model.currentCycle.getRepetitions()){
+                finishRoutine();
+            }
+            // Card 1
+            if(model.exercisesIterator.nextIndex()==1){
+                binding.exerciseCard1.setVisibility(View.INVISIBLE);
+            }else {
+                int auxIdx = model.exercisesIterator.previousIndex();
+                binding.exerciseReps1.setText(getResources().getString(R.string.barra, model.Exercises.get(auxIdx).getRepetitions(), model.Exercises.get(auxIdx).getRepetitions()));
+                binding.exerciseName1.setText(model.Exercises.get(auxIdx).getExercise().getName());
+            }
+            // Card 2
+            binding.exerciseName2.setText(model.currentExercise.getExercise().getName());
+            binding.exerciseReps2.setText(getResources().getString(R.string.barra, model.currentExerciseReps, model.currentExercise.getRepetitions()));
+            // Card 3
+            if(!model.exercisesIterator.hasNext()){
+                binding.exerciseCard3.setVisibility(View.INVISIBLE);
+            }else {
+                int auxIdx = model.exercisesIterator.nextIndex();
+                binding.exerciseReps3.setText(getResources().getString(R.string.barra, 0, model.Exercises.get(auxIdx).getRepetitions()));
+                binding.exerciseName3.setText(model.Exercises.get(auxIdx).getExercise().getName());
+            }
+            // Card de detail
+            binding.exerciseTitleDetailLayout.setText(model.currentExercise.getExercise().getName() + " " + model.currentExerciseReps + "/" + model.currentExercise.getRepetitions());
+            int minutes = model.currentExercise.getDuration() / 60;
+            int seconds = (model.currentExercise.getDuration() % 60);
+            binding.exerciseDurationDetailLayout.setText(minutes + ":" + seconds);
+            binding.exerciseDetailDetailLayout.setText(model.currentExercise.getExercise().getDetail());
+            binding.exerciseTypeDetailLayout.setText(model.currentExercise.getExercise().getType());
+            // Exercises left
+            binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+            // Title routine
+            binding.cycleTitle.setText(new StringBuilder().append(model.currentCycle.getName()).append(" ").append(getResources().getString(R.string.barra, model.currentCycleReps, model.currentCycle.getRepetitions())).toString());
+            // Botones
+            binding.toggleExerciseView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (binding.noDetailLayout.getVisibility() == View.VISIBLE) {
+                        binding.noDetailLayout.setVisibility(View.GONE);
+                        binding.detailLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.noDetailLayout.setVisibility(View.VISIBLE);
+                        binding.detailLayout.setVisibility(View.GONE);
+                    }
+                }
+            });
+            binding.fabPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!model.timerRunning) {
+                        model.timer = new CountDownTimer(model.timeLeftMiliseconds, 1000) {
+                            @Override
+                            public void onTick(long l) {
+                                model.timeLeftMiliseconds = l;
+                                updateTimer();
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                boolean startTimer = !(!model.exercisesIterator.hasNext() && !model.cycleIterator.hasNext() && (model.currentExerciseReps+1)==model.currentExercise.getRepetitions() && (model.currentCycleReps+1)==model.currentCycle.getRepetitions());
+                                nextExercise();
+                                if (startTimer) {
+                                    if(model.timer!=null)
+                                        model.timer.cancel();
+                                    model.timerRunning = false;
+                                    binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                                    binding.fabPlay.callOnClick();
+                                }else {
+                                    model.timerRunning = false;
+                                    binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                                }
+                                playSound();
+
+                            }
+                        };
+                        model.timer.start();
+                        model.timerRunning = true;
+                        binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
+                    } else {
+                        model.timer.cancel();
+                        model.timerRunning = false;
+                        binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                    }
+                }
+            });
+            binding.fabNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    nextExercise();
+                    if (model.timer != null)
+                        model.timer.cancel();
+                    model.timerRunning = false;
+                    binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+
+
+                }
+            });
+            binding.fabStop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(model.timerRunning){
+                        if(model.timer!=null)
+                            model.timer.cancel();
+                        model.timerRunning = false;
+                    }
+                    confirmStop();
+                }
+            });
+            binding.fabPrev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    prevExercise();
+                    resetTimer(model.currentExercise.getDuration()*1000);
+                    if (model.timer != null)
+                        model.timer.cancel();
+                    model.timerRunning = false;
+                    binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                }
+            });
+            if(model.timerRunning) {
+                model.timer.cancel();
+                model.timer = new CountDownTimer(model.timeLeftMiliseconds, 1000) {
+                    @Override
+                    public void onTick(long l) {
+                        model.timeLeftMiliseconds = l;
+                        updateTimer();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        boolean startTimer = !(!model.exercisesIterator.hasNext() && !model.cycleIterator.hasNext() && (model.currentExerciseReps+1)==model.currentExercise.getRepetitions() && (model.currentCycleReps+1)==model.currentCycle.getRepetitions());
+                        nextExercise();
+                        if (startTimer) {
+                            if (model.timer != null)
+                                model.timer.cancel();
+                            model.timerRunning = false;
+                            binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                            binding.fabPlay.callOnClick();
+                        } else {
+                            model.timerRunning = false;
+                            binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                        }
+                        playSound();
+
+                    }
+                };
+                model.timer.start();
+                binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
+            } else binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+            // timer
+//            if(!model.timerRunning)
+                updateTimer();
+        }
     }
 
     private void confirmStop() {
@@ -440,10 +598,8 @@ public class PlayRoutineActivity extends AppCompatActivity {
     private void cycleJump(boolean popUp) {
 
         if(popUp){
-            new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.finishCyclePopUp) + " " + model.currentCycle.getName() + ". " + getResources().getString(R.string.keepGoing))
-                    .setMessage(getResources().getString(R.string.cyclesLeft, model.cyclesDone + 1, model.totalCycles))
-                    .setPositiveButton(R.string.goNextCycle, null).show();
+            Snackbar snack = Snackbar.make(binding.getRoot(), getResources().getString(R.string.finishCyclePopUp) + " " + model.currentCycle.getName() + ". " + getResources().getString(R.string.keepGoing) + "\n" +getResources().getString(R.string.cyclesLeft, model.cyclesDone + 1, model.totalCycles) , Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.teal_200)).setDuration(10 * 1000);
+            snack.setTextColor(getResources().getColor(R.color.black)).show();
         }
         model.currentCycle = model.cycleIterator.next();
         model.cyclesDone++;
@@ -501,6 +657,37 @@ public class PlayRoutineActivity extends AppCompatActivity {
                         binding.exerciseTypeDetailLayout.setText(model.currentExercise.getExercise().getType());
 
                         model.timeLeftMiliseconds = model.currentExercise.getDuration() * 1000;
+                        if(model.timer!=null)
+                            model.timer.cancel();
+                        if(model.timerRunning) {
+                            model.timer = new CountDownTimer(model.timeLeftMiliseconds, 1000) {
+                                @Override
+                                public void onTick(long l) {
+                                    model.timeLeftMiliseconds = l;
+                                    updateTimer();
+                                }
+
+                                @Override
+                                public void onFinish() {
+                                    boolean startTimer = !(!model.exercisesIterator.hasNext() && !model.cycleIterator.hasNext() && (model.currentExerciseReps+1)==model.currentExercise.getRepetitions() && (model.currentCycleReps+1)==model.currentCycle.getRepetitions());
+                                    nextExercise();
+                                    if (startTimer) {
+                                        if (model.timer != null)
+                                            model.timer.cancel();
+                                        model.timerRunning = false;
+                                        binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                                        binding.fabPlay.callOnClick();
+                                    } else {
+                                        model.timerRunning = false;
+                                        binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                                    }
+                                    playSound();
+
+                                }
+                            };
+                            model.timer.start();
+                            binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_pause_24));
+                        } else binding.fabPlay.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
                         updateTimer();
                     } else {
                         // loading
@@ -563,7 +750,6 @@ public class PlayRoutineActivity extends AppCompatActivity {
         public long timeLeftMiliseconds;
         public boolean timerRunning = false;
         public CountDownTimer timer;
-
         public ListIterator<ContentEx> exercisesIterator;
         public ContentEx currentExercise;
         public List<ContentEx> Exercises;
