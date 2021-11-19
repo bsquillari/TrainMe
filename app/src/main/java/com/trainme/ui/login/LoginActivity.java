@@ -186,12 +186,12 @@ public class LoginActivity extends AppCompatActivity {
         if(getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             intent = new Intent(this, DetailRoutineActivity.class);
 
-            intent.putExtra("ID", Integer.parseInt(getIntent().getData().getQueryParameter("id")));
-            intent.putExtra("Name", getIntent().getData().getQueryParameter("name"));
-            intent.putExtra("Detail", getIntent().getData().getQueryParameter("detail"));
-            intent.putExtra("Difficulty", getIntent().getData().getQueryParameter("difficulty"));
-            intent.putExtra("Score", Integer.parseInt(getIntent().getData().getQueryParameter("score")));
-            intent.putExtra("ColorPill", Integer.parseInt(getIntent().getData().getQueryParameter("color_pill")));
+            intent.putExtra("ID", Integer.parseInt(getIntent().getData().getQueryParameter("id").replaceAll("\\+", " ")));
+            intent.putExtra("Name", getIntent().getData().getQueryParameter("name").replaceAll("\\+", " "));
+            intent.putExtra("Detail", getIntent().getData().getQueryParameter("detail").replaceAll("\\+", " "));
+            intent.putExtra("Difficulty", getIntent().getData().getQueryParameter("difficulty").replaceAll("\\+", " "));
+            intent.putExtra("Score", Integer.parseInt(getIntent().getData().getQueryParameter("score").replaceAll("\\+", " ")));
+            intent.putExtra("ColorPill", Integer.parseInt(getIntent().getData().getQueryParameter("color_pill").replaceAll("\\+", " ")));
         } else {
             intent = new Intent(this, MainActivity.class);
         }
