@@ -3,6 +3,7 @@ package com.trainme;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
+import com.squareup.picasso.Picasso;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -68,6 +69,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 Log.d("user", "user");
                 String username=r.getData().getUser().getUsername();
+                Picasso.get().load(r.getData().getUser().getAvatarUrl()).into(binding.contentScrollingFragment.iconImageView);
                 binding.contentScrollingFragment.username.setText(username);
 
             } else if (r.getStatus() == Status.ERROR) {

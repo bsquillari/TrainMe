@@ -15,7 +15,6 @@ import android.view.View;
 
 import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
-import com.trainme.api.model.Exercise;
 import com.trainme.databinding.ActivityPlayRoutineBinding;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
@@ -48,6 +47,18 @@ public class PlayRoutineActivity extends AppCompatActivity {
 
             repository.getCycles(0, 1, "order", model.routineID).observe(this, rAuxCycle -> {
                 if(rAuxCycle.getStatus() == Status.SUCCESS){
+                    if(rAuxCycle.getData().getTotalCount()==0){
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                                .setTitle(getResources().getString(R.string.noCycles))
+                                .setPositiveButton(R.string.goBackToDetail, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+
+                                }).setCancelable(false);
+                        dialog.show();
+                    }
                     repository.getCycles(0, rAuxCycle.getData().getTotalCount(), "order", model.routineID).observe(this, rCycle -> {
                         if(rCycle.getStatus() == Status.SUCCESS){
                         model.totalCycles = rCycle.getData().getTotalCount();
@@ -58,6 +69,18 @@ public class PlayRoutineActivity extends AppCompatActivity {
                         repository.getExercises(0, 1, "order", model.currentCycle.getId()).observe(this, rAuxExercise -> {
 
                             if (rAuxExercise.getStatus() == Status.SUCCESS) {
+                                if(rAuxExercise.getData().getTotalCount()==0){
+                                    AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                                            .setTitle(getResources().getString(R.string.noExercises, model.currentCycle.getName())).setMessage(getResources().getString(R.string.noExercisesMsg))
+                                            .setPositiveButton(R.string.goBackToDetail, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    finish();
+                                                }
+
+                                            }).setCancelable(false);
+                                    dialog.show();
+                                }
                                 repository.getExercises(0, rAuxExercise.getData().getTotalCount(), "order", model.currentCycle.getId()).observe(this, rExercise -> {
                                     if (rExercise.getStatus() == Status.SUCCESS) {
                                         model.Exercises = rExercise.getData().getContent();
@@ -157,6 +180,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                         binding.fabStop.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
+                                                binding.fabPlay.callOnClick();
                                                 confirmStop();
                                             }
                                         });
@@ -431,6 +455,18 @@ public class PlayRoutineActivity extends AppCompatActivity {
         repository.getExercises(0, 1, "order", model.currentCycle.getId()).observe(this, rAuxExercise -> {
 
             if (rAuxExercise.getStatus() == Status.SUCCESS) {
+                if(rAuxExercise.getData().getTotalCount()==0){
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this)
+                            .setTitle(getResources().getString(R.string.noExercises, model.currentCycle.getName())).setMessage(getResources().getString(R.string.noExercisesMsg))
+                            .setPositiveButton(R.string.goBackToDetail, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+
+                            }).setCancelable(false);
+                    dialog.show();
+                }
                 repository.getExercises(0, rAuxExercise.getData().getTotalCount(), "order", model.currentCycle.getId()).observe(this, rExercise -> {
                     if (rExercise.getStatus() == Status.SUCCESS) {
                         model.Exercises = rExercise.getData().getContent();
