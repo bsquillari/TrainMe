@@ -64,5 +64,6 @@
     <string name="noCycles">La rutina no tiene ciclos</string>
     <string name="noExercises">%1$s no tiene ejercicios</string>
     <string name="noExercisesMsg">Necesitas ejercicios en tus ciclos si o si.</string>
+    <string name="defaultSection">defaultSection</string>
 
 </resources>

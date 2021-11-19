@@ -1,6 +1,7 @@
 package com.trainme;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.MenuItem;
@@ -41,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        SharedPreferences settings = getSharedPreferences("UserPreferences", 0);
+        if(settings!=null){
+            int i;
+            if((settings.getInt(getResources().getString(R.string.defaultSection), 0))!=0)
+            navController.navigate(settings.getInt(getResources().getString(R.string.defaultSection), 0));
+        }
         binding.filterBtn.show();
         binding.filterBtn.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, v);
@@ -58,11 +65,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }else binding.filterBtn.hide();
     }
 
-    public void openEditProfileActivity() {
-//        setContentView(ActivityEditProfileBinding.inflate(getLayoutInflater()).getRoot());
 
-
-    }
 
 
     public void openEditProfileActivity(View view) {
@@ -81,18 +84,23 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         RoutinesFragment fragment = (RoutinesFragment)navHost.getChildFragmentManager().getPrimaryNavigationFragment();
         switch (item.getItemId()){
             case R.id.menu_item_date:
+                item.setChecked(true);
                 fragment.refreshOrderBy("date");
                 break;
             case R.id.menu_item_score:
+                item.setChecked(true);
                 fragment.refreshOrderBy("score");
                 break;
             case R.id.menu_item_category:
+                item.setChecked(true);
                 fragment.refreshOrderBy("category");
                 break;
             case R.id.menu_item_difficulty:
+                item.setChecked(true);
                 fragment.refreshOrderBy("difficulty");
                 break;
             case R.id.menu_item_name:
+                item.setChecked(true);
                 fragment.refreshOrderBy("name");
                 break;
             default: return false;
