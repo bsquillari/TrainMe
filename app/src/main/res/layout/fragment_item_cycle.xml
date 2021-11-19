@@ -31,8 +31,7 @@
                     android:id="@+id/cycleNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                        android:text="NAME"
-                    android:textColor="@android:color/black"
+
                     android:textSize="@dimen/text_title"
                     android:textStyle="bold" />
                     <TextView
@@ -41,8 +40,7 @@
                         android:id="@+id/cycleTypeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:text="TYPE"
+
                         android:textSize="@dimen/text_subtitle"/>
                 </LinearLayout>
                 <LinearLayout
@@ -55,13 +53,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_subtitle"
-                    android:textColor="@android:color/black"
                     android:text=" Repetitions: "/>
                 <TextView
                     android:id="@+id/repsTextView"
                     android:layout_width="wrap_content"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
