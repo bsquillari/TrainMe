@@ -72,7 +72,6 @@ public class DetailRoutineActivity extends AppCompatActivity {
         binding.contentScrollingFragment.colorPill.setCardBackgroundColor(colorPill);
         //binding.contentScrollingFragment.username.setText(username);
 
-        int routineId=getIntent().getExtras().getInt("ID");
         App api= (App)getApplication();
         api.getRoutineRepository().getRoutine(routineId).observe(this,r -> {
             if (r.getStatus() == Status.SUCCESS) {
@@ -137,11 +136,11 @@ public class DetailRoutineActivity extends AppCompatActivity {
             shareIntent.setType("text/plain");
             String URI = "https://trainme.com/"
                     + "?id=" + routineId
-                    + "&?name=" + routineName
-                    + "&?detail=" + routineDetail
-                    + "&?difficulty=" + routineDifficulty
-                    + "&?score=" + routineScore
-                    + "&?pill=" + colorPill;
+                    + "&name=" + routineName
+                    + "&detail=" + routineDetail
+                    + "&difficulty=" + routineDifficulty
+                    + "&score=" + routineScore
+                    + "&color_pill=" + colorPill;
             shareIntent.putExtra(Intent.EXTRA_TEXT, URI);
             startActivity(Intent.createChooser(shareIntent, "Choose one"));
         } else if(id == R.id.action_fav) {
