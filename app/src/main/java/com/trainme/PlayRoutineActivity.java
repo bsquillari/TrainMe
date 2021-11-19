@@ -540,7 +540,11 @@ public class PlayRoutineActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        binding.fabStop.callOnClick();
+//        super.onBackPressed();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
