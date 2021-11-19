@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.trainme.App;
+import com.trainme.DetailRoutineActivity;
 import com.trainme.MainActivity;
 import com.trainme.R;
 import com.trainme.api.model.Credentials;
@@ -180,8 +181,22 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = "Welcome!";
         // TODO : initiate successful logged in experience
 
+        Intent intent;
+
+        if(getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+            intent = new Intent(this, DetailRoutineActivity.class);
+
+            intent.putExtra("ID", Integer.parseInt(getIntent().getData().getQueryParameter("id")));
+            intent.putExtra("Name", getIntent().getData().getQueryParameter("name"));
+            intent.putExtra("Detail", getIntent().getData().getQueryParameter("detail"));
+            intent.putExtra("Difficulty", getIntent().getData().getQueryParameter("difficulty"));
+            intent.putExtra("Score", Integer.parseInt(getIntent().getData().getQueryParameter("score")));
+            intent.putExtra("ColorPill", Integer.parseInt(getIntent().getData().getQueryParameter("color_pill")));
+        } else {
+            intent = new Intent(this, MainActivity.class);
+        }
+
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

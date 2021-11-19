@@ -31,13 +31,6 @@
             android:label="@string/title_activity_detail_routine"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.TrainMeLogin.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="trainme.com"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".EditProfileActivity"
@@ -52,11 +45,15 @@
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
-
-                <!-- Lo que se va abrir -->
                 <action android:name="android.intent.action.MAIN" />
-                <!-- El iconito en el launcher de apps -->
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="trainme.com"/>
             </intent-filter>
         </activity>
     </application>

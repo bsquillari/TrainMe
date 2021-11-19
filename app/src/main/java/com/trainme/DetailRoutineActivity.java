@@ -47,23 +47,14 @@ public class DetailRoutineActivity extends AppCompatActivity {
 
         binding = ActivityDetailRoutineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        if(getIntent().getAction() != null) {
-            routineId = Integer.parseInt(getIntent().getData().getQueryParameter("id"));
-            routineName = getIntent().getData().getQueryParameter("name");
-            routineDetail = getIntent().getData().getQueryParameter("detail");
-            routineDifficulty = getIntent().getData().getQueryParameter("difficulty");
-            routineScore = Integer.parseInt(getIntent().getData().getQueryParameter("score"));
-            colorPill = Integer.parseInt(getIntent().getData().getQueryParameter("color_pill"));
-        } else {
-            routineId = getIntent().getExtras().getInt("ID");
-            routineName = getIntent().getExtras().getString("Name");
-            routineDetail = getIntent().getExtras().getString("Detail");
-            routineDifficulty = getIntent().getExtras().getString("Difficulty");
-            routineScore = getIntent().getExtras().getInt("Score");
-            colorPill = getIntent().getExtras().getInt("ColorPill");
-            //username=getIntent().getExtras().getString("Username");
-        }
+        //https://trainme.com/?id=1&name=routine name&detail=detail&difficulty=difficulty&score=2&color_pill=1
+        routineId = getIntent().getExtras().getInt("ID");
+        routineName = getIntent().getExtras().getString("Name");
+        routineDetail = getIntent().getExtras().getString("Detail");
+        routineDifficulty = getIntent().getExtras().getString("Difficulty");
+        routineScore = getIntent().getExtras().getInt("Score");
+        colorPill = getIntent().getExtras().getInt("ColorPill");
+        //username=getIntent().getExtras().getString("Username");
 
         binding.contentScrollingFragment.detailTextView.setText(routineDetail);
         binding.contentScrollingFragment.titleTextView.setText(routineName);
