@@ -2,6 +2,8 @@ package com.trainme;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.app.Dialog;
 import android.content.Intent;
 import com.squareup.picasso.Picasso;
 import android.content.res.ColorStateList;
@@ -14,7 +16,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.trainme.api.model.Review;
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
 import com.trainme.repository.Status;
@@ -170,16 +179,48 @@ public class DetailRoutineActivity extends AppCompatActivity {
     }
 
     public void rateRoutine(View view){
-        Intent intent=new Intent(this, RateActiviy.class);
 
-        intent.putExtra("ID", routineId);
-        intent.putExtra("Name", routineName);
 
-        startActivity(intent);
+        Dialog rankDialog = new Dialog(DetailRoutineActivity.this, R.style.FullHeightDialog);
+        rankDialog.setContentView(R.layout.rank_dialog);
+        rankDialog.setCancelable(true);
+
+        RatingBar ratingBar = (RatingBar)rankDialog.findViewById(R.id.dialog_ratingbar);
+
+
+        TextView text = (TextView) rankDialog.findViewById(R.id.rank_dialog_title);
+        text.setText(routineName);
+
+        Button updateButton = (Button) rankDialog.findViewById(R.id.rank_dialog_button);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                App api= (App) getApplication();
+                Integer score= Double.valueOf(ratingBar.getRating()).intValue();
+
+                //llamado a la Api
+                String message="Rated "+ score.toString() + " stars !";
+                Review review=new Review(score,"" );
+                api.getRoutineRepository().addReview(routineId,review).observe(DetailRoutineActivity.this,
+                        r -> {
+                            if(r.getStatus()== Status.SUCCESS) {
+                                Log.d("RATE", "added review");
+                                Toast.makeText(DetailRoutineActivity.this, message, Toast.LENGTH_LONG).show();
+                            }else if (r.getStatus() == Status.ERROR)
+                                Log.d("RATE", "rate Error");
+
+                        });
+
+                rankDialog.dismiss();
+                refreshRating();
+
+            }
+        });
+        //now that the dialog is set up, it's time to show it
+        rankDialog.show();
     }
 
-    @Override
-    protected void onResume() {
+    private void refreshRating() {
         super.onResume();
         int routineId=getIntent().getExtras().getInt("ID");
         App api= (App)getApplication();

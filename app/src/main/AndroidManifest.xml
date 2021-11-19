@@ -15,9 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainMeLogin">
-        <activity
-            android:name=".RateActiviy"
-            android:exported="false" />
+
+
         <activity
             android:name=".PlayRoutineActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
