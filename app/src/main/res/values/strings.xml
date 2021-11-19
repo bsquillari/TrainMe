@@ -160,4 +160,7 @@
     <string name="gender">Gender</string>
     <string name="last_name">Last Name</string>
     <string name="first_name">First Name</string>
+    <string name="noCycles">Routine has no cycles</string>
+    <string name="noExercises">%1$s has no exercises</string>
+    <string name="noExercisesMsg">Sorry, you need exercises on your cycle.</string>
 </resources>

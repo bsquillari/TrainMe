@@ -27,8 +27,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            app:cardCornerRadius="20dp">
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="20dp"
+            android:layout_marginHorizontal="10dp">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -41,22 +42,23 @@
                     android:id="@+id/usernameProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:textSize="@dimen/text_body"
                     android:gravity="center"
                     android:drawableLeft="@drawable/ic_baseline_person_24"
-                    android:textSize="24sp" />
+                     />
 
                 <TextView
                     android:id="@+id/fullNameProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:textSize="@dimen/text_body"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginStart="8dp"
                     android:gravity="center"
                     android:drawableLeft="@drawable/baseline_badge_24"
-                    android:textSize="24sp" />
+                    />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -67,7 +69,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="20dp">
 
             <LinearLayout
@@ -80,50 +83,43 @@
                     android:id="@+id/emailProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:textSize="@dimen/text_body"
                     android:drawableLeft="@drawable/ic_baseline_email_24"
                     android:textAlignment="center"
-                    android:textSize="24sp" />
+                    />
 
                 <TextView
                     android:id="@+id/phoneProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textSize="24sp"
-                    android:gravity="center"
-
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="12dp"
+                    android:textSize="@dimen/text_body"
+                    android:layout_marginBottom="8dp"
                     android:drawableLeft="@drawable/ic_baseline_local_phone_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    />
 
                 <TextView
                     android:id="@+id/genderProfile"
+                    android:drawableLeft="@drawable/ic_baseline_wc_24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:gravity="center"
-
-                    android:textSize="24sp"
-                    android:drawableLeft="@drawable/ic_baseline_wc_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginHorizontal="12dp"
+                    android:textSize="@dimen/text_body"
+                    android:layout_marginBottom="8dp" />
 
                 <TextView
                     android:id="@+id/birthProfile"
+                    android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:gravity="center"
-
-                    android:textSize="24sp"
-                    android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginHorizontal="12dp"
+                    android:textSize="@dimen/text_body"
+                    android:layout_marginBottom="8dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -131,7 +127,8 @@
             android:id="@+id/EditProfileBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="30dp"
+            android:textSize="@dimen/text_btn"
             android:onClick="openEditProfileActivity"
             android:drawableLeft="@drawable/ic_sharp_edit_24"
             android:text="@string/edit_profile" />
@@ -140,7 +137,8 @@
             android:id="@+id/LogOutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:textSize="@dimen/text_btn"
+            android:layout_marginTop="30dp"
             android:onClick="openEditProfileActivity"
             android:drawableLeft="@drawable/baseline_logout_24"
             android:text="LOGOUT" />

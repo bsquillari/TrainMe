@@ -109,9 +109,7 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
                 holder.cycleType.setText(holder.mItem.getType());
                 holder.id = holder.mItem.getId();
                 holder.reps.setText(holder.mItem.getRepetitions().toString());
-                boolean isExpanded = mValues.get(position).isExpanded();
-                holder.expandableLayout.setVisibility(isExpanded? View.VISIBLE : View.GONE);
-                holder.exerciseList.setLayoutManager(new GridLayoutManager(context, 2));        // TODO: Cambiar el numero de columnas segun el tamaño?
+                holder.exerciseList.setLayoutManager(new GridLayoutManager(context, 1));        // TODO: Cambiar el numero de columnas segun el tamaño?
                 holder.exerciseList.setAdapter(new MyExerciseRecyclerViewAdapter(repository, lifecycleOwner, context, holder.id));
 
             }
@@ -132,7 +130,6 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
         public TextView cycleName, cycleDetail, cycleType, reps;
         public ConstraintLayout expandableLayout;
         public LinearLayout cycleMainLinearLayout;
-        public ImageView expandIcon;
         public FrameLayout exercisesFrameLayout;
         public RecyclerView exerciseList;
         public Cycle mItem;
@@ -143,7 +140,6 @@ public class MyCycleRecyclerViewAdapter extends RecyclerView.Adapter<MyCycleRecy
             cycleName = binding.cycleNameTextView;
             cycleType = binding.cycleTypeTextView;
             reps = binding.repsTextView;
-            expandIcon = binding.dropDown;
 
             cycleMainLinearLayout = binding.cycleLinearLayout;
             expandableLayout = binding.expandableCycle;
