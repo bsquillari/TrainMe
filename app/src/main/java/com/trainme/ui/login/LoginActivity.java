@@ -219,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent;
 
-        if(getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+        if(getIntent().getAction()!=null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             intent = new Intent(this, DetailRoutineActivity.class);
 
             intent.putExtra("ID", Integer.parseInt(getIntent().getData().getQueryParameter("id").replaceAll("\\+", " ")));
