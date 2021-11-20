@@ -84,4 +84,5 @@
     <string name="emailVerificationError">Email no verificado.</string>
     <string name="submit_rating">Enviar</string>
     <string name="repetitions_cycle">Repeticiones: </string>
+    <string name="HelpText">"MisRutinas: Aquí encontraras todas las rutinas que hayas creado.\n\nExplorar: Este es el lugar para buscar las rutinas creadas por nuestra comunidad. Puedes identificar las rutinas mas dificiles poeque están marcadas con un color mas oscuro.\n\nMisFavoritos: Pudes agregar rutinas a esta lista para tner un acceso rápido a las mismas.\n\nPerfil: Mira y edita toda tu informacion personal"</string>
 </resources>

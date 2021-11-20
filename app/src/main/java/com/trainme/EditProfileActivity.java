@@ -119,9 +119,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        int style = AlertDialog.THEME_HOLO_LIGHT;
 
-        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        datePickerDialog = new DatePickerDialog(this,  android.R.style.Theme_DeviceDefault_Dialog_Alert, dateSetListener, year, month, day);
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
     }

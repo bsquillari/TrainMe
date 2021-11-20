@@ -1,6 +1,7 @@
 package com.trainme.ui.profile;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,6 +42,7 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel profileViewModel;
     private FragmentProfileBinding binding;
     private Activity mActivity;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         String section = ProfileFragmentArgs.fromBundle(getArguments()).getSection();
@@ -63,13 +65,17 @@ public class ProfileFragment extends Fragment {
                 binding.genderProfile.setText(r.getData().getGender());
                 if (r.getData().getBirthdate() != null) {
                     Date birth = new Date(r.getData().getBirthdate());
-                    binding.birthProfile.setText(birth.getDate() + "/" + birth.getMonth() + "/" + birth.getYear() );
-                }else{
+                    binding.birthProfile.setText(birth.getDate() + "/" + birth.getMonth() + "/" + birth.getYear());
+                } else {
                     binding.birthProfile.setText(R.string.NoBdate);
                 }
-                Picasso.get().load(r.getData().getAvatarUrl()).into(binding.avatarURLProfile);
+                String url = r.getData().getAvatarUrl();
+                if (url == null){
+                    url = "https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg";
+                }
+                Picasso.get().load(url).into(binding.avatarURLProfile);
 //                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
-            }else if(r.getStatus() == Status.ERROR){
+            } else if (r.getStatus() == Status.ERROR) {
                 Log.d("debugeado", "onCreateView: " + r.getError().toString());
 
             }
@@ -78,8 +84,7 @@ public class ProfileFragment extends Fragment {
         binding.LogOutBtn.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
                     .setTitle(R.string.logoutQuestion)
-                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
-                    {
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             app.getUserRepository().logout().observe(getViewLifecycleOwner(), r -> {
@@ -99,21 +104,25 @@ public class ProfileFragment extends Fragment {
                     .show();
 
         });
+
+        binding.helpButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext()).setTitle("Do you need help?").setMessage(R.string.HelpText).show();
+        });
         SharedPreferences settings0 = getActivity().getSharedPreferences("UserPreferences", 0);
-        if(settings0!=null){
+        if (settings0 != null) {
             boolean value = settings0.getBoolean("DetailExerciseView", false);
-            if(value){
+            if (value) {
                 binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
                 binding.detailViewBtn.setText(getResources().getString(R.string.active));
                 binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.notActive));
                 binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            }else{
+            } else {
                 binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
                 binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.active));
                 binding.detailViewBtn.setText(getResources().getString(R.string.notActive));
                 binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
             }
-            switch (settings0.getInt(getResources().getString(R.string.defaultSection),0)){
+            switch (settings0.getInt(getResources().getString(R.string.defaultSection), 0)) {
                 case R.id.navigation_profile:
                     binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
                     break;
@@ -134,10 +143,10 @@ public class ProfileFragment extends Fragment {
             binding.detailViewBtn.setText(getResources().getString(R.string.active));
             binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.notActive));
             binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-                SharedPreferences settings1 = getActivity().getSharedPreferences("UserPreferences", 0);
-                SharedPreferences.Editor editor = settings1.edit();
-                editor.putBoolean("DetailExerciseView",true);
-                editor.apply();
+            SharedPreferences settings1 = getActivity().getSharedPreferences("UserPreferences", 0);
+            SharedPreferences.Editor editor = settings1.edit();
+            editor.putBoolean("DetailExerciseView", true);
+            editor.apply();
         });
         binding.multipleExercisesViewBtn.setOnClickListener(v -> {
             binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
@@ -146,7 +155,7 @@ public class ProfileFragment extends Fragment {
             binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
             SharedPreferences settings2 = getActivity().getSharedPreferences("UserPreferences", 0);
             SharedPreferences.Editor editor = settings2.edit();
-            editor.putBoolean("DetailExerciseView",false);
+            editor.putBoolean("DetailExerciseView", false);
             editor.apply();
         });
         binding.exploreBtn.setOnClickListener(v -> {
@@ -156,7 +165,7 @@ public class ProfileFragment extends Fragment {
             binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
             SharedPreferences settings3 = getActivity().getSharedPreferences("UserPreferences", 0);
             SharedPreferences.Editor editor = settings3.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_explore);
+            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_explore);
             editor.apply();
         });
         binding.profileBtn.setOnClickListener(v -> {
@@ -166,7 +175,7 @@ public class ProfileFragment extends Fragment {
             binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
             SharedPreferences settings4 = getActivity().getSharedPreferences("UserPreferences", 0);
             SharedPreferences.Editor editor = settings4.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_profile);
+            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_profile);
             editor.apply();
         });
         binding.myRoutinesBtn.setOnClickListener(v -> {
@@ -176,7 +185,7 @@ public class ProfileFragment extends Fragment {
             binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
             SharedPreferences settings5 = getActivity().getSharedPreferences("UserPreferences", 0);
             SharedPreferences.Editor editor = settings5.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_myroutines);
+            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_myroutines);
             editor.apply();
         });
         binding.favsBtn.setOnClickListener(v -> {
@@ -186,7 +195,7 @@ public class ProfileFragment extends Fragment {
             binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
             SharedPreferences settings6 = getActivity().getSharedPreferences("UserPreferences", 0);
             SharedPreferences.Editor editor = settings6.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_favs);
+            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_favs);
             editor.apply();
         });
 
@@ -197,15 +206,16 @@ public class ProfileFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
-        ((MainActivity)mActivity).filterBtn(!(section.equals("favs") || section.equals("profile")));
+        ((MainActivity) mActivity).filterBtn(!(section.equals("favs") || section.equals("profile")));
         return root;
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof Activity){
-            mActivity =(Activity) context;
+        if (context instanceof Activity) {
+            mActivity = (Activity) context;
         }
     }
 
