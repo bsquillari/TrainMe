@@ -2,7 +2,6 @@ package com.trainme;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.content.Intent;
 import com.squareup.picasso.Picasso;
@@ -17,12 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.trainme.api.model.Review;
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
@@ -47,7 +44,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
 
         binding = ActivityDetailRoutineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //https://trainme.com/?id=1&name=routine name&detail=detail&difficulty=difficulty&score=2&color_pill=1
+        //https://trainme.com/?id=1&name=routineName&detail=detail&difficulty=difficulty&score=2&color_pill=1
         routineId = getIntent().getExtras().getInt("ID");
         routineName = getIntent().getExtras().getString("Name");
         routineDetail = getIntent().getExtras().getString("Detail");
@@ -120,9 +117,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == android.R.id.home) {
-            finish();
-        } else if(id == R.id.action_share) {
+        if(id == R.id.action_share) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             String URI = "https://trainme.com/"
@@ -132,8 +127,9 @@ public class DetailRoutineActivity extends AppCompatActivity {
                     + "&difficulty=" + routineDifficulty
                     + "&score=" + routineScore
                     + "&color_pill=" + colorPill;
-            shareIntent.putExtra(Intent.EXTRA_TEXT, URI);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, URI.replaceAll(" ", "+"));
             startActivity(Intent.createChooser(shareIntent, "Choose one"));
+            return true;
         } else if(id == R.id.action_fav) {
             App app = (App) getApplication();
 
@@ -155,6 +151,10 @@ public class DetailRoutineActivity extends AppCompatActivity {
                     }
                 });
             }
+            return true;
+        } else if (id == android.R.id.home) {
+            startActivity(new Intent(this, MainActivity.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
