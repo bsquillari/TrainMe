@@ -89,6 +89,8 @@
     <string name="rate">Rate</string>
     <string name="checkConnection">Please check your connection and try again.</string>
     <string name="editProfileConfirm">Profile data saved</string>
+    <string name="wrongLoginFields">Username or password are missing or incorrect.</string>
+    <string name="emailVerificationError">Email not verified.</string>
     <string name="submit_rating">Submit</string>
     <string name="repetitions_cycle">Repetitions: </string>
 </resources>
