@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import com.trainme.repository.Status;
 import com.trainme.ui.login.LoginActivity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -84,6 +86,8 @@ public class ProfileFragment extends Fragment {
                                 Log.d("Logout", r.getStatus().toString());
                                 if (r.getStatus() == Status.SUCCESS) {
                                     Log.d("profile", getString(R.string.success));
+                                    App newApp = (App) requireActivity().getApplication();
+                                    newApp.getPreferences().setAuthToken(null);
                                     Intent intent = new Intent(getContext(), LoginActivity.class);
                                     startActivity(intent);
                                 }
@@ -94,6 +98,96 @@ public class ProfileFragment extends Fragment {
                     .setNegativeButton(R.string.no, null)
                     .show();
 
+        });
+        SharedPreferences settings0 = getActivity().getSharedPreferences("UserPreferences", 0);
+        if(settings0!=null){
+            boolean value = settings0.getBoolean("DetailExerciseView", false);
+            if(value){
+                binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                binding.detailViewBtn.setText(getResources().getString(R.string.active));
+                binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.notActive));
+                binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            }else{
+                binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.active));
+                binding.detailViewBtn.setText(getResources().getString(R.string.notActive));
+                binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            }
+            switch (settings0.getInt(getResources().getString(R.string.defaultSection),0)){
+                case R.id.navigation_profile:
+                    binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+
+                case R.id.navigation_explore:
+                    binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+                case R.id.navigation_favs:
+                    binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+                default:
+                    binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+            }
+        }
+        binding.detailViewBtn.setOnClickListener(v -> {
+            binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            binding.detailViewBtn.setText(getResources().getString(R.string.active));
+            binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.notActive));
+            binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+                SharedPreferences settings1 = getActivity().getSharedPreferences("UserPreferences", 0);
+                SharedPreferences.Editor editor = settings1.edit();
+                editor.putBoolean("DetailExerciseView",true);
+                editor.apply();
+        });
+        binding.multipleExercisesViewBtn.setOnClickListener(v -> {
+            binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.active));
+            binding.detailViewBtn.setText(getResources().getString(R.string.notActive));
+            binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            SharedPreferences settings2 = getActivity().getSharedPreferences("UserPreferences", 0);
+            SharedPreferences.Editor editor = settings2.edit();
+            editor.putBoolean("DetailExerciseView",false);
+            editor.apply();
+        });
+        binding.exploreBtn.setOnClickListener(v -> {
+            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            SharedPreferences settings3 = getActivity().getSharedPreferences("UserPreferences", 0);
+            SharedPreferences.Editor editor = settings3.edit();
+            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_explore);
+            editor.apply();
+        });
+        binding.profileBtn.setOnClickListener(v -> {
+            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            SharedPreferences settings4 = getActivity().getSharedPreferences("UserPreferences", 0);
+            SharedPreferences.Editor editor = settings4.edit();
+            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_profile);
+            editor.apply();
+        });
+        binding.myRoutinesBtn.setOnClickListener(v -> {
+            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            SharedPreferences settings5 = getActivity().getSharedPreferences("UserPreferences", 0);
+            SharedPreferences.Editor editor = settings5.edit();
+            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_myroutines);
+            editor.apply();
+        });
+        binding.favsBtn.setOnClickListener(v -> {
+            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
+            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+            SharedPreferences settings6 = getActivity().getSharedPreferences("UserPreferences", 0);
+            SharedPreferences.Editor editor = settings6.edit();
+            editor.putInt(getResources().getString(R.string.defaultSection),R.id.navigation_favs);
+            editor.apply();
         });
 
 //        final TextView textView = binding.textProfile;

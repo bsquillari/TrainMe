@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import com.squareup.picasso.Picasso;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -150,18 +152,35 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     holder.mItem = mValues.get(position);
                     holder.routineName.setText(holder.mItem.getName());
                     holder.routineDescription.setText(holder.mItem.getDetail());
-                    holder.iconImage.setImageResource(R.mipmap.ic_launcher);
+                    repository.getRoutine(holder.mItem.getId()).observe(lifecycleOwner,r -> {
+                        if (r.getStatus() == Status.SUCCESS) {
+                            Log.d("user", "user");
+                            String username=r.getData().getUser().getUsername();
+                            Picasso.get().load(r.getData().getUser().getAvatarUrl()).into(holder.iconImage);
+                            holder.username.setText(username);
+                            holder.loadingOwner.setVisibility(View.GONE);
+                            holder.iconImage.setVisibility(View.VISIBLE);
+                            holder.username.setVisibility(View.VISIBLE);
+                        } else if (r.getStatus() == Status.ERROR) {
+                            Log.d("user", " Error");
+                            holder.loadingOwner.setVisibility(View.VISIBLE);
+                            holder.iconImage.setVisibility(View.GONE);
+                            holder.username.setVisibility(View.GONE);
+                        }else{
+
+                        }
+                    });
                     int color=Color.BLACK;
                     switch (holder.mItem.getDifficulty()){
-                        case "rookie": color=Color.GREEN;
+                        case "rookie": color=myContext.getResources().getColor(R.color.rookie);
                         break;
-                        case "beginner": color=Color.YELLOW;
+                        case "beginner":color=myContext.getResources().getColor(R.color.beginner);
                         break;
-                        case "intermediate": color=Color.LTGRAY;
+                        case "intermediate": color=myContext.getResources().getColor(R.color.intermediate);
                         break;
-                        case "advanced": color=Color.BLUE;
+                        case "advanced": color=myContext.getResources().getColor(R.color.advanced);
                             break;
-                        case "expert": color=Color.RED;
+                        case "expert": color=myContext.getResources().getColor(R.color.expert );
                             break;
                     }
                     holder.colorPill.setCardBackgroundColor(color);
@@ -197,18 +216,21 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView iconImage;
-        public TextView routineName, routineDescription;
+        public TextView routineName, routineDescription, username;
         public Routine mItem;
         public CardView colorPill;
         public CardView routineCard;
+        public ProgressBar loadingOwner;
 
         public ViewHolder(FragmentRoutinesBinding binding) {
             super(binding.getRoot());
             iconImage = binding.iconImageView;
+            username = binding.username;
             routineName = binding.nameTextView;
             routineDescription = binding.descriptionTextView;
             colorPill = binding.colorPill;
             routineCard = binding.routineCard;
+            loadingOwner = binding.loadingOwner;
 //            binding.routineCard.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {

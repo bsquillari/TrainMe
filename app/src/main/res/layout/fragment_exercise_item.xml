@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:id="@+id/exerciseCard"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,57 +8,75 @@
     android:elevation="20dp"
     app:cardCornerRadius="10dp"
     android:layout_margin="5dp">
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/exerciseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="@dimen/text_title"
-        android:layout_gravity="start"
-        android:paddingTop="10dp"
-        android:paddingHorizontal="10dp"/>
-    <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Type"
-    android:textSize="@dimen/text_subtitle"
-    android:id="@+id/exercise_type"
-        android:paddingHorizontal="10dp"/>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Repetitions: " android:textSize="@dimen/text_subtitle"/>
-        <TextView
-            android:id="@+id/exerciseRepetitions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:textSize="@dimen/text_subtitle" />
-    </LinearLayout>
-    <LinearLayout
-        android:paddingBottom="10dp"
-        android:paddingHorizontal="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/duration" android:textSize="@dimen/text_subtitle"/>
-        <TextView
-            android:id="@+id/exerciseDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:textSize="@dimen/text_subtitle" />
-    </LinearLayout>
+        android:padding="3dp"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:orientation="vertical">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/exerciseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_subtitle"
+                    android:layout_gravity="start"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type"
+                    android:textSize="@dimen/text_body"
+                    android:id="@+id/exercise_type"
+                    android:paddingBottom="5dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:paddingBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Repetitions: " android:textSize="@dimen/text_body"/>
+                    <TextView
+                        android:id="@+id/exerciseRepetitions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="@dimen/text_body" />
+                </LinearLayout>
+                <LinearLayout
+                    android:paddingBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/duration" android:textSize="@dimen/text_body"/>
+                    <TextView
+                        android:id="@+id/exerciseDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="@dimen/text_body" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

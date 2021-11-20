@@ -54,12 +54,16 @@
     <string name="cyclesLeft">Terminaste %1$d de %2$d ciclos</string>
     <string name="quitRoutineQuestion">Estas seguro de querer terminar la rutina?</string>
     <string name="progressLost">Todo el progreso se va a perder!</string>
-    <string name="confirmChanges">Confirmar cambios?</string>
+    <string name="confirmChanges">Quiere confirmar los cambios?</string>
     <string name="save_changes">Guardar cambios</string>
-    <string name="phone_number">Telefono</string>
+    <string name="phone_number">Número de teléfono</string>
     <string name="link_to_profile_pic">Link a foto de perfil</string>
-    <string name="gender">Genero</string>
-    <string name="last_name">Nombre</string>
-    <string name="first_name">Apellido</string>
+    <string name="gender">Género</string>
+    <string name="last_name">Apellido</string>
+    <string name="first_name">Nombre</string>
+    <string name="noCycles">La rutina no tiene ciclos</string>
+    <string name="noExercises">%1$s no tiene ejercicios</string>
+    <string name="noExercisesMsg">Necesitas ejercicios en tus ciclos si o si.</string>
+    <string name="defaultSection">defaultSection</string>
 
 </resources>

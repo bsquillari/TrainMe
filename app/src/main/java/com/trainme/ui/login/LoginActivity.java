@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.trainme.App;
+import com.trainme.DetailRoutineActivity;
 import com.trainme.MainActivity;
 import com.trainme.R;
 import com.trainme.api.model.Credentials;
@@ -46,6 +48,28 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        App newApp = (App) getApplication();
+
+        String token = newApp.getPreferences().getAuthToken();
+
+        if(token != null) {
+            if(getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+                Intent intent = new Intent(this, DetailRoutineActivity.class);
+
+                intent.putExtra("ID", Integer.parseInt(getIntent().getData().getQueryParameter("id").replaceAll("\\+", " ")));
+                intent.putExtra("Name", getIntent().getData().getQueryParameter("name").replaceAll("\\+", " "));
+                intent.putExtra("Detail", getIntent().getData().getQueryParameter("detail").replaceAll("\\+", " "));
+                intent.putExtra("Difficulty", getIntent().getData().getQueryParameter("difficulty").replaceAll("\\+", " "));
+                intent.putExtra("Score", Integer.parseInt(getIntent().getData().getQueryParameter("score").replaceAll("\\+", " ")));
+                intent.putExtra("ColorPill", Integer.parseInt(getIntent().getData().getQueryParameter("color_pill").replaceAll("\\+", " ")));
+
+                startActivity(intent);
+            } else {
+                startActivity(new Intent(this, MainActivity.class));
+            }
+
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -56,7 +80,11 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
-
+        SharedPreferences settings = getSharedPreferences("UserInfo", 0);
+        if(settings!=null){
+            binding.username.setText(settings.getString("Username", "").toString());
+            binding.password.setText(settings.getString("Password", "").toString());
+        }
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -141,6 +169,11 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(TAG, getString(R.string.success));
                     binding.loading.setVisibility(View.GONE);
                     app.getPreferences().setAuthToken(r.getData().getToken());
+                    SharedPreferences setting = getSharedPreferences("UserInfo", 0);
+                    SharedPreferences.Editor editor = setting.edit();
+                    editor.putString("Username",binding.username.getText().toString());
+                    editor.putString("Password",binding.password.getText().toString());
+                    editor.apply();
                     updateUiWithUser(new LoggedInUserView(binding.username.getText().toString()));
                 } else {
                     defaultResourceHandler(r);
@@ -176,12 +209,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-//        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        String welcome = "Welcome!";
+        String welcome = getString(R.string.welcome);
         // TODO : initiate successful logged in experience
 
+        Intent intent;
+
+        if(getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+            intent = new Intent(this, DetailRoutineActivity.class);
+
+            intent.putExtra("ID", Integer.parseInt(getIntent().getData().getQueryParameter("id").replaceAll("\\+", " ")));
+            intent.putExtra("Name", getIntent().getData().getQueryParameter("name").replaceAll("\\+", " "));
+            intent.putExtra("Detail", getIntent().getData().getQueryParameter("detail").replaceAll("\\+", " "));
+            intent.putExtra("Difficulty", getIntent().getData().getQueryParameter("difficulty").replaceAll("\\+", " "));
+            intent.putExtra("Score", Integer.parseInt(getIntent().getData().getQueryParameter("score").replaceAll("\\+", " ")));
+            intent.putExtra("ColorPill", Integer.parseInt(getIntent().getData().getQueryParameter("color_pill").replaceAll("\\+", " ")));
+        } else {
+            intent = new Intent(this, MainActivity.class);
+        }
+
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
