@@ -195,6 +195,14 @@ public class LoginActivity extends AppCompatActivity {
                 if(error.getDescription().contains("Unexpected")) {
                     message = getResources().getString(R.string.checkConnection);
                 } else {
+                    if(error.getCode()==4){
+                        // Error en datos
+                        message = getResources().getString(R.string.wrongLoginFields);
+                    }else
+                    if(error.getCode()==8){
+                        // Error de email verification
+                        message = getResources().getString(R.string.emailVerificationError);
+                    }else
                     message = error.getDescription() + ".";
                 }
                 Snackbar snack = Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.error)).setDuration(20 * 1000);
