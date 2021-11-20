@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -79,7 +80,11 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
-
+        SharedPreferences settings = getSharedPreferences("UserInfo", 0);
+        if(settings!=null){
+            binding.username.setText(settings.getString("Username", "").toString());
+            binding.password.setText(settings.getString("Password", "").toString());
+        }
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -164,6 +169,11 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(TAG, getString(R.string.success));
                     binding.loading.setVisibility(View.GONE);
                     app.getPreferences().setAuthToken(r.getData().getToken());
+                    SharedPreferences setting = getSharedPreferences("UserInfo", 0);
+                    SharedPreferences.Editor editor = setting.edit();
+                    editor.putString("Username",binding.username.getText().toString());
+                    editor.putString("Password",binding.password.getText().toString());
+                    editor.apply();
                     updateUiWithUser(new LoggedInUserView(binding.username.getText().toString()));
                 } else {
                     defaultResourceHandler(r);
@@ -199,8 +209,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-//        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        String welcome = "Welcome!";
+        String welcome = getString(R.string.welcome);
         // TODO : initiate successful logged in experience
 
         Intent intent;

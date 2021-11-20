@@ -163,4 +163,17 @@
     <string name="noCycles">Routine has no cycles</string>
     <string name="noExercises">%1$s has no exercises</string>
     <string name="noExercisesMsg">Sorry, you need exercises on your cycle.</string>
+    <string name="userPreferences">User Preferences</string>
+    <string name="logout">Logout</string>
+    <string name="darkMode">Dark Mode</string>
+    <string name="setPlayRoutineMode">Default view for exercises when training</string>
+    <string name="detailViewDescrip">Show one exercise in detail</string>
+    <string name="active">Active</string>
+    <string name="notActive">Not activated</string>
+    <string name="multipleExercisesViewDescrip">Show previous, current and next exercise</string>
+    <string name="viewMode">Set view mode</string>
+    <string name="defaultSection">defaultSection</string>
+    <string name="setDefaultSection">- Select default navigation section</string>
+    <string name="currentOrder">Now ordered by %1$s</string>
+    <string name="orderBy">Select order</string>
 </resources>

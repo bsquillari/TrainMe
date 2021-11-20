@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -91,6 +92,17 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                         model.currentExercise = model.exercisesIterator.next();
                                         // NO DETAIL VIEW
                                         binding.exercisesLeft.setText(new StringBuilder().append(getResources().getString(R.string.ejercicios)).append(" ").append(getResources().getString(R.string.barra, model.exercisesDone, model.totalExercises)).toString());
+                                        SharedPreferences settings = getSharedPreferences("UserPreferences", 0);
+                                        if(settings!=null){
+                                            boolean value = settings.getBoolean("DetailExerciseView", false);
+                                            if(value){
+                                                binding.detailLayout.setVisibility(View.VISIBLE);
+                                                binding.noDetailLayout.setVisibility(View.INVISIBLE);
+                                            }else{
+                                                binding.noDetailLayout.setVisibility(View.VISIBLE);
+                                                binding.detailLayout.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
                                         binding.exerciseCard1.setVisibility(View.INVISIBLE);
                                         if (model.totalExercises > 0) {
                                             int idxAux = model.exercisesIterator.nextIndex();
@@ -219,6 +231,7 @@ public class PlayRoutineActivity extends AppCompatActivity {
         });
 
     }else{
+
             if(!model.cycleIterator.hasNext() && model.currentCycleReps==model.currentCycle.getRepetitions()){
                 finishRoutine();
             }
