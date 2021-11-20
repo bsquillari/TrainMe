@@ -28,9 +28,9 @@
     <string name="previous">Previous</string>
     <string name="start_training">Comienza a entrenar!</string>
     <string name="cycles">Ciclos</string>
-    <string name="loading">Cargando...</string>
+    <string name="loading">Cargando…</string>
     <string name="error">Error</string>
-    <string name="success">Exito</string>
+    <string name="success">Éxito</string>
     <string name="NoBdate">Falta la fecha de nacimiento</string>
     <string name="menu_item_score">Puntuación</string>
     <string name="menu_item_date">Fecha</string>
@@ -69,18 +69,18 @@
     <string name="logout">Desloguearse</string>
     <string name="darkMode">Modo oscuro</string>
     <string name="setPlayRoutineMode">Vista por defecto de los ejecicios mientras entreno</string>
-    <string name="detailViewDescrip">Mostror un ejercicio con detalle</string>
+    <string name="detailViewDescrip">Mostrar un ejercicio con detalle</string>
     <string name="active">Activo</string>
     <string name="notActive">No activo</string>
     <string name="multipleExercisesViewDescrip">Mostrar el ejercicio actual, previo y proximo</string>
     <string name="viewMode">Setear vista</string>
-    <string name="setDefaultSection">Seleccionar la secci\'on de navegaci\'on por defecto</string>
+    <string name="setDefaultSection">Seleccionar la sección de navegación por defecto</string>
     <string name="currentOrder">Ordenado por %1$s</string>
     <string name="orderBy">Elegir un orden</string>
     <string name="rate">Puntuar</string>
-    <string name="checkConnection">Por favor chequee su conexi\'on y pruebe otra vez.</string>
+    <string name="checkConnection">Por favor chequee su conexión y pruebe otra vez.</string>
     <string name="editProfileConfirm">Información de perfil guardada</string>
-    <string name="wrongLoginFields">Usuario o contraseña son incorretos o estan incompletos.</string>
+    <string name="wrongLoginFields">Usuario o contraseña son incorretos o están incompletos.</string>
     <string name="emailVerificationError">Email no verificado.</string>
 
 </resources>
