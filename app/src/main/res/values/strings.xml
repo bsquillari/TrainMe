@@ -89,4 +89,5 @@
     <string name="rate">Rate</string>
     <string name="checkConnection">Please check your connection and try again.</string>
     <string name="editProfileConfirm">Profile data saved</string>
+    <string name="HelpText">MyRoutines: This is where you will find all the routines you ever created.\n\nExplore: Here you can find all the other routines created by our community. You can quickly identify the hard ones because they are marked with a darker color.\n\nFavourites: You can add routines to this list so you have a quick access to them.\n\nProfile: See and edit all your personal data.\n</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.trainme.ui.profile;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -98,6 +99,10 @@ public class ProfileFragment extends Fragment {
                     .setNegativeButton(R.string.no, null)
                     .show();
 
+        });
+
+        binding.helpButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext()).setTitle("Do you need help?").setMessage(R.string.HelpText).show();
         });
         SharedPreferences settings0 = getActivity().getSharedPreferences("UserPreferences", 0);
         if(settings0!=null){
