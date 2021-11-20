@@ -80,5 +80,7 @@
     <string name="rate">Puntuar</string>
     <string name="checkConnection">Por favor chequee su conexi\'on y pruebe otra vez.</string>
     <string name="editProfileConfirm">Información de perfil guardada</string>
+    <string name="submit_rating">Enviar</string>
+    <string name="repetitions_cycle">Repeticiones: </string>
 
 </resources>

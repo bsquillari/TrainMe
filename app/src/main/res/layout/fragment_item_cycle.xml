@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_subtitle"
-                    android:text=" Repetitions: "/>
+                    android:text="@string/repetitions_cycle"/>
                 <TextView
                     android:id="@+id/repsTextView"
                     android:layout_width="wrap_content"

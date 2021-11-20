@@ -64,11 +64,10 @@
                 </LinearLayout>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/colorPill"
                     android:layout_width="21dp"
-                    android:layout_height="125dp"
+                    android:layout_height="161dp"
                     android:layout_marginStart="5dp"
                     app:cardBackgroundColor="@color/teal_200"
                     app:cardCornerRadius="10dp" />
@@ -103,11 +102,6 @@
                         android:layout_height="wrap_content"
                         android:textSize="18sp" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="2dp">
 
                         <RatingBar
                             android:id="@+id/rating"
@@ -121,12 +115,12 @@
 
                         <Button
                             android:id="@+id/rate_button"
-                            android:layout_width="80dp"
-                            android:layout_height="40dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:padding="5dp"
                             android:onClick="rateRoutine"
-                            android:text="@string/rate" />
-                    </LinearLayout>
+                            android:text="@string/rate"/>
 
 
                     <!-- TODO: La descripción no baja de renglon. -->
