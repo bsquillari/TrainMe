@@ -155,6 +155,9 @@ public class DetailRoutineActivity extends AppCompatActivity {
                 });
             }
             return true;
+        } else if (id == android.R.id.home) {
+            startActivity(new Intent(this, MainActivity.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
