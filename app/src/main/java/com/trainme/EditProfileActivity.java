@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.trainme.api.model.User;
 import com.trainme.databinding.ActivityEditProfileBinding;
@@ -76,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 Log.d("Logout", r.getStatus().toString());
                 if (r.getStatus() == Status.SUCCESS) {
                     Log.d("editProfile", getString(R.string.success));
-
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.editProfileConfirm), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
