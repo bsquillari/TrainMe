@@ -2,7 +2,6 @@ package com.trainme;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.content.Intent;
 import com.squareup.picasso.Picasso;
@@ -17,12 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.trainme.api.model.Review;
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityDetailRoutineBinding;

@@ -47,6 +47,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        App newApp = (App) getApplication();
+
+        String token = newApp.getPreferences().getAuthToken();
+
+        if(token != null) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

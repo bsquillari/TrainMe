@@ -33,6 +33,7 @@ import com.trainme.repository.Status;
 import com.trainme.ui.login.LoginActivity;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -84,6 +85,8 @@ public class ProfileFragment extends Fragment {
                                 Log.d("Logout", r.getStatus().toString());
                                 if (r.getStatus() == Status.SUCCESS) {
                                     Log.d("profile", getString(R.string.success));
+                                    App newApp = (App) requireActivity().getApplication();
+                                    newApp.getPreferences().setAuthToken(null);
                                     Intent intent = new Intent(getContext(), LoginActivity.class);
                                     startActivity(intent);
                                 }
