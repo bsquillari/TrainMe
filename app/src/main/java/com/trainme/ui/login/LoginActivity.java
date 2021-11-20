@@ -177,7 +177,12 @@ public class LoginActivity extends AppCompatActivity {
             case ERROR:
                 binding.loading.setVisibility(View.GONE);
                 Error error = resource.getError();
-                String message = getString(R.string.error) + ": " + error.getDescription();
+                String message;
+                if(error.getDescription().contains("Unexpected")) {
+                    message = getResources().getString(R.string.checkConnection);
+                } else {
+                    message = error.getDescription() + ".";
+                }
                 Snackbar snack = Snackbar.make(binding.container, message, Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.error)).setDuration(20 * 1000);
                 View view = snack.getView();
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();

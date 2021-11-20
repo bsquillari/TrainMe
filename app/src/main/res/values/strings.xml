@@ -176,4 +176,6 @@
     <string name="setDefaultSection">- Select default navigation section</string>
     <string name="currentOrder">Now ordered by %1$s</string>
     <string name="orderBy">Select order</string>
+    <string name="rate">Rate</string>
+    <string name="checkConnection">Please check your connection and try again.</string>
 </resources>
