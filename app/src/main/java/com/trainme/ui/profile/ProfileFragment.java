@@ -113,6 +113,21 @@ public class ProfileFragment extends Fragment {
                 binding.detailViewBtn.setText(getResources().getString(R.string.notActive));
                 binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
             }
+            switch (settings0.getInt(getResources().getString(R.string.defaultSection),0)){
+                case R.id.navigation_profile:
+                    binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+
+                case R.id.navigation_explore:
+                    binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+                case R.id.navigation_favs:
+                    binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+                default:
+                    binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                    break;
+            }
         }
         binding.detailViewBtn.setOnClickListener(v -> {
             binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));

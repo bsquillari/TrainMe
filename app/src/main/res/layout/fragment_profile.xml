@@ -255,7 +255,7 @@
                         android:textSize="@dimen/text_btn"
                         android:layout_marginTop="15dp"
                         android:layout_gravity="end"
-                        android:backgroundTint="@color/purple_500"
+                        android:backgroundTint="@color/purple_700"
                         android:text="@string/title_myroutines"
                         />
                     <Button
