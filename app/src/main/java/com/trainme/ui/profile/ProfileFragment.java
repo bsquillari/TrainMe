@@ -77,7 +77,6 @@ public class ProfileFragment extends Fragment {
 //                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
             } else if (r.getStatus() == Status.ERROR) {
                 Log.d("debugeado", "onCreateView: " + r.getError().toString());
-
             }
         });
 

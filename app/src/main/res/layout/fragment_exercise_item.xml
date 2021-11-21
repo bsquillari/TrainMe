@@ -4,7 +4,7 @@
     android:id="@+id/exerciseCard"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/teal_200"
+    app:cardBackgroundColor="?colorSecondary"
     android:elevation="20dp"
     app:cardCornerRadius="10dp"
     android:layout_margin="5dp">

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?><!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<RelativeLayout  xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView android:layout_height="match_parent"
-        android:layout_width="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,9 +33,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="30dp"
-                app:cardCornerRadius="20dp"
-                android:layout_marginHorizontal="10dp">
+                app:cardCornerRadius="20dp">
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -46,26 +48,26 @@
                         android:id="@+id/usernameProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
                         android:layout_marginHorizontal="12dp"
-                        android:textSize="@dimen/text_body"
-                        android:gravity="center"
+                        android:layout_marginVertical="8dp"
                         android:drawableLeft="@drawable/ic_baseline_person_24"
-                        />
+                        android:gravity="center"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
 
                     <TextView
                         android:id="@+id/fullNameProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="12dp"
-                        android:textSize="@dimen/text_body"
                         android:layout_marginBottom="8dp"
-                        android:gravity="center"
                         android:drawableLeft="@drawable/baseline_badge_24"
-                        />
+                        android:gravity="center"
+                        android:textColor="?android:textColorPrimary"
+
+                        android:textSize="@dimen/text_body" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
 
 
             <!--    </LinearLayout>-->
@@ -73,8 +75,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
@@ -87,83 +89,87 @@
                         android:id="@+id/emailProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
                         android:layout_marginHorizontal="12dp"
-                        android:textSize="@dimen/text_body"
+                        android:layout_marginVertical="8dp"
                         android:drawableLeft="@drawable/ic_baseline_email_24"
                         android:textAlignment="center"
-                        />
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
 
                     <TextView
                         android:id="@+id/phoneProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:layout_marginHorizontal="12dp"
-                        android:textSize="@dimen/text_body"
                         android:layout_marginBottom="8dp"
                         android:drawableLeft="@drawable/ic_baseline_local_phone_24"
-                        />
+                        android:textAlignment="center"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
 
                     <TextView
                         android:id="@+id/genderProfile"
-                        android:drawableLeft="@drawable/ic_baseline_wc_24"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:layout_marginHorizontal="12dp"
-                        android:textSize="@dimen/text_body"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginBottom="8dp"
+                        android:drawableLeft="@drawable/ic_baseline_wc_24"
+                        android:textAlignment="center"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
 
                     <TextView
                         android:id="@+id/birthProfile"
-                        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:layout_marginHorizontal="12dp"
-                        android:textSize="@dimen/text_body"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+                        android:textAlignment="center"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <Button
                     android:id="@+id/EditProfileBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:textSize="@dimen/text_btn"
-                    android:onClick="openEditProfileActivity"
                     android:drawableLeft="@drawable/ic_sharp_edit_24"
-                    android:text="@string/edit_profile" />
+                    android:onClick="openEditProfileActivity"
+                    android:text="@string/edit_profile"
+                    android:textSize="@dimen/text_btn" />
+
                 <Button
                     android:id="@+id/LogOutBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_btn"
                     android:layout_marginTop="15dp"
-                    android:onClick="openEditProfileActivity"
                     android:drawableLeft="@drawable/baseline_logout_24"
-                    android:text="@string/logout" />
+                    android:onClick="openEditProfileActivity"
+                    android:text="@string/logout"
+                    android:textSize="@dimen/text_btn" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_title"
-                    android:text="@string/userPreferences"
                     android:gravity="center"
-                    android:textColor = "?android:textColorPrimary"
-                    />
+                    android:text="@string/userPreferences"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/text_title" />
                 <!--            <TextView-->
                 <!--                android:layout_width="wrap_content"-->
                 <!--                android:layout_height="wrap_content"-->
@@ -182,71 +188,77 @@
                 <!--                android:drawableLeft="@drawable/ic_baseline_nights_stay_24"-->
                 <!--                android:text="@string/darkMode" />-->
                 <TextView
-                    android:layout_marginStart="5dp"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/setPlayRoutineMode"
-                    android:textSize="@dimen/text_subtitle"
-                    android:textColor = "?android:textColorPrimary"/>
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/text_subtitle" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor = "?android:textColorPrimary"
-                        android:text="@string/detailViewDescrip"
                         android:layout_marginHorizontal="20dp"
-                        android:textSize="@dimen/text_body"/>
+                        android:text="@string/detailViewDescrip"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
+
                     <Button
                         android:id="@+id/detailViewBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_btn"
-                        android:layout_marginTop="15dp"
                         android:layout_gravity="end"
+                        android:layout_marginTop="15dp"
                         android:backgroundTint="@color/purple_700"
-                        android:text="@string/notActive" />
+                        android:text="@string/notActive"
+                        android:textSize="@dimen/text_btn" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor = "?android:textColorPrimary"
-                        android:text="@string/multipleExercisesViewDescrip"
                         android:layout_marginHorizontal="20dp"
-                        android:textSize="@dimen/text_body"/>
+                        android:text="@string/multipleExercisesViewDescrip"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/text_body" />
+
                     <Button
                         android:id="@+id/multipleExercisesViewBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/text_btn"
-                        android:layout_marginTop="15dp"
                         android:layout_gravity="end"
+                        android:layout_marginTop="15dp"
                         android:backgroundTint="@color/purple_500"
                         android:text="@string/active"
-                        />
+                        android:textSize="@dimen/text_btn" />
                 </LinearLayout>
 
                 <TextView
-                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="@string/setDefaultSection"
-                    android:textSize="@dimen/text_subtitle"
-                    android:textColor = "?android:textColorPrimary"/>
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/text_subtitle" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -254,53 +266,52 @@
 
                         <Button
                             android:id="@+id/myRoutinesBtn"
-                            android:layout_marginHorizontal="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_btn"
-                            android:layout_marginTop="15dp"
                             android:layout_gravity="end"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="15dp"
                             android:backgroundTint="@color/purple_700"
                             android:text="@string/title_myroutines"
-                            />
+                            android:textSize="@dimen/text_btn" />
+
                         <Button
                             android:id="@+id/exploreBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
-                            android:textSize="@dimen/text_btn"
-                            android:layout_marginTop="15dp"
                             android:layout_gravity="end"
+                            android:layout_marginTop="15dp"
                             android:backgroundTint="@color/purple_700"
                             android:text="@string/title_explore"
-                            />
+                            android:textSize="@dimen/text_btn" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
 
                         <Button
                             android:id="@+id/favsBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_btn"
-                            android:layout_marginTop="15dp"
                             android:layout_gravity="end"
-                            android:backgroundTint="@color/purple_700"
                             android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="15dp"
+                            android:backgroundTint="@color/purple_700"
                             android:text="@string/title_favs"
-                            />
+                            android:textSize="@dimen/text_btn" />
+
                         <Button
                             android:id="@+id/profileBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_btn"
-                            android:layout_marginTop="15dp"
                             android:layout_gravity="end"
+                            android:layout_marginTop="15dp"
                             android:backgroundTint="@color/purple_700"
                             android:text="@string/title_profile"
-                            />
+                            android:textSize="@dimen/text_btn" />
                     </LinearLayout>
 
 
@@ -315,14 +326,12 @@
         android:id="@+id/helpButton"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/ic_baseline_help_24"/>
+        app:srcCompat="@drawable/ic_baseline_help_24" />
 </RelativeLayout>
-
-
 
 
     <!--</LinearLayout>-->

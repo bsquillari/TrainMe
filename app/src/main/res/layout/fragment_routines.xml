@@ -60,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:textSize="20dp"
+                        android:textColor="?android:textColorPrimary"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <androidx.cardview.widget.CardView
@@ -90,6 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/text_subtitle"
                         android:textStyle="bold" />
 
@@ -97,7 +99,8 @@
                         android:id="@+id/descriptionTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Detail"
+                        android:text="@string/detail"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/text_body" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
