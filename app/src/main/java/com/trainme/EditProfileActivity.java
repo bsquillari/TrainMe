@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,6 +94,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         initDatePicker();
 //        binding.datePickerButton = findViewById(R.id.datePickerButton);
         binding.datePickerButton.setText(getTodaysDate());
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.colorOnSecondary, typedValue, true);
+        binding.datePickerButton.setTextColor(typedValue.data);
 //        );
 //        setContentView(R.layout.activity_edit_profile);
     }
