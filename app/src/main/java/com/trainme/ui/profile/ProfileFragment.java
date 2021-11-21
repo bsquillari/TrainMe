@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
                     binding.birthProfile.setText(R.string.NoBdate);
                 }
                 String url = r.getData().getAvatarUrl();
-                if (url == null){
+                if (url == null || url.isEmpty()){
                     url = "https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg";
                 }
                 Picasso.get().load(url).into(binding.avatarURLProfile);
