@@ -65,7 +65,11 @@ public class DetailRoutineActivity extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 Log.d("user", "user");
                 String username=r.getData().getUser().getUsername();
-                Picasso.get().load(r.getData().getUser().getAvatarUrl()).into(binding.contentScrollingFragment.iconImageView);
+                String url=r.getData().getUser().getAvatarUrl();
+                if(url == null || url.isEmpty()){
+                    url = "https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg";
+                }
+                Picasso.get().load(url).into(binding.contentScrollingFragment.iconImageView);
                 binding.contentScrollingFragment.username.setText(username);
 
             } else if (r.getStatus() == Status.ERROR) {
