@@ -11,16 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
+import com.trainme.api.model.Error;
 import com.trainme.api.model.Exercise;
 import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
 import com.trainme.databinding.FragmentExerciseItemBinding;
 import com.trainme.databinding.FragmentItemCycleBinding;
 import com.trainme.databinding.FragmentRoutinesBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
 
@@ -54,6 +58,7 @@ public class MyExerciseRecyclerViewAdapter extends RecyclerView.Adapter<MyExerci
                 notifyDataSetChanged();
             } else if (r.getStatus() == Status.ERROR) {
                 Log.d("ExerciseAdapter", "exercise adapter: Error consiguiendo exercises");
+                defaultHandler(r);
             }
         });
 //            repository.getMyRoutines(page++, PageSize, "id").observe(lifecycleOwner, r -> {
@@ -71,7 +76,22 @@ public class MyExerciseRecyclerViewAdapter extends RecyclerView.Adapter<MyExerci
 //
         myContext = context;
     }
+    private void defaultHandler(Resource<PagedList<ContentEx>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
 
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = myContext.getResources().getString(R.string.checkConnection);
+                Toast.makeText(myContext, message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -93,6 +113,7 @@ public class MyExerciseRecyclerViewAdapter extends RecyclerView.Adapter<MyExerci
 //                        notifyDataSetChanged();
                     } else if (r.getStatus() == Status.ERROR) {
                         Log.d("CyclesAdapter", "MyCycleRecyclerViewAdapter: Error consiguiendo cycles");
+                        defaultHandler(r);
                     }
                 });
 

@@ -4,22 +4,31 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
+
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.trainme.api.model.Error;
 import com.trainme.api.model.PagedList;
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.FragmentRoutinesBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
 
@@ -63,7 +72,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     isLastPage = r.getData().getIsLastPage();
                     notifyDataSetChanged();
                 } else {
-
+                    defaultHandler(r);
                 }
             });
         }
@@ -77,7 +86,7 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     isLastPage = r.getData().getIsLastPage();
                     notifyDataSetChanged();
                 } else {
-
+                    defaultHandler(r);
                 }
             });
         }
@@ -91,12 +100,30 @@ public class MyRoutineRecyclerViewAdapter extends RecyclerView.Adapter<MyRoutine
                     isLastPage = r.getData().getIsLastPage();
                     notifyDataSetChanged();
                 } else {
-
+                    defaultHandler(r);
                 }
             });
         }
 
         myContext = context;
+    }
+
+    private void defaultHandler(Resource<PagedList<Routine>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+//                Snackbar snack = Snackbar.make(myContext.get, myContext.getResources().getString(R.string.checkConnection) , Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.teal_200)).setDuration(10 * 1000);
+//                snack.setTextColor(getResources().getColor(R.color.black)).show();
+                message = myContext.getResources().getString(R.string.checkConnection);
+                Toast.makeText(myContext, message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
     }
 
     @Override

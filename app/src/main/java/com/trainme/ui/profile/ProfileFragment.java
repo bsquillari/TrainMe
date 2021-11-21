@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +30,12 @@ import com.trainme.App;
 import com.trainme.MainActivity;
 import com.trainme.R;
 import com.trainme.RoutinesFragmentArgs;
+import com.trainme.api.model.Error;
+import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Routine;
+import com.trainme.api.model.User;
 import com.trainme.databinding.FragmentProfileBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.Status;
 import com.trainme.ui.login.LoginActivity;
 
@@ -71,7 +77,7 @@ public class ProfileFragment extends Fragment {
 //                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
             }else if(r.getStatus() == Status.ERROR){
                 Log.d("debugeado", "onCreateView: " + r.getError().toString());
-
+                defaultHandlerUser(r);
             }
         });
 
@@ -90,6 +96,8 @@ public class ProfileFragment extends Fragment {
                                     newApp.getPreferences().setAuthToken(null);
                                     Intent intent = new Intent(getContext(), LoginActivity.class);
                                     startActivity(intent);
+                                }else{
+                                    defaultHandler(r);
                                 }
                             });
                         }
@@ -200,6 +208,23 @@ public class ProfileFragment extends Fragment {
         ((MainActivity)mActivity).filterBtn(!(section.equals("favs") || section.equals("profile")));
         return root;
     }
+
+    private void defaultHandlerUser(Resource<User> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -208,7 +233,22 @@ public class ProfileFragment extends Fragment {
             mActivity =(Activity) context;
         }
     }
+    private void defaultHandler(Resource<Void> r) {
+        switch (r.getStatus()) {
+            case LOADING:
 
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
