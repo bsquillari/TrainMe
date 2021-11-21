@@ -83,7 +83,7 @@
     <string name="multipleExercisesViewDescrip">Show previous, current and next exercise</string>
     <string name="viewMode">Set view mode</string>
     <string name="defaultSection">defaultSection</string>
-    <string name="setDefaultSection">- Select default navigation section</string>
+    <string name="setDefaultSection">Select default navigation section</string>
     <string name="currentOrder">Now ordered by %1$s</string>
     <string name="orderBy">Select order</string>
     <string name="rate">Rate</string>
