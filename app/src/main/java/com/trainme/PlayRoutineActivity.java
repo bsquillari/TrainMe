@@ -13,11 +13,17 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
+import com.trainme.api.model.Error;
+import com.trainme.api.model.Exercise;
+import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityPlayRoutineBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
 
@@ -215,18 +221,22 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                         updateTimer();
                                     } else {
                                         // loading
+                                        defaultHandler(rExercise);
                                     }
                                 });
                             } else {
                                 // Loading
+                                defaultHandler(rAuxExercise);
                             }
                         });
                     }else{
                         // Loading
+                            defaultHandlerCycle(rCycle);
                     }
                 });
             }else{
                 // Loading
+                    defaultHandlerCycle(rAuxCycle);
             }
         });
 
@@ -387,6 +397,23 @@ public class PlayRoutineActivity extends AppCompatActivity {
         }
     }
 
+    private void defaultHandlerCycle(Resource<PagedList<Cycle>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
+
     private void confirmStop() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this)
                 .setTitle(getResources().getString(R.string.quitRoutineQuestion)).setMessage(getResources().getString(R.string.progressLost))
@@ -507,10 +534,12 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                             }
                                         } else {
                                             // loading
+                                            defaultHandler(rExercise);
                                         }
                                     });
                                 } else {
                                     // Loading
+                                    defaultHandler(rAuxExercise);
                                 }
                             });
                         } else {
@@ -606,6 +635,23 @@ public class PlayRoutineActivity extends AppCompatActivity {
                 });
         dialog.setCancelable(false);
         dialog.show();
+    }
+
+    private void defaultHandler(Resource<PagedList<ContentEx>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
     }
 
     private void cycleJump(boolean popUp) {
@@ -704,10 +750,12 @@ public class PlayRoutineActivity extends AppCompatActivity {
                         updateTimer();
                     } else {
                         // loading
+                        defaultHandler(rExercise);
                     }
                 });
             } else {
                 // Loading
+                defaultHandler(rAuxExercise);
             }
         });
     }
@@ -743,6 +791,8 @@ public class PlayRoutineActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         binding.fabStop.callOnClick();
+        if(!binding.fabStop.hasOnClickListeners())
+        finish();
 //        super.onBackPressed();
     }
 

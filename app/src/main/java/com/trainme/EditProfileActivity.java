@@ -16,8 +16,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.trainme.api.model.Error;
 import com.trainme.api.model.User;
 import com.trainme.databinding.ActivityEditProfileBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.Status;
 
 import java.util.Calendar;
@@ -61,6 +63,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 binding.editTextPhone.setText(user.getPhone());
                 binding.editTextGender.setSelection(adapter.getPosition(user.getGender()));
                 binding.editTextLinkToPicture.setText(user.getAvatarUrl());
+            }else{
+                defaultHandler(r);
             }
         });
 
@@ -80,6 +84,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.editProfileConfirm), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                }else{
+                    defaultHandler(r);
                 }
             });
         });
@@ -129,7 +135,22 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     {
         return getMonthFormat(month) + " " + day + " " + year;
     }
+    private void defaultHandler(Resource<User> r) {
+        switch (r.getStatus()) {
+            case LOADING:
 
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
     private String getMonthFormat(int month)
     {
         if(month == 1)
