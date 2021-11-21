@@ -92,5 +92,6 @@
     <string name="HelpText">MyRoutines: This is where you will find all the routines you ever created.\n\nExplore: Here you can find all the other routines created by our community. You can quickly identify the hard ones because they are marked with a darker color.\n\nFavourites: You can add routines to this list so you have a quick access to them.\n\nProfile: See and edit all your personal data.\n</string>
     <string name="wrongLoginFields">Username or password are missing or incorrect.</string>
     <string name="emailVerificationError">Email not verified.</string>
+    <string name="action_help">Help</string>
     <string name="detail">Detail</string>
 </resources>
