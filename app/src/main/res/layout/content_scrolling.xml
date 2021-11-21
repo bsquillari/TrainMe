@@ -60,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:textSize="20dp"
+                        android:textColor="?android:textColorPrimary"
                         android:textStyle="bold"/>
                 </LinearLayout>
 
@@ -89,18 +90,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
                         android:textSize="24sp"
+                        android:textColor="?android:textColorPrimary"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/detailTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="21sp" />
 
                     <TextView
                         android:id="@+id/difficultyTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="?android:textColorPrimary"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -117,7 +121,7 @@
                             android:isIndicator="true"
                             android:numStars="5"
                             android:stepSize="1"
-                            android:theme="@style/RatingBar"/>
+                            android:theme="@style/RatingBar" />
 
                         <Button
                             android:id="@+id/rate_button"

@@ -93,4 +93,5 @@
     <string name="wrongLoginFields">Username or password are missing or incorrect.</string>
     <string name="emailVerificationError">Email not verified.</string>
     <string name="action_help">Help</string>
+    <string name="detail">Detail</string>
 </resources>
