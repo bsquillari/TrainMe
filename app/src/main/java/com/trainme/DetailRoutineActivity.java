@@ -20,9 +20,13 @@ import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.trainme.api.model.Error;
+import com.trainme.api.model.PagedList;
 import com.trainme.api.model.Review;
 import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityDetailRoutineBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.Status;
 import java.util.Objects;
 
@@ -65,11 +69,16 @@ public class DetailRoutineActivity extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 Log.d("user", "user");
                 String username=r.getData().getUser().getUsername();
-                Picasso.get().load(r.getData().getUser().getAvatarUrl()).into(binding.contentScrollingFragment.iconImageView);
+                String url=r.getData().getUser().getAvatarUrl();
+                if(url == null || url.isEmpty()){
+                    url = "https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg";
+                }
+                Picasso.get().load(url).into(binding.contentScrollingFragment.iconImageView);
                 binding.contentScrollingFragment.username.setText(username);
 
             } else if (r.getStatus() == Status.ERROR) {
                 Log.d("user", " Error");
+                defaultHandlerRoutine(r);
             }
         });
 
@@ -90,6 +99,22 @@ public class DetailRoutineActivity extends AppCompatActivity {
 
         routineFavorite = false;
     }
+    private void defaultHandlerRoutine(Resource<Routine> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,9 +133,27 @@ public class DetailRoutineActivity extends AppCompatActivity {
                         break;
                     }
                 }
+            }else {
+                defaultHandlerRoutines(r);
             }
         });
         return true;
+    }
+    private void defaultHandlerRoutines(Resource<PagedList<Routine>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
     }
 
     @Override
@@ -139,6 +182,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
                         item.setIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
                         routineFavorite = !routineFavorite;
                     } else if (r.getStatus() == Status.ERROR) {
+                        defaultHandler(r);
                     }
                 });
             } else {
@@ -147,7 +191,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
                         item.setIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.error)));
                         routineFavorite = !routineFavorite;
                     } else if (r.getStatus() == Status.ERROR) {
-
+                        defaultHandler(r);
                     }
                 });
             }
@@ -158,6 +202,23 @@ public class DetailRoutineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void defaultHandler(Resource<Void> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
     }
 
     public void playRoutine(View view) {
@@ -196,8 +257,10 @@ public class DetailRoutineActivity extends AppCompatActivity {
                             if(r.getStatus()== Status.SUCCESS) {
                                 Log.d("RATE", "added review");
                                 Toast.makeText(DetailRoutineActivity.this, message, Toast.LENGTH_LONG).show();
-                            }else if (r.getStatus() == Status.ERROR)
+                            }else if (r.getStatus() == Status.ERROR) {
                                 Log.d("RATE", "rate Error");
+                                defaultHandler(r);
+                            }
 
                         });
 
@@ -222,6 +285,7 @@ public class DetailRoutineActivity extends AppCompatActivity {
 
             } else if (r.getStatus() == Status.ERROR) {
                 Log.d("onRes", " Error");
+                defaultHandlerRoutine(r);
             }
         });
     }

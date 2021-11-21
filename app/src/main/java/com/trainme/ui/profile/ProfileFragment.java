@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,7 +31,12 @@ import com.trainme.App;
 import com.trainme.MainActivity;
 import com.trainme.R;
 import com.trainme.RoutinesFragmentArgs;
+import com.trainme.api.model.Error;
+import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Routine;
+import com.trainme.api.model.User;
 import com.trainme.databinding.FragmentProfileBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.Status;
 import com.trainme.ui.login.LoginActivity;
 
@@ -70,14 +76,14 @@ public class ProfileFragment extends Fragment {
                     binding.birthProfile.setText(R.string.NoBdate);
                 }
                 String url = r.getData().getAvatarUrl();
-                if (url == null){
+                if (url == null || url.isEmpty()){
                     url = "https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg";
                 }
                 Picasso.get().load(url).into(binding.avatarURLProfile);
 //                imageLoader.DisplayImage(r.getData().getAvatarUrl(), R.drawable.profilepic, binding.avatarURLProfile);
             } else if (r.getStatus() == Status.ERROR) {
                 Log.d("debugeado", "onCreateView: " + r.getError().toString());
-
+                defaultHandlerUser(r);
             }
         });
 
@@ -95,6 +101,8 @@ public class ProfileFragment extends Fragment {
                                     newApp.getPreferences().setAuthToken(null);
                                     Intent intent = new Intent(getContext(), LoginActivity.class);
                                     startActivity(intent);
+                                }else{
+                                    defaultHandler(r);
                                 }
                             });
                         }
@@ -105,111 +113,27 @@ public class ProfileFragment extends Fragment {
 
         });
 
-        binding.helpButton.setOnClickListener(v -> {
-            new AlertDialog.Builder(getContext()).setTitle("Do you need help?").setMessage(R.string.HelpText).show();
-        });
-        SharedPreferences settings0 = getActivity().getSharedPreferences("UserPreferences", 0);
-        if (settings0 != null) {
-            boolean value = settings0.getBoolean("DetailExerciseView", false);
-            if (value) {
-                binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                binding.detailViewBtn.setText(getResources().getString(R.string.active));
-                binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.notActive));
-                binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            } else {
-                binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.active));
-                binding.detailViewBtn.setText(getResources().getString(R.string.notActive));
-                binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            }
-            switch (settings0.getInt(getResources().getString(R.string.defaultSection), 0)) {
-                case R.id.navigation_profile:
-                    binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                    break;
-
-                case R.id.navigation_explore:
-                    binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                    break;
-                case R.id.navigation_favs:
-                    binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                    break;
-                default:
-                    binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-                    break;
-            }
-        }
-        binding.detailViewBtn.setOnClickListener(v -> {
-            binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            binding.detailViewBtn.setText(getResources().getString(R.string.active));
-            binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.notActive));
-            binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            SharedPreferences settings1 = getActivity().getSharedPreferences("UserPreferences", 0);
-            SharedPreferences.Editor editor = settings1.edit();
-            editor.putBoolean("DetailExerciseView", true);
-            editor.apply();
-        });
-        binding.multipleExercisesViewBtn.setOnClickListener(v -> {
-            binding.multipleExercisesViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            binding.multipleExercisesViewBtn.setText(getResources().getString(R.string.active));
-            binding.detailViewBtn.setText(getResources().getString(R.string.notActive));
-            binding.detailViewBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            SharedPreferences settings2 = getActivity().getSharedPreferences("UserPreferences", 0);
-            SharedPreferences.Editor editor = settings2.edit();
-            editor.putBoolean("DetailExerciseView", false);
-            editor.apply();
-        });
-        binding.exploreBtn.setOnClickListener(v -> {
-            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            SharedPreferences settings3 = getActivity().getSharedPreferences("UserPreferences", 0);
-            SharedPreferences.Editor editor = settings3.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_explore);
-            editor.apply();
-        });
-        binding.profileBtn.setOnClickListener(v -> {
-            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            SharedPreferences settings4 = getActivity().getSharedPreferences("UserPreferences", 0);
-            SharedPreferences.Editor editor = settings4.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_profile);
-            editor.apply();
-        });
-        binding.myRoutinesBtn.setOnClickListener(v -> {
-            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            SharedPreferences settings5 = getActivity().getSharedPreferences("UserPreferences", 0);
-            SharedPreferences.Editor editor = settings5.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_myroutines);
-            editor.apply();
-        });
-        binding.favsBtn.setOnClickListener(v -> {
-            binding.exploreBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.profileBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.myRoutinesBtn.setBackgroundColor(getResources().getColor(R.color.purple_700));
-            binding.favsBtn.setBackgroundColor(getResources().getColor(R.color.purple_500));
-            SharedPreferences settings6 = getActivity().getSharedPreferences("UserPreferences", 0);
-            SharedPreferences.Editor editor = settings6.edit();
-            editor.putInt(getResources().getString(R.string.defaultSection), R.id.navigation_favs);
-            editor.apply();
-        });
-
-//        final TextView textView = binding.textProfile;
-//        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
         ((MainActivity) mActivity).filterBtn(!(section.equals("favs") || section.equals("profile")));
         return root;
     }
 
+
+    private void defaultHandlerUser(Resource<User> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -218,7 +142,22 @@ public class ProfileFragment extends Fragment {
             mActivity = (Activity) context;
         }
     }
+    private void defaultHandler(Resource<Void> r) {
+        switch (r.getStatus()) {
+            case LOADING:
 
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

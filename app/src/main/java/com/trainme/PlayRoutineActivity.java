@@ -11,13 +11,20 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.trainme.api.model.ContentEx;
 import com.trainme.api.model.Cycle;
+import com.trainme.api.model.Error;
+import com.trainme.api.model.Exercise;
+import com.trainme.api.model.PagedList;
+import com.trainme.api.model.Routine;
 import com.trainme.databinding.ActivityPlayRoutineBinding;
+import com.trainme.repository.Resource;
 import com.trainme.repository.RoutineRepository;
 import com.trainme.repository.Status;
 
@@ -108,7 +115,9 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                             int idxAux = model.exercisesIterator.nextIndex();
                                             binding.exerciseName2.setText(model.currentExercise.getExercise().getName());
                                             binding.exerciseReps2.setText(getResources().getString(R.string.barra, 0, model.currentExercise.getRepetitions()));
-                                            binding.exerciseCard2.setCardBackgroundColor(getResources().getColor(R.color.teal_200));
+                                            TypedValue typedValue = new TypedValue();
+                                            getTheme().resolveAttribute(R.attr.colorSecondary, typedValue, true);
+                                            binding.exerciseCard2.setCardBackgroundColor(typedValue.data);
                                             if (model.totalExercises > 1) {
                                                 binding.exerciseName3.setText(model.Exercises.get(idxAux).getExercise().getName());
                                                 binding.exerciseReps3.setText(getResources().getString(R.string.barra, 0, model.Exercises.get(idxAux).getRepetitions()));
@@ -215,18 +224,22 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                         updateTimer();
                                     } else {
                                         // loading
+                                        defaultHandler(rExercise);
                                     }
                                 });
                             } else {
                                 // Loading
+                                defaultHandler(rAuxExercise);
                             }
                         });
                     }else{
                         // Loading
+                            defaultHandlerCycle(rCycle);
                     }
                 });
             }else{
                 // Loading
+                    defaultHandlerCycle(rAuxCycle);
             }
         });
 
@@ -387,6 +400,23 @@ public class PlayRoutineActivity extends AppCompatActivity {
         }
     }
 
+    private void defaultHandlerCycle(Resource<PagedList<Cycle>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
+
     private void confirmStop() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this)
                 .setTitle(getResources().getString(R.string.quitRoutineQuestion)).setMessage(getResources().getString(R.string.progressLost))
@@ -476,7 +506,9 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                                 int idxAux = model.exercisesIterator.nextIndex();
                                                 binding.exerciseName2.setText(model.currentExercise.getExercise().getName());
                                                 binding.exerciseReps2.setText(getResources().getString(R.string.barra, 0, model.currentExercise.getRepetitions()));
-                                                binding.exerciseCard2.setCardBackgroundColor(getResources().getColor(R.color.teal_200));
+                                                TypedValue typedValue = new TypedValue();
+                                                getTheme().resolveAttribute(R.attr.colorSecondary, typedValue, true);
+                                                binding.exerciseCard2.setCardBackgroundColor(typedValue.data);
                                                 if (model.totalExercises > 1) {
                                                     binding.exerciseName3.setText(model.Exercises.get(idxAux).getExercise().getName());
                                                     binding.exerciseReps3.setText(getResources().getString(R.string.barra, 0, model.Exercises.get(idxAux).getRepetitions()));
@@ -507,10 +539,12 @@ public class PlayRoutineActivity extends AppCompatActivity {
                                             }
                                         } else {
                                             // loading
+                                            defaultHandler(rExercise);
                                         }
                                     });
                                 } else {
                                     // Loading
+                                    defaultHandler(rAuxExercise);
                                 }
                             });
                         } else {
@@ -569,7 +603,9 @@ public class PlayRoutineActivity extends AppCompatActivity {
                         int idxAux = model.exercisesIterator.nextIndex();
                         binding.exerciseName2.setText(model.currentExercise.getExercise().getName());
                         binding.exerciseReps2.setText(getResources().getString(R.string.barra, 0, model.currentExercise.getRepetitions()));
-                        binding.exerciseCard2.setCardBackgroundColor(getResources().getColor(R.color.teal_200));
+                        TypedValue typedValue = new TypedValue();
+                        getTheme().resolveAttribute(R.attr.colorSecondary, typedValue, true);
+                        binding.exerciseCard2.setCardBackgroundColor(typedValue.data);
                         if (model.totalExercises > 1) {
                             binding.exerciseName3.setText(model.Exercises.get(idxAux).getExercise().getName());
                             binding.exerciseReps3.setText(getResources().getString(R.string.barra, 0, model.Exercises.get(idxAux).getRepetitions()));
@@ -608,9 +644,27 @@ public class PlayRoutineActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void defaultHandler(Resource<PagedList<ContentEx>> r) {
+        switch (r.getStatus()) {
+            case LOADING:
+
+                break;
+            case ERROR:
+                Error error = r.getError();
+                String message;
+
+                message = getApplicationContext().getResources().getString(R.string.checkConnection);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                Log.d("RoutineAdapter", "defaultHandler: " + message);
+                break;
+        }
+    }
+
     private void cycleJump(boolean popUp) {
 
         if(popUp){
+
             Snackbar snack = Snackbar.make(binding.getRoot(), getResources().getString(R.string.finishCyclePopUp) + " " + model.currentCycle.getName() + ". " + getResources().getString(R.string.keepGoing) + "\n" +getResources().getString(R.string.cyclesLeft, model.cyclesDone + 1, model.totalCycles) , Snackbar.LENGTH_LONG).setBackgroundTint(getResources().getColor(R.color.teal_200)).setDuration(10 * 1000);
             snack.setTextColor(getResources().getColor(R.color.black)).show();
         }
@@ -651,7 +705,9 @@ public class PlayRoutineActivity extends AppCompatActivity {
                             int idxAux = model.exercisesIterator.nextIndex();
                             binding.exerciseName2.setText(model.currentExercise.getExercise().getName());
                             binding.exerciseReps2.setText(getResources().getString(R.string.barra, 0, model.currentExercise.getRepetitions()));
-                            binding.exerciseCard2.setCardBackgroundColor(getResources().getColor(R.color.teal_200));
+                            TypedValue typedValue = new TypedValue();
+                            getTheme().resolveAttribute(R.attr.colorSecondary, typedValue, true);
+                            binding.exerciseCard2.setCardBackgroundColor(typedValue.data);
                             if (model.totalExercises > 1) {
                                 binding.exerciseName3.setText(model.Exercises.get(idxAux).getExercise().getName());
                                 binding.exerciseReps3.setText(getResources().getString(R.string.barra, 0, model.Exercises.get(idxAux).getRepetitions()));
@@ -704,10 +760,12 @@ public class PlayRoutineActivity extends AppCompatActivity {
                         updateTimer();
                     } else {
                         // loading
+                        defaultHandler(rExercise);
                     }
                 });
             } else {
                 // Loading
+                defaultHandler(rAuxExercise);
             }
         });
     }
@@ -723,7 +781,9 @@ public class PlayRoutineActivity extends AppCompatActivity {
         model.currentExerciseReps = 0;
         binding.exerciseName2.setText(model.currentExercise.getExercise().getName());
         binding.exerciseReps2.setText(getResources().getString(R.string.barra, model.currentExerciseReps, model.currentExercise.getRepetitions()));
-        binding.exerciseCard2.setCardBackgroundColor(getResources().getColor(R.color.teal_200));
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.colorSecondary, typedValue, true);
+        binding.exerciseCard2.setCardBackgroundColor(typedValue.data);
         if(model.exercisesIterator.hasNext()){
             int idxAux = model.exercisesIterator.nextIndex();
             binding.exerciseName3.setText(model.Exercises.get(idxAux).getExercise().getName());
@@ -743,6 +803,8 @@ public class PlayRoutineActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         binding.fabStop.callOnClick();
+        if(!binding.fabStop.hasOnClickListeners())
+        finish();
 //        super.onBackPressed();
     }
 

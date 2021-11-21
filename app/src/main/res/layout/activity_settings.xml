@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/settingsExerciseView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/setPlayRoutineMode"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_title"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsExerciseView">
+
+        <RadioButton
+            android:id="@+id/singleExercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detailViewDescrip"
+            android:textSize="20sp"
+            android:buttonTint="?android:textColorPrimary"/>
+
+        <RadioButton
+            android:id="@+id/multipleExercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/multipleExercisesViewDescrip"
+            android:textSize="20sp"
+            android:buttonTint="?android:textColorPrimary"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/settingsDefaultView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/setDefaultSection"
+        android:textSize="@dimen/text_title"
+        android:textColor = "?android:textColorPrimary"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupView"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsDefaultView">
+
+        <RadioButton
+            android:id="@+id/myRoutinesRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_myroutines"
+            android:textSize="20sp"
+            android:buttonTint="?android:textColorPrimary"/>
+        <RadioButton
+            android:id="@+id/exploreRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_explore"
+            android:textSize="20sp"
+            android:buttonTint="?android:textColorPrimary"/>
+        <RadioButton
+            android:id="@+id/favRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_favs"
+            android:textSize="20sp"
+            android:buttonTint="?android:textColorPrimary"/>
+        <RadioButton
+            android:id="@+id/profileRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_profile"
+            android:textSize="20sp"
+            android:buttonTint="?android:textColorPrimary"/>
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

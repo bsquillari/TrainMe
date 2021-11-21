@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:elevation="10dp"
-                app:cardBackgroundColor="@color/teal_200"
+                app:cardBackgroundColor="?colorSecondary"
                 app:cardCornerRadius="20dp">
 
                 <TextView
@@ -200,7 +200,7 @@
             android:layout_margin="10dp"
             android:elevation="10dp"
             android:visibility="visible"
-            app:cardBackgroundColor="@color/teal_200"
+            app:cardBackgroundColor="?colorSecondary"
             app:cardCornerRadius="20dp">
 
             <LinearLayout
